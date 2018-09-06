@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "847538910072",
+    "firebase_url": "https://celtic-bazaar-215414.firebaseio.com",
+    "project_id": "celtic-bazaar-215414",
+    "storage_bucket": "celtic-bazaar-215414.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:847538910072:android:928df9c1bf2c5fac",
+        "android_client_info": {
+          "package_name": "us.globalpay.manhattan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "847538910072-1du6uk9rbjib55gpe40af6fr58tttcci.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "us.globalpay.manhattan",
+            "certificate_hash": "24b630e114e2ed8269c00a93bd47e25bf07975c3"
+          }
+        },
+        {
+          "client_id": "847538910072-sbj6o6r9d6f60or48ddqb8mvk5opdkhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTx5dX4xre6Fy1osGAIu4QHeauWvbKcUY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "847538910072-sbj6o6r9d6f60or48ddqb8mvk5opdkhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
