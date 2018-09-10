@@ -89,6 +89,12 @@ dependencies {
     //Cashlytics
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.3'
 
+    //Facebook Login
+    implementation 'com.facebook.android:facebook-login:[4,5)'
+
+    //Facebook Login
+    implementation 'com.facebook.android:facebook-share:[4,5)'
+
 
 }
 

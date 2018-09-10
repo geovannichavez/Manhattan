@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Manhattan</string>
     <string name="title_activity_main">Map</string>
+
+    <!-- Facebook -->
+    <string name="facebook_app_id">678060775913586</string>
+    <string name="fb_login_protocol_scheme">fb678060775913586</string>
 </resources>
