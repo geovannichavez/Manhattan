@@ -76,14 +76,11 @@
                                 <ImageView
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="38"
+                                    android:layout_weight="41"
                                     android:scaleType="fitCenter"
                                     android:src="@drawable/ic_counter" />
 
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="3" />
+
 
                             </LinearLayout>
 
@@ -104,18 +101,13 @@
                                     android:id="@+id/tvCoinsCounter"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="38"
+                                    android:layout_weight="41"
                                     android:gravity="center"
                                     android:text="5,500"
                                     android:textColor="@color/color_white"
                                     android:textSize="16sp"
                                     app:fontFamily="@font/baloo_regular"
                                     tools:text="5,500" />
-
-                                <Space
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="3" />
 
                             </LinearLayout>
                         </RelativeLayout>
@@ -135,6 +127,98 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/toolbar" />
+
+                <!-- Content layer 1 -->
+                <LinearLayout
+                    android:layout_below="@id/toolbar"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Space
+                        android:layout_weight="2"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                    <LinearLayout
+                        android:weightSum="100"
+                        android:orientation="horizontal"
+                        android:layout_weight="10"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <Space
+                            android:layout_weight="80"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                        <ImageView
+                            android:id="@+id/ivPromoAlert"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="17"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_promo_alert_on" />
+                        <Space
+                            android:layout_weight="3"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+                    <Space
+                        android:layout_weight="88"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                </LinearLayout>
+
+                <!-- Content layer 2 -->
+                <LinearLayout
+                    android:layout_below="@id/toolbar"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Space
+                        android:layout_weight="3"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                    <LinearLayout
+                        android:weightSum="100"
+                        android:orientation="horizontal"
+                        android:layout_weight="4"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp">
+                        <Space
+                            android:layout_weight="80"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                        <TextView
+                            android:id="@+id/tvBadge"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="5.5"
+                            android:fontFamily="@font/baloo_regular"
+                            android:gravity="center"
+                            android:lineSpacingExtra="-3sp"
+                            android:maxLines="1"
+                            android:textColor="@color/color_white"
+                            android:textSize="12sp"
+                            tools:text="2" />
+                        <Space
+                            android:layout_weight="14.5"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+                    <Space
+                        android:layout_weight="93"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+                </LinearLayout>
 
 
             </RelativeLayout>
@@ -170,6 +254,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
 
 </RelativeLayout>
 
