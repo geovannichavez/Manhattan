@@ -10,73 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Toolbar -->
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize">
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                android:minHeight="?android:attr/actionBarSize" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="100">
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="80"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="30" />
-
-                    <TextView
-                        android:id="@+id/tvTitle"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="30"
-                        android:fontFamily="@font/baloo_regular"
-                        android:gravity="center"
-                        android:text="@string/label_coupons"
-                        android:textColor="@color/color_white"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10"
-                        android:src="@drawable/ic_coupons_icon" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="30" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="10" />
-            </LinearLayout>
-
-
-        </FrameLayout>
-
+        <include layout="@layout/custom_toolbar_layout" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -330,7 +264,6 @@
 
 
         </RelativeLayout>
-
 
     </LinearLayout>
 
