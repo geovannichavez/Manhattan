@@ -129,7 +129,7 @@
                     android:layout_weight="6"
                     android:fontFamily="@font/baloo_regular"
                     android:gravity="center"
-                    android:text="¿Cómo nos podemos contactar?"
+                    android:text="@string/title_provide_communication_way_required"
                     android:textColor="@color/color_white"
                     android:textSize="16sp" />
 
@@ -139,7 +139,8 @@
                     android:layout_weight="8"
                     android:fontFamily="@font/lato_semibold"
                     android:gravity="center"
-                    android:text="Si obtienes una súper promoción necesitaremos comunicarno contigo"
+                    android:maxLines="2"
+                    android:text="@string/label_provide_communication_way_required"
                     android:textColor="@color/color_white"
                     android:textSize="14sp" />
 
@@ -168,12 +169,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="10"
+                    android:digits="-0123456789"
                     android:fontFamily="@font/lato_semibold"
                     android:gravity="center"
+                    android:maxLines="1"
+                    android:hint="@string/hint_user_phone_input"
+                    android:inputType="phone"
+                    android:maxLength="9"
                     android:textColor="@color/color_purple"
                     android:textColorHint="@color/color_blue_light"
-                    android:textSize="14sp"
-                    android:hint="@string/hint_user_phone_input" />
+                    android:textSize="14sp" />
 
                 <Space
                     android:layout_width="match_parent"
