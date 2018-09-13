@@ -1,4 +1,4 @@
-    <resources>
+<resources>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -9,6 +9,9 @@
 
     </style>
 
-
+    <!-- Remove line below EditText -->
+    <style name="NoUnderlineEditText" parent="@android:style/TextAppearance.Widget.EditText">
+        <item name="android:background">@color/color_transparent</item>
+    </style>
 
 </resources>

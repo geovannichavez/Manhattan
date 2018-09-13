@@ -73,7 +73,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.Coupons" />
-        <activity android:name=".ui.activities.Authenticate"></activity>
+        <activity android:name=".ui.activities.Authenticate" />
+        <activity android:name=".ui.activities.AddPhone"></activity>
     </application>
 
 </manifest>

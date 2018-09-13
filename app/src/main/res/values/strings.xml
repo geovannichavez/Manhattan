@@ -6,4 +6,5 @@
     <string name="facebook_app_id">678060775913586</string>
     <string name="fb_login_protocol_scheme">fb678060775913586</string>
     <string name="label_coupons">CUPONES</string>
+    <string name="hint_user_phone_input">+000 Escribe tu N° de Teléfono</string>
 </resources>
