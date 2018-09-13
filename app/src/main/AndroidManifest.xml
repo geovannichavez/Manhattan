@@ -74,7 +74,8 @@
         </activity>
         <activity android:name=".ui.activities.Coupons" />
         <activity android:name=".ui.activities.Authenticate" />
-        <activity android:name=".ui.activities.AddPhone"></activity>
+        <activity android:name=".ui.activities.AddPhone" />
+        <activity android:name=".ui.activities.SmsCodeInput"></activity>
     </application>
 
 </manifest>
