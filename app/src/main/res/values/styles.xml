@@ -9,6 +9,13 @@
 
     </style>
 
+    <style name="AppTheme.FullScreen" parent="AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
     <!-- Remove line below EditText -->
     <style name="NoUnderlineEditText" parent="@android:style/TextAppearance.Widget.EditText">
         <item name="android:background">@color/color_transparent</item>
