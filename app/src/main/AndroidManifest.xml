@@ -78,7 +78,8 @@
         <activity android:name=".ui.activities.SmsCodeInput" />
         <activity android:name=".ui.activities.Nickname" />
         <activity android:name=".ui.activities.Terms" />
-        <activity android:name=".ui.activities.Splashscreen"></activity>
+        <activity android:name=".ui.activities.Splashscreen" />
+        <activity android:name=".ui.activities.Brands"></activity>
     </application>
 
 </manifest>
