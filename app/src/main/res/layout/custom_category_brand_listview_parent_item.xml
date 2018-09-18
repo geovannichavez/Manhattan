@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="54dp"
     xmlns:tools="http://schemas.android.com/tools">
@@ -9,10 +10,10 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:src="@drawable/bg_category_brand_item_parent"
-            android:scaleType="fitXY"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_category_brand_item_parent" />
 
         <LinearLayout
             android:weightSum="100"
@@ -26,11 +27,12 @@
                 android:layout_height="match_parent" />
 
             <ImageView
-                android:src="@drawable/ic_category_brand_restaurants"
+                android:id="@+id/ivIcon"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="14"
                 android:scaleType="centerInside"
-                android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:src="@drawable/ic_category_brand_restaurants" />
 
             <Space
                 android:layout_weight="4"
@@ -38,14 +40,15 @@
                 android:layout_height="match_parent" />
 
             <TextView
-                tools:text="Restaurantes"
-                android:textSize="18sp"
-                android:fontFamily="@font/lato_semibold"
-                android:textColor="@color/color_purple"
-                android:gravity="center_vertical"
-                android:layout_weight="78"
+                android:id="@+id/tvCategoryName"
                 android:layout_width="0dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="78"
+                android:fontFamily="@font/lato_semibold"
+                android:gravity="center_vertical"
+                android:textColor="@color/color_purple"
+                android:textSize="18sp"
+                tools:text="Restaurantes" />
 
         </LinearLayout>
     </RelativeLayout>

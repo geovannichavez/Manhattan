@@ -15,4 +15,5 @@
     <string name="title_confirm_your_phone">Confirma tu Celular</string>
     <string name="label_confirm_your_phone">Hemos enviado un SMS al número %1$s, ingresa el código de confirmación</string>
     <string name="label_nickname">Nickname</string>
+    <string name="label_select_brand_category">Selecciona la Categoría de la Marca</string>
 </resources>

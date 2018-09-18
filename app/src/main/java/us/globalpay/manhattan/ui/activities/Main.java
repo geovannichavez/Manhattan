@@ -1,5 +1,6 @@
 package us.globalpay.manhattan.ui.activities;
 
+import android.content.Intent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -25,8 +26,9 @@ import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.FavoriteCuppon;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
 import us.globalpay.manhattan.utils.ButtonAnimator;
+import us.globalpay.manhattan.views.MainView;
 
-public class Main extends AppCompatActivity implements OnMapReadyCallback
+public class Main extends AppCompatActivity implements OnMapReadyCallback, MainView
 {
     private static final String TAG = Main.class.getSimpleName();
 
@@ -74,6 +76,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback
             public void onClick(View v)
             {
                 ButtonAnimator.getInstance(Main.this).animateButton(v);
+                navigateBrands();
             }
         });
 
@@ -213,4 +216,22 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback
         }
     }
 
+    @Override
+    public void initialize()
+    {
+
+    }
+
+    @Override
+    public void loadInitialValues()
+    {
+
+    }
+
+    @Override
+    public void navigateBrands()
+    {
+        Intent brands = new Intent(this, Brands.class);
+        startActivity(brands);
+    }
 }
