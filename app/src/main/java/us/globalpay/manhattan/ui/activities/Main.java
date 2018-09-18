@@ -182,6 +182,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback
     private void generateCuppons()
     {
         List<FavoriteCuppon> list = new ArrayList<>();
+
         try
         {
             FavoriteCuppon cup1 = new FavoriteCuppon();

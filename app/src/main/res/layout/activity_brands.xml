@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -87,183 +86,27 @@
                     android:layout_weight="2" />
 
                 <!-- Buttons bar -->
-                <LinearLayout
+                <ImageView
+                    android:src="@drawable/bg_general_description"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="6"
-                    android:weightSum="100">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="8" />
-
-                    <ImageView
-                        android:id="@+id/btnFavorites"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="28"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/btn_coupon_bar_left_on" />
-
-                    <ImageView
-                        android:id="@+id/btnCoupons"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="28"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/btn_coupon_bar_middle_off" />
-
-                    <ImageView
-                        android:id="@+id/btnRedeemeds"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="28"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/btn_coupon_bar_right_off" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="8" />
-                </LinearLayout>
+                    android:layout_weight="7"  />
 
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="3.7" />
+                    android:layout_weight="1" />
 
-                <LinearLayout
+                <ExpandableListView
+                    android:id="@+id/lvCategories"
+                    tools:listitem="@layout/custom_category_brand_listview_parent_item"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="80"
+                    android:layout_weight="81.7"
+
                     android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4" />
-
-                    <GridView
-                        android:id="@+id/gvCoupons"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="92"
-                        android:numColumns="3"
-                        tools:listitem="@layout/custom_coupon_gridview_item" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4" />
-                </LinearLayout>
+                    android:weightSum="100" />
             </LinearLayout>
-
-            <!-- Layer 3 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:weightSum="100">
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2.3" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="6"
-                    android:orientation="horizontal"
-                    android:weightSum="100">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="10" />
-
-                    <TextView
-                        android:id="@+id/tvSpinnerLocation"
-                        android:layout_width="0dp"
-                        android:fontFamily="@font/lato_semibold"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_height="match_parent"
-                        android:layout_weight="70"
-                        android:gravity="center_vertical"
-                        tools:text="San Salvador, El Salvador" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="20" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2" />
-
-                <!-- Buttons bar -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="6"
-                    android:weightSum="100">
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="8" />
-
-                    <TextView
-                        android:id="@+id/lblFavorites"
-                        android:layout_width="0dp"
-                        android:text="Favoritos"
-                        android:textSize="14sp"
-                        android:textColor="@color/color_white"
-                        android:fontFamily="@font/lato_semibold"
-                        android:gravity="center"
-                        android:layout_height="match_parent"
-                        android:layout_weight="28" />
-
-                    <TextView
-                        android:id="@+id/lblCoupons"
-                        android:layout_width="0dp"
-                        android:textSize="14sp"
-                        android:text="Cupones"
-                        android:textColor="@color/color_blue_dark"
-                        android:fontFamily="@font/lato_semibold"
-                        android:gravity="center"
-                        android:layout_height="match_parent"
-                        android:layout_weight="28"   />
-
-                    <TextView
-                        android:text="Canjeados"
-                        android:id="@+id/lblRedeemeds"
-                        android:layout_width="0dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/color_blue_dark"
-                        android:fontFamily="@font/lato_semibold"
-                        android:gravity="center"
-                        android:layout_height="match_parent"
-                        android:layout_weight="28"  />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="8" />
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="83.7" />
-
-            </LinearLayout>
-
 
         </RelativeLayout>
 
