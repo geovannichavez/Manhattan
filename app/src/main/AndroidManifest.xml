@@ -79,7 +79,8 @@
         <activity android:name=".ui.activities.Nickname" />
         <activity android:name=".ui.activities.Terms" />
         <activity android:name=".ui.activities.Splashscreen" />
-        <activity android:name=".ui.activities.Brands"></activity>
+        <activity android:name=".ui.activities.Brands" />
+        <activity android:name=".ui.activities.AR"></activity>
     </application>
 
 </manifest>
