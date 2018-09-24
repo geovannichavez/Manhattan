@@ -5,6 +5,9 @@ package us.globalpay.manhattan.utils;
  */
 public class Constants
 {
+    public static final String PLATFORM = "ANDROID";
+    public static final String FACEBOOK = "Facebook";
+    public static final String GOOGLE = "Google";
 
     //Intent extras: Notificactions
     public static final String NOTIFICATION_TITLE_EXTRA = "notification_title_extra";

@@ -7,7 +7,7 @@
     <string name="fb_login_protocol_scheme">fb678060775913586</string>
     <string name="label_coupons">CUPONES</string>
     <string name="hint_user_phone_input">+000 Escribe tu N° de Teléfono</string>
-    <string name="label_provide_communication_way_required">Si obtienes una súper promoción necesitaremos comunicarno contigo</string>
+    <string name="label_provide_communication_way_required">Si obtienes una súper promoción necesitaremos comunicarnos contigo</string>
     <string name="title_provide_communication_way_required">¿Cómo nos podemos contactar?</string>
     <string name="label_continue">CONTINUAR</string>
     <string name="label_contact_us_via_whatsapp">Si no recibes el SMS de confirmación puedes comunicarte con nosotros por WhatsApp al número +503 7768 1443</string>
@@ -16,4 +16,11 @@
     <string name="label_confirm_your_phone">Hemos enviado un SMS al número %1$s, ingresa el código de confirmación</string>
     <string name="label_nickname">Nickname</string>
     <string name="label_select_brand_category">Selecciona la Categoría de la Marca</string>
+    <string name="label_select_country">Selecciona tu País Actual</string>
+    <string name="label_facebook">Facebook</string>
+    <string name="label_google">Google</string>
+    <string name="label_please_wait">Por favor espere...</string>
+    <string name="error_title_something_went_wrong">¡Ups!</string>
+    <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
+    <string name="button_accept">Aceptar</string>
 </resources>

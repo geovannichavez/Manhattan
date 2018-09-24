@@ -78,6 +78,9 @@ dependencies {
     //Firebase
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
+    //Firebase Auth
+    implementation 'com.google.firebase:firebase-auth:16.0.1'
+
     //GeoFire
     implementation 'com.firebase:geofire-android:2.1.1'
 

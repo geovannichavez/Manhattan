@@ -21,4 +21,14 @@
         <item name="android:background">@color/color_transparent</item>
     </style>
 
+    <!-- Rounded corners and gradient dialog -->
+    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+
+        <!-- buttons -->
+        <item name="colorAccent">@color/colorPrimary</item>
+
+        <!-- Used for the background -->
+        <item name="android:windowBackground">@drawable/custom_rounded_gradient_rectangle</item>
+    </style>
+
 </resources>
