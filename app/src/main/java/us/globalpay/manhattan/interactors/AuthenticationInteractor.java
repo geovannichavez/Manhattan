@@ -80,7 +80,6 @@ public class AuthenticationInteractor implements IAuthenticationInteractor
                     {
                         ex.printStackTrace();
                     }
-
                 }
             }
 

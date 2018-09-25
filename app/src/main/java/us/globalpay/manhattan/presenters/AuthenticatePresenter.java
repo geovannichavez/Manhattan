@@ -14,6 +14,10 @@ import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
@@ -41,10 +45,15 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
     private AuthenticateView mView;
     private AppCompatActivity mActivity;
     private AuthenticationInteractor mInteractor;
+    private int MNH_SIGNIN = 11;
 
     //Facebook
     private CallbackManager mCallbackManager;
     private LoginButton mFacebookLoginBtn;
+
+    //Google
+    private GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInAccount mGoogleAccount;
 
     //Firebase
     private FirebaseAuth mFirebaseAuth;
@@ -93,7 +102,12 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
     @Override
     public void onAuthenticateConsumerError(int code, Throwable throwable, String rawResponse)
     {
-
+        mView.hideLoadingDialog();
+        DialogModel model = new DialogModel();
+        model.setTitle(mContext.getString(R.string.error_title_something_went_wrong));
+        model.setContent(mContext.getString(R.string.error_label_something_went_wrong));
+        model.setAcceptButton(mContext.getString(R.string.button_accept));
+        mView.showGenericDialog(model);
     }
 
     @Override
@@ -181,7 +195,6 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
     @Override
     public void onFirebaseAuthError()
     {
-
         try
         {
             mInteractor.logoutFirebase();
@@ -216,7 +229,7 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
         if (result != ConnectionResult.SUCCESS)
         {
             //Any random request code
-            int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
+            int PLAY_SERVICES_RESOLUTION_REQUEST = 1001;
 
             if (googleAPI.isUserResolvableError(result))
             {
@@ -243,7 +256,20 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
     @Override
     public void setupGoogleAuth()
     {
-
+        try
+        {
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestServerAuthCode(Constants.GOOGLE_OAUTH_CLIENT_ID)
+                    .requestServerAuthCode(Constants.GOOGLE_OAUTH_CLIENT_ID, false)
+                    .requestIdToken(Constants.GOOGLE_OAUTH_CLIENT_ID)
+                    .requestEmail()
+                    .build();
+            mGoogleSignInClient = GoogleSignIn.getClient(mContext, gso);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error on GoogleSignInOptions: "+ ex.getMessage());
+        }
     }
 
     @Override
@@ -294,7 +320,10 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
     @Override
     public void googleSignin()
     {
-
+        mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
+        UserData.getInstance(mContext).saveAuthModeSelected(Constants.GOOGLE);
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        mActivity.startActivityForResult(signInIntent, MNH_SIGNIN);
     }
 
     @Override

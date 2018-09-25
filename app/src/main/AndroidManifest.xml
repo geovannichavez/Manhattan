@@ -3,11 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="us.globalpay.manhattan">
 
+    <!-- PERMISOS -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".core.ManhattanApplication"
@@ -65,26 +70,26 @@
         -->
         <activity
             android:name=".ui.activities.Main"
-            android:label="@string/title_activity_main">
-
-        </activity>
+            android:label="@string/title_activity_main"></activity>
         <activity android:name=".ui.activities.Coupons" />
-        <activity android:name=".ui.activities.Authenticate">
+        <activity android:name=".ui.activities.Authenticate"></activity>
+        <activity
+            android:name=".ui.activities.AddPhone"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".ui.activities.SmsCodeInput" />
+        <activity android:name=".ui.activities.Nickname" />
+        <activity
+            android:name=".ui.activities.Terms"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.AddPhone"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity android:name=".ui.activities.SmsCodeInput" />
-        <activity android:name=".ui.activities.Nickname" />
-        <activity android:name=".ui.activities.Terms" />
         <activity android:name=".ui.activities.Splashscreen" />
         <activity android:name=".ui.activities.Brands" />
+        <activity android:name=".ui.activities.Permissions"></activity>
     </application>
 
 </manifest>

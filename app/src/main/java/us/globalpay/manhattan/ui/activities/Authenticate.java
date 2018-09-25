@@ -49,6 +49,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
 
         mPresenter.checkPlayServices();
         mPresenter.setupFacebookAuth(btnFacebookLogin);
+        mPresenter.setupGoogleAuth();
     }
 
     @Override
@@ -62,6 +63,15 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
             {
                 btnFacebookLogin.performClick();
                 mPresenter.facebookSigin();
+            }
+        });
+
+        btnGoogle.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+
             }
         });
     }

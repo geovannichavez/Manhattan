@@ -19,8 +19,19 @@
     <string name="label_select_country">Selecciona tu País Actual</string>
     <string name="label_facebook">Facebook</string>
     <string name="label_google">Google</string>
-    <string name="label_please_wait">Por favor espere...</string>
+    <string name="label_please_wait">Por favor espere…</string>
     <string name="error_title_something_went_wrong">¡Ups!</string>
     <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
     <string name="button_accept">Aceptar</string>
+    <string name="error_label_something_went_wrong">Revisa tu conexión e inténtalo de nuevo</string>
+
+    <!--    COMPONENTS -->
+    <string name="component_compass">Giroscopio</string>
+    <string name="component_gps">GPS</string>
+    <string name="component_camera">Cámara</string>
+    <string name="component_opengl">OpenGL 2.0</string>
+    <string name="contentdescription_2d_prize_image">Imagen de premio 2D</string>
+    <string name="toast_permissions_denied">Denegaste los permisos. Inténtalo de nuevo.</string>
+    <string name="title_grant_permissions">Concede Permisos</string>
+    <string name="label_grant_permissions">Deberás conceder permisos a la aplicación para hacer uso de todas las características. Haz clic el siguiente botón.</string>
 </resources>

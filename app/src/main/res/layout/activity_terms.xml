@@ -49,7 +49,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="85"
                     android:scaleType="fitXY"
-                    android:src="@drawable/bg_modal_full" />
+                    android:src="@drawable/bg_modal_full_height" />
 
                 <Space
                     android:layout_width="match_parent"

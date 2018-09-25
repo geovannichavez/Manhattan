@@ -48,8 +48,14 @@ public class UserData
     private static final String KEY_HAS_SET_NICKNAME = "usr_has_set_nickname";
     private static final String KEY_WELCOME_CHEST_AVAILABLE = "key_welcome_chest_available";
 
+    //First time settings
+    private static final String KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED = "usr_firsttime_simple_instructions";
+    private static final String KEY_WELCOME_CHEST_LATITUDE = "key_welcome_chest_latitude";
+    private static final String KEY_WELCOME_CHEST_LONGITUDE = "key_welcome_chest_longitude";
+
     //Device
     private static final String KEY_UNIQUE_DEVICE_ID = "app_unique_device_id";
+    private static final String KEY_3D_COMPATIBLE_DEVICE = "app_3d_compatible_device";
 
     //Provider Data
     private static final String KEY_FACEBOOK_FIRST_NAME = "usr_facebook_first_name";
@@ -197,5 +203,33 @@ public class UserData
     }
 
 
+    public void save3DCompatibleValue(boolean hasAllRequirements)
+    {
+        mEditor.putBoolean(KEY_3D_COMPATIBLE_DEVICE, hasAllRequirements);
+        mEditor.commit();
+    }
 
+    public void saveSimpleInstructionsSetting(boolean shown)
+    {
+        mEditor.putBoolean(KEY_FIRTTIME_SIMPLE_INSTRUCTIONS_SHOWED, shown);
+        mEditor.commit();
+    }
+
+    public void hasGrantedDevicePermissions(boolean granted)
+    {
+        mEditor.putBoolean(KEY_HAS_GRANTED_DEVICE_PERMISSIONS, granted);
+        mEditor.commit();
+    }
+
+    public void hasAccpetedTerms(boolean accepted)
+    {
+        mEditor.putBoolean(KEY_HAS_ACCEPTED_TERMS, accepted);
+        mEditor.commit();
+    }
+
+    public void saveDeviceID(String deviceID)
+    {
+        mEditor.putString(KEY_UNIQUE_DEVICE_ID, deviceID);
+        mEditor.commit();
+    }
 }
