@@ -64,5 +64,8 @@
     <string name="validation_not_valid_nickname">Este nickname no es válido. Intenta con otro</string>
 
 
+    <string name="title_update_required">¡Actualiza tu aplicación!</string>
+    <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
+
 
 </resources>

@@ -12,26 +12,25 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import us.globalpay.manhattan.R;
-import us.globalpay.manhattan.models.Brand;
-import us.globalpay.manhattan.models.BrandCategory;
+import us.globalpay.manhattan.models.api.Brand;
+import us.globalpay.manhattan.models.api.Category;
 
 /**
  * Created by Josué Chávez on 18/09/2018.
  */
-public class ExpandableBrandsAdapter extends BaseExpandableListAdapter
+public class BrandsAdapter extends BaseExpandableListAdapter
 {
     private static final String TAG = ExpandableListView.class.getSimpleName();
 
     private Context mContext;
     private Map<String, List<Brand>> mChildrenCollection;
-    private List<BrandCategory> mParents;
+    private List<Category> mParents;
 
-    public ExpandableBrandsAdapter(Activity context, List<BrandCategory> categories, Map<String, List<Brand>> brandsCollection)
+    public BrandsAdapter(Activity context, List<Category> categories, Map<String, List<Brand>> brandsCollection)
     {
         this.mContext = context;
         this.mChildrenCollection = brandsCollection;
@@ -86,7 +85,7 @@ public class ExpandableBrandsAdapter extends BaseExpandableListAdapter
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent)
     {
-        BrandCategory category = (BrandCategory) getGroup(groupPosition);
+        Category category = (Category) getGroup(groupPosition);
         if (convertView == null)
         {
             LayoutInflater infalInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -112,9 +111,9 @@ public class ExpandableBrandsAdapter extends BaseExpandableListAdapter
         TextView name = (TextView) convertView.findViewById(R.id.tvName);
         TextView description = (TextView) convertView.findViewById(R.id.tvDescription);
 
-        Glide.with(mContext).load(brand.getLogoUrl()).into(logo);
+        Glide.with(mContext).load(brand.getUrlLogo()).into(logo);
         name.setText(brand.getName());
-        description.setText(brand.getDescription());
+        //description.setText(brand.);
 
         return convertView;
     }

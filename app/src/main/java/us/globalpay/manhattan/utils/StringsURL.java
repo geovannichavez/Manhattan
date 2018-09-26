@@ -12,4 +12,6 @@ public class StringsURL
     public static final String AUTHENTICATE_CONSUMER = "ConsumerSignin";
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
+
+    public final static String GET_BRANDS = "GetBrand";
 }
