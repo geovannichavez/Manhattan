@@ -13,4 +13,7 @@
     <color name="color_transparent">#00ffffff</color>
     <color name="color_pure_black">#000000</color>
     <color name="color_aqua">#0eb5a6</color>
+
+
+    <color name="color_red_error">#D32F2F</color>
 </resources>

@@ -24,6 +24,22 @@
     <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
     <string name="button_accept">Aceptar</string>
     <string name="error_label_something_went_wrong">Revisa tu conexión e inténtalo de nuevo</string>
+    <string name="title_dialog_invalid_nickname">Nickname Inválido</string>
+    <string name="label_dialog_invalid_nickname">Este nickname no es válido. Intenta uno diferente</string>
+    <string name="title_dialog_invalid_name">Nombre Inválido</string>
+    <string name="label_dialog_invalid_name">Este nombre no es válido. Intenta uno diferente</string>
+    <string name="title_dialog_nickname_already_exists">Nombre en uso</string>
+
+    <!--    NICKNAME    -->
+    <string name="title_nickname">NICKNAME (APODO)</string>
+    <string name="label_content_nickname">Elige un nombre de usuario (apodo) para identificarte. Este nombre se mostrará en las tablas de Rankings y otros contenidos de uso público. Ejemplos:</string>
+    <string name="hint_nickname">Nickname</string>
+    <string name="validation_nickname_already_exists">Este nombre ya está en uso, usa uno diferente.</string>
+    <string-array name="array_nickname_examples">
+        <item>Pepe43</item>
+        <item>jose.luis</item>
+        <item>majo12</item>
+    </string-array>
 
     <!--    COMPONENTS -->
     <string name="component_compass">Giroscopio</string>
@@ -34,4 +50,19 @@
     <string name="toast_permissions_denied">Denegaste los permisos. Inténtalo de nuevo.</string>
     <string name="title_grant_permissions">Concede Permisos</string>
     <string name="label_grant_permissions">Deberás conceder permisos a la aplicación para hacer uso de todas las características. Haz clic el siguiente botón.</string>
+
+    <!--    VALIDATIONS -->
+    <string name="validation_not_valid_phone_message">Teléfono no válido</string>
+    <string name="validation_required_phone_message">El número de teléfono es requerido</string>
+    <string name="validation_required_operator">Debe seleccionar un operador</string>
+    <string name="validation_required_amount">Debe seleccionar un monto</string>
+    <string name="validation_not_valid_vendor_code">El código de vendedor no es válido</string>
+    <string name="validation_required_vendor_code">El código de vendedor es requerido</string>
+    <string name="validation_title_required">Requerido</string>
+    <string name="validation_required_nickname">El nickname es requerido.</string>
+    <string name="validation_title_invalid_nickname">Nick</string>
+    <string name="validation_not_valid_nickname">Este nickname no es válido. Intenta con otro</string>
+
+
+
 </resources>

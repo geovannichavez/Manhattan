@@ -70,26 +70,28 @@
         -->
         <activity
             android:name=".ui.activities.Main"
-            android:label="@string/title_activity_main"></activity>
-        <activity android:name=".ui.activities.Coupons" />
-        <activity android:name=".ui.activities.Authenticate"></activity>
-        <activity
-            android:name=".ui.activities.AddPhone"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.activities.SmsCodeInput" />
-        <activity android:name=".ui.activities.Nickname" />
-        <activity
-            android:name=".ui.activities.Terms"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activities.Coupons" />
+        <activity android:name=".ui.activities.Authenticate" />
+        <activity
+            android:name=".ui.activities.AddPhone"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activities.SmsCodeInput" />
+        <activity android:name=".ui.activities.Nickname" />
+        <activity
+            android:name=".ui.activities.Terms"
+            android:screenOrientation="portrait">
+
+        </activity>
         <activity android:name=".ui.activities.Splashscreen" />
         <activity android:name=".ui.activities.Brands" />
-        <activity android:name=".ui.activities.Permissions"></activity>
+        <activity android:name=".ui.activities.Permissions" />
     </application>
 
 </manifest>

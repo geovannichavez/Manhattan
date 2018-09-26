@@ -101,12 +101,6 @@ public class UserData
         return mPreferences.getString(KEY_AUTH_MODE_SELECTED, "none");
     }
 
-    public void setDeviceID(String deviceID)
-    {
-        mEditor.putString(KEY_UNIQUE_DEVICE_ID, deviceID);
-        mEditor.commit();
-    }
-
     public String getDeviceID()
     {
         return mPreferences.getString(KEY_UNIQUE_DEVICE_ID, "");
@@ -144,6 +138,11 @@ public class UserData
         mEditor.commit();
     }
 
+    public String getUserAuthenticationKey()
+    {
+        return mPreferences.getString(KEY_AUTHENTICATION_KEY, "");
+    }
+
     public void saveNickname(String nickname)
     {
         mEditor.putString(KEY_CONSUMER_NICKNAME, nickname);
@@ -165,6 +164,12 @@ public class UserData
     public void hasSetNickname(boolean hasSetNickname)
     {
         mEditor.putBoolean(KEY_HAS_SET_NICKNAME, hasSetNickname);
+        mEditor.commit();
+    }
+
+    public void deleteNickname()
+    {
+        mEditor.remove(KEY_CONSUMER_NICKNAME);
         mEditor.commit();
     }
 

@@ -26,4 +26,19 @@ public class VersionName
 
         return version;
     }
+
+    public static String getPackageName(Context context, String tag)
+    {
+        String packageName = "";
+        try
+        {
+            packageName = context.getApplicationContext().getPackageName();
+        }
+        catch (Exception ex)
+        {
+            Log.e(tag, "Error: " + ex.getMessage());
+        }
+
+        return packageName;
+    }
 }

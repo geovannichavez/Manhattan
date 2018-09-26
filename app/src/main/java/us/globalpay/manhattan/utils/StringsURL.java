@@ -10,4 +10,6 @@ public class StringsURL
     public static final String COUNTRIES = "Country/Get";
 
     public static final String AUTHENTICATE_CONSUMER = "ConsumerSignin";
+
+    public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 }
