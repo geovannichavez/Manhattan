@@ -65,6 +65,10 @@ public class UserData
     private static final String KEY_AUTH_PROVIDER_ID = "usr_auth_provider_id";
     private static final String KEY_AUTH_PROVIDER_URL = "usr_auth_provider_url";
 
+    //RAW Data
+    private static final String KEY_BRANDS_RAW_DATA = "rsbrn-rw-dta260918305-ser-manh";
+    private static final String KEY_HOME_RAW_DATA = "rshm-rw-dta2709018948-ser-manh";
+
     private UserData(Context context)
     {
         UserData.mContext = context;
@@ -237,4 +241,28 @@ public class UserData
         mEditor.putString(KEY_UNIQUE_DEVICE_ID, deviceID);
         mEditor.commit();
     }
+
+    public void saveBrandsData(String rawData)
+    {
+        mEditor.putString(KEY_BRANDS_RAW_DATA, rawData);
+        mEditor.commit();
+    }
+
+    public String getBrandsData()
+    {
+        return mPreferences.getString(KEY_BRANDS_RAW_DATA, "");
+    }
+
+    public void saveHomeData(String rawData)
+    {
+        mEditor.putString(KEY_HOME_RAW_DATA, rawData);
+        mEditor.commit();
+    }
+
+    public String getHomeData()
+    {
+        return mPreferences.getString(KEY_HOME_RAW_DATA, "");
+    }
+
+
 }

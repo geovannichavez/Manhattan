@@ -6,7 +6,9 @@ package us.globalpay.manhattan.views;
 public interface MainView
 {
     void initialize();
-    void loadInitialValues();
+    void renderMap();
+    void renderCoupons();
+    void loadInitialValues(String coins, String promos);
     void navigateBrands();
 
 }

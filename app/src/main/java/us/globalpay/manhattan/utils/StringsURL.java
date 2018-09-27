@@ -14,4 +14,6 @@ public class StringsURL
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 
     public final static String GET_BRANDS = "GetBrand";
+
+    public static final String GET_INITIAL_DATA = "Home";
 }

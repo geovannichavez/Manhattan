@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.FavoriteCuppon;
+import us.globalpay.manhattan.presenters.MainPresenter;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
 import us.globalpay.manhattan.utils.ButtonAnimator;
 import us.globalpay.manhattan.views.MainView;
@@ -32,50 +34,73 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
 {
     private static final String TAG = Main.class.getSimpleName();
 
-    private GoogleMap mMap;
+    //Views
     private BottomSheetBehavior bottomSheetBehavior;
     private ImageView btnCuppons;
     private ImageView btnBrands;
     private ImageView btnToggleBar;
-
-    private FavoriteCupponAdapter mCupponsAdapter;
+    private TextView tvCoinsCounter;
+    private TextView tvBadge;
     private GridView gvCuppons;
+
+    //Adapters and Layouts
+    private FavoriteCupponAdapter mCupponsAdapter;
+    private GoogleMap mGoogleMap;
+
+    //MVP
+    private MainPresenter mPresenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-        gvCuppons = (GridView) findViewById(R.id.gvCuppons);
 
-
-        mCupponsAdapter = new FavoriteCupponAdapter(this, R.layout.custom_promo_main_item);
-        gvCuppons.setAdapter(mCupponsAdapter);
-
-
-
-        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheetLayout));
         btnToggleBar = (ImageView) findViewById(R.id.btnToggleBar);
-
         btnCuppons = (ImageView) findViewById(R.id.btnCuppons);
+        gvCuppons = (GridView) findViewById(R.id.gvCuppons);
+        btnBrands = (ImageView) findViewById(R.id.btnBrands);
+        tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
+        tvBadge = (TextView) findViewById(R.id.tvBadge);
+        bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheetLayout));
+
+        mPresenter = new MainPresenter(this, this, this);
+        mPresenter.initialize();
+        mPresenter.retrieveData();
+
+    }
+
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap)
+    {
+        mGoogleMap = googleMap;
+
+        LatLng sydney = new LatLng(24.704697, 46.756808);
+        mGoogleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Ryhad"));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
+    public void initialize()
+    {
         btnCuppons.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.getInstance(Main.this).animateButton(v);
+                ButtonAnimator.animateButton(v);
             }
         });
-        btnBrands = (ImageView) findViewById(R.id.btnBrands);
+
         btnBrands.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.getInstance(Main.this).animateButton(v);
+                ButtonAnimator.animateButton(v);
                 navigateBrands();
             }
         });
@@ -94,40 +119,8 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         break;
                 }
-
             }
         });
-
-        initListeners();
-
-        generateCuppons();
-    }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap)
-    {
-        mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
-
-    private void initListeners()
-    {
-        // register the listener for button click
-
 
         // Capturing the callbacks for bottom sheet
         bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback()
@@ -178,12 +171,28 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
 
             }
         });
-
-
     }
 
-    private void generateCuppons()
+    @Override
+    public void renderMap()
     {
+        try
+        {
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void renderCoupons()
+    {
+        mCupponsAdapter = new FavoriteCupponAdapter(this, R.layout.custom_promo_main_item);
+        gvCuppons.setAdapter(mCupponsAdapter);
+
         List<FavoriteCuppon> list = new ArrayList<>();
 
         try
@@ -217,15 +226,10 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
     }
 
     @Override
-    public void initialize()
+    public void loadInitialValues(String coins, String promos)
     {
-
-    }
-
-    @Override
-    public void loadInitialValues()
-    {
-
+        tvCoinsCounter.setText(coins);
+        tvBadge.setText(promos);
     }
 
     @Override

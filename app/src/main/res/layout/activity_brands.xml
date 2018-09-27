@@ -10,7 +10,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/custom_toolbar_layout" />
+        <include
+            android:id="@+id/toolbarBrand"
+            layout="@layout/custom_toolbar_layout" />
 
         <RelativeLayout
             android:layout_width="match_parent"

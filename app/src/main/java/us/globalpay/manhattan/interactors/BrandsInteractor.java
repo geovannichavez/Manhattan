@@ -3,6 +3,7 @@ package us.globalpay.manhattan.interactors;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
@@ -37,16 +38,16 @@ public class BrandsInteractor implements IBrandsInteractor
     public void retrieveBrands(BrandsReqBody request, final BrandsListener listener)
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        final Call<BrandsResponse> call = apiService.getBrands(request,
+        final Call<JsonObject> call = apiService.getBrands(request,
                 UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
                 VersionName.getPackageName(mContext, TAG));
 
-        call.enqueue(new Callback<BrandsResponse>()
+        call.enqueue(new Callback<JsonObject>()
         {
             @Override
-            public void onResponse(Call<BrandsResponse> call, Response<BrandsResponse> response)
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response)
             {
                 if(response.isSuccessful())
                 {
@@ -75,7 +76,7 @@ public class BrandsInteractor implements IBrandsInteractor
             }
 
             @Override
-            public void onFailure(Call<BrandsResponse> call, Throwable t)
+            public void onFailure(Call<JsonObject> call, Throwable t)
             {
                 listener.onError(0, t, "");
             }

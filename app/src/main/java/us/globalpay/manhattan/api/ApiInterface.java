@@ -1,5 +1,7 @@
 package us.globalpay.manhattan.api;
 
+import com.google.gson.JsonObject;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -40,8 +42,15 @@ public interface ApiInterface
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_BRANDS)
-    Call<BrandsResponse> getBrands(@Body BrandsReqBody requestBody,
-                                   @Header("authenticationKey") String userAuthenticationKey,
+    Call<JsonObject> getBrands(@Body BrandsReqBody requestBody,
+                               @Header("authenticationKey") String userAuthenticationKey,
+                               @Header("AppVersion") String versionName,
+                               @Header("Platform") String platform,
+                               @Header("PackageName") String packageName);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.GET_INITIAL_DATA)
+    Call<JsonObject> getInitialData(@Header("authenticationKey") String userAuthenticationKey,
                                    @Header("AppVersion") String versionName,
                                    @Header("Platform") String platform,
                                    @Header("PackageName") String packageName);

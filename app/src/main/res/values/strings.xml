@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Manhattan</string>
     <string name="title_activity_main">Map</string>
+    <string name="title_activity_brands">Marcas</string>
 
     <!-- Facebook -->
     <string name="facebook_app_id">678060775913586</string>

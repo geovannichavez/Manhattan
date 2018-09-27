@@ -2,6 +2,11 @@ package us.globalpay.manhattan.presenters;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -30,20 +35,44 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
     private BrandsView mView;
     private BrandsInteractor mInteractor;
 
-    List<Category> mGroupList;
-    List<Brand> mChildList;
+    private Gson mGson;
 
     public BrandsPresenter(Context context, AppCompatActivity activity, BrandsView view)
     {
         this.mContext = context;
         this.mView = view;
         this.mInteractor = new BrandsInteractor(mContext);
+        mGson = new Gson();
     }
 
     @Override
     public void init()
     {
+        try
+        {
+            mView.initialize();
 
+            //Load saved brands data
+            String savedBrands = UserData.getInstance(mContext).getBrandsData();
+            if(!TextUtils.isEmpty(savedBrands))
+            {
+                BrandsResponse brandsResponse = mGson.fromJson(savedBrands, BrandsResponse.class);
+                Map<String, List<Brand>> filledCategories = new LinkedHashMap<>();
+
+                //Fills linkedHashMap with items to corresponding category
+                for(Category cat : brandsResponse.getCategories().getCategories())
+                {
+                    filledCategories.put(cat.getName(), cat.getBrands());
+                }
+
+                // Passes lists with results to view
+                mView.renderBrands(brandsResponse.getCategories().getCategories(), filledCategories);
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -57,21 +86,30 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
     }
 
     @Override
-    public void onSuccess(BrandsResponse response)
+    public void onSuccess(JsonObject rawResponse)
     {
         mView.hideLoadingDialog();
 
-        // Declare empty LinkedHashMap
-        Map<String, List<Brand>> filledCategories = new LinkedHashMap<>();
+        //Saves response data
+        String rawData = mGson.toJson(rawResponse);
 
-        //Fills linkedHashMap with items to corresponding category
-        for(Category cat : response.getCategories().getCategories())
+        if(!TextUtils.equals(rawData, UserData.getInstance(mContext).getBrandsData()))
         {
-            filledCategories.put(cat.getName(), cat.getBrands());
-        }
+            //Saves data
+            UserData.getInstance(mContext).saveBrandsData(rawData);
 
-        // Passes lists with results to view
-        mView.renderBrands(response.getCategories().getCategories(), filledCategories);
+            //Deserialize data
+            BrandsResponse brandsResponse = mGson.fromJson(rawData, BrandsResponse.class);
+
+            Map<String, List<Brand>> filledCategories = new LinkedHashMap<>();
+            for(Category cat : brandsResponse.getCategories().getCategories())
+            {
+                filledCategories.put(cat.getName(), cat.getBrands());
+            }
+
+            // Passes lists with results to view
+            mView.renderBrands(brandsResponse.getCategories().getCategories(), filledCategories);
+        }
     }
 
     @Override

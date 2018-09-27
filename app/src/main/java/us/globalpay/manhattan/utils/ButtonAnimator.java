@@ -1,11 +1,17 @@
 package us.globalpay.manhattan.utils;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 /**
@@ -15,41 +21,60 @@ public class ButtonAnimator
 {
     private static final String TAG = ButtonAnimator.class.getSimpleName();
 
-    private static ButtonAnimator singleton;
-    private Context mContext;
 
-    public static synchronized ButtonAnimator getInstance(Context context)
+    public static void animateButton(View view)
     {
-        if (singleton == null)
+        final ImageView imageButton = (ImageView) view;
+        final ValueAnimator colorAnim = ObjectAnimator.ofFloat(0f, 1f);
+        colorAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener()
         {
-            singleton = new ButtonAnimator(context);
-        }
-        return singleton;
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation)
+            {
+                float mul = (Float) animation.getAnimatedValue();
+                int alphaOrange = adjustAlpha(Color.argb(50, 0, 0, 0), mul);
+                imageButton.setColorFilter(alphaOrange, PorterDuff.Mode.SRC_ATOP);
+                if (mul == 0.0) {
+                    imageButton.setColorFilter(null);
+                }
+            }
+        });
+
+        colorAnim.setDuration(120);
+        colorAnim.setRepeatMode(ValueAnimator.REVERSE);
+        colorAnim.setRepeatCount(1);
+        colorAnim.start();
+
     }
 
-    private ButtonAnimator(Context context)
+    private static int adjustAlpha(int color, float factor)
     {
-        this.mContext = context;
+        int alpha = Math.round(Color.alpha(color) * factor);
+        int red = Color.red(color);
+        int green = Color.green(color);
+        int blue = Color.blue(color);
+        return Color.argb(alpha, red, green, blue);
     }
 
-    public void animateButton(View view)
+    /*public void animateButton2(View view)
     {
         try
         {
-            ImageView image = (ImageView) view;
-            Drawable drawableNormal = image.getDrawable().getCurrent();
-            Drawable drawablePressed = image.getDrawable().getConstantState().newDrawable();
-            drawablePressed.mutate();
-            drawablePressed.setColorFilter(Color.argb(50, 0, 0, 0), PorterDuff.Mode.SRC_ATOP);
-
-            StateListDrawable listDrawable = new StateListDrawable();
-            listDrawable.addState(new int[]{android.R.attr.state_pressed}, drawablePressed);
-            listDrawable.addState(new int[]{}, drawableNormal);
-            image.setImageDrawable(listDrawable);
+            Animation animation = new AlphaAnimation(1, (float)0.5); // Change alpha from fully visible to invisible
+            animation.setDuration(200); // duration - half a second
+            animation.setInterpolator(new LinearInterpolator()); // do not alter
+            // animation
+            // rate
+            animation.setRepeatCount(Animation.INFINITE); // Repeat animation
+            // infinitely
+            animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the
+            // end so the button will
+            // fade back in
+            view.startAnimation(animation);
         }
         catch (Exception ex)
         {
-            ex.printStackTrace();
+            Log.e(TAG, "Error: " + ex.getMessage());
         }
-    }
+    }*/
 }
