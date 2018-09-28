@@ -24,12 +24,25 @@
     <string name="error_title_something_went_wrong">¡Ups!</string>
     <string name="error_content_facebook_graph">Error al iniciar sesión en Facebook. Inténtelo nuevamente.</string>
     <string name="button_accept">Aceptar</string>
+    <string name="button_verify">Verificar</string>
+    <string name="button_activate">Activar</string>
+    <string name="button_cancel">Cancelar</string>
+    <string name="button_retry">Reintentar</string>
+    <string name="button_yes">Si</string>
+    <string name="button_no">No</string>
     <string name="error_label_something_went_wrong">Revisa tu conexión e inténtalo de nuevo</string>
     <string name="title_dialog_invalid_nickname">Nickname Inválido</string>
     <string name="label_dialog_invalid_nickname">Este nickname no es válido. Intenta uno diferente</string>
     <string name="title_dialog_invalid_name">Nombre Inválido</string>
     <string name="label_dialog_invalid_name">Este nombre no es válido. Intenta uno diferente</string>
     <string name="title_dialog_nickname_already_exists">Nombre en uso</string>
+    <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>
+    <string name="dialog_content_activate_location">Debes activar la ubicación para un uso correcto del mapa.</string>
+    <string name="dialog_permissions_title">Permisos</string>
+    <string name="dialog_permissions_location_content">Debes proporcionar permisos a la aplicación para acceder a tu ubicación y usar la funcionalidad del mapa.</string>
+    <string name="toast_mock_apps_may_be_installed">¡Asegúrate de no tener instaladas aplicaciones de ubicaciones falsas!</string>
+    <string name="title_wildcard_pointer">¡Suerte!</string>
+    <string name="label_wildcard_pointer">Averigua el secreto</string>
 
     <!--    NICKNAME    -->
     <string name="title_nickname">NICKNAME (APODO)</string>

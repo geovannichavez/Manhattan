@@ -64,7 +64,11 @@ public class FirebasePointInteractor implements IFirebasePointInteractor
     @Override
     public void initializeGeolocation()
     {
-        new InitializeGeolocation().execute();
+        //new InitializeGeolocation().execute();
+        mReferenceGoldsPoint = new GeoFire(mGoldPoints);
+        mReferenceSilverPoint = new GeoFire(mSilverPoints);
+        mReferenceBronzePoint = new GeoFire(mBronzePoints);
+        mReferenceWildcardPoint = new GeoFire(mWildcardPoints);
     }
 
     @Override

@@ -264,5 +264,8 @@ public class UserData
         return mPreferences.getString(KEY_HOME_RAW_DATA, "");
     }
 
-
+    public String getAuthProviderId()
+    {
+        return mPreferences.getString(KEY_AUTH_PROVIDER_ID, "");
+    }
 }
