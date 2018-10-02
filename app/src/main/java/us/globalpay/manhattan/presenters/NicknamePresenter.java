@@ -35,7 +35,7 @@ public class NicknamePresenter implements INicknamePresenter, NicknameListener
     {
         this.mContext = context;
         this.mView = view;
-        //this.mInteractor = new NicknameInteractor(this, mContext);
+        this.mInteractor = new NicknameInteractor(mContext);
         this.mActivity = activity;
     }
 

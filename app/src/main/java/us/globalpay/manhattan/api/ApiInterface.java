@@ -1,5 +1,7 @@
 package us.globalpay.manhattan.api;
 
+import com.google.gson.JsonObject;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -10,7 +12,10 @@ import us.globalpay.manhattan.models.api.AuthenticateReqBody;
 import us.globalpay.manhattan.models.api.AuthenticateResponse;
 import us.globalpay.manhattan.models.api.Countries;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
+import us.globalpay.manhattan.models.api.RegisterClientResponse;
+import us.globalpay.manhattan.models.api.RegisterPhoneConsumerReqBody;
 import us.globalpay.manhattan.models.api.SimpleResultResponse;
+import us.globalpay.manhattan.models.api.SmsValidationReqBody;
 import us.globalpay.manhattan.utils.StringsURL;
 
 /**
@@ -35,6 +40,22 @@ public interface ApiInterface
                                                 @Header("AppVersion") String pAppVersion,
                                                 @Header("Platform") String pPlatform,
                                                 @Header("PackageName") String packageName);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.REGISTER_PHONE_CONSUMER)
+    Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey,
+                                                  @Header("AppVersion") String pAppVersion,
+                                                  @Header("Platform") String pPlatform,
+                                                  @Header("PackageName") String packageName,
+                                                  @Body RegisterPhoneConsumerReqBody registerConsumerBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.VALIDATE_TOKEN_LOCAL_AUTH)
+    Call<JsonObject> requestSmsValidation(@Body SmsValidationReqBody pTokenValBody,
+                                          @Header("authenticationKey") String pAuthKey,
+                                          @Header("AppVersion") String pAppVersion,
+                                          @Header("Platform") String pPlatform,
+                                          @Header("PackageName") String packageName);
 
 
 }

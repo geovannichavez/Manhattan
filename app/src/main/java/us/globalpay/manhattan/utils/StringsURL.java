@@ -12,4 +12,8 @@ public class StringsURL
     public static final String AUTHENTICATE_CONSUMER = "ConsumerSignin";
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
+
+    public final static String REGISTER_PHONE_CONSUMER = "registerPhoneConsumer";
+
+    public final static String VALIDATE_TOKEN_LOCAL_AUTH = "ValidateToken";
 }

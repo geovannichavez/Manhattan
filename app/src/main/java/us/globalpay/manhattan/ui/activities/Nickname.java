@@ -22,6 +22,7 @@ import com.bumptech.glide.Glide;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.presenters.NicknamePresenter;
+import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.Validation;
 import us.globalpay.manhattan.views.NicknameView;
 
@@ -52,7 +53,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
         ivBackground = (ImageView) findViewById(R.id.ivBackground);
 
         mPresenter = new NicknamePresenter(this, this, this);
-
+        mPresenter.initialize();
     }
 
     @Override
@@ -96,13 +97,16 @@ public class Nickname extends AppCompatActivity implements NicknameView
     @Override
     public void showGenericMessage(DialogModel dialog)
     {
-
+        //TODO: Consumir mecanismo previamente creado
     }
 
     @Override
     public void navigateNext(Intent nextActivity)
     {
-
+        Intent main = new Intent(this, Main.class);
+        NavFlagsUtil.addFlags(main);
+        startActivity(main);
+        finish();
     }
 
     @Override
