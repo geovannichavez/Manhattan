@@ -102,6 +102,8 @@
         <activity android:name=".ui.activities.Splashscreen" />
         <activity android:name=".ui.activities.Brands" />
         <activity android:name=".ui.activities.Permissions" />
+        <activity android:name=".ui.activities.AR" />
+
     </application>
 
 </manifest>
