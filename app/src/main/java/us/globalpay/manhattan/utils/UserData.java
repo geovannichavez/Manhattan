@@ -233,7 +233,7 @@ public class UserData
         mEditor.commit();
     }
 
-<<<<<<< HEAD
+
     public void saveBrandsData(String rawData)
     {
         mEditor.putString(KEY_BRANDS_RAW_DATA, rawData);
@@ -260,7 +260,7 @@ public class UserData
     {
         return mPreferences.getString(KEY_AUTH_PROVIDER_ID, "");
     }
-=======
+
     public void saveSimpleUserPhone(String pUserPhone)
     {
         mEditor.putString(KEY_CONSUMER_SIMPLE_PHONE, pUserPhone);
@@ -307,5 +307,5 @@ public class UserData
         mEditor.commit();
     }
 
->>>>>>> feature/Authentication
+
 }

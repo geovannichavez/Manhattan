@@ -44,14 +44,14 @@ public interface ApiInterface
                                                 @Header("PackageName") String packageName);
 
     @Headers("Content-Type: application/json")
-<<<<<<< HEAD
+
     @POST(StringsURL.GET_BRANDS)
     Call<JsonObject> getBrands(@Body BrandsReqBody requestBody,
                                @Header("authenticationKey") String userAuthenticationKey,
                                @Header("AppVersion") String versionName,
                                @Header("Platform") String platform,
                                @Header("PackageName") String packageName);
-=======
+
     @POST(StringsURL.REGISTER_PHONE_CONSUMER)
     Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey,
                                                   @Header("AppVersion") String pAppVersion,
@@ -66,8 +66,6 @@ public interface ApiInterface
                                           @Header("AppVersion") String pAppVersion,
                                           @Header("Platform") String pPlatform,
                                           @Header("PackageName") String packageName);
-
->>>>>>> feature/Authentication
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_INITIAL_DATA)

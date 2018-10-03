@@ -13,13 +13,12 @@ public class StringsURL
 
     public final static String VALIDATE_NICKNAME = "InsertNicknameConsumer";
 
-<<<<<<< HEAD
     public final static String GET_BRANDS = "GetBrand";
 
     public static final String GET_INITIAL_DATA = "Home";
-=======
+
     public final static String REGISTER_PHONE_CONSUMER = "registerPhoneConsumer";
 
     public final static String VALIDATE_TOKEN_LOCAL_AUTH = "ValidateToken";
->>>>>>> feature/Authentication
+
 }
