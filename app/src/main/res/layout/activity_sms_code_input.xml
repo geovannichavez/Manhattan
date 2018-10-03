@@ -153,6 +153,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="10"
                     android:ems="10"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/lato_semibold"
                     android:gravity="center"
                     android:hint="@string/hint_code"
                     android:imeOptions="actionDone"

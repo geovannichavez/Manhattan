@@ -31,6 +31,8 @@ public class UserData
     private static final String KEY_CONSUMER_EMAIL = "usr_consumer_email";
     private static final String KEY_CONSUMER_PHONE = "usr_consumer_phone";
     private static final String KEY_CONSUMER_NICKNAME = "key_consumer_nickname";
+    private static final String KEY_CONSUMER_SIMPLE_PHONE = "usr_simple_phone";
+    private static final String KEY_CONSUMER_ID = "usr_consumer_id";
 
     private static final String KEY_AUTH_MODE_SELECTED = "key_auth_mode_selected";
 
@@ -87,7 +89,7 @@ public class UserData
 
     public void saveSelectedCuntry(Country country)
     {
-        mEditor.putInt(KEY_CONSUMER_COUNTRY_ID, Integer.valueOf(country.get$id()));
+        mEditor.putString(KEY_CONSUMER_COUNTRY_ID, country.get$id());
         mEditor.putString(KEY_CONSUMER_COUNTRY_PHONE_CODE, country.getPhoneCode());
         mEditor.putString(KEY_CONSUMER_COUNTRY_IS3CODE, country.getCode());
         mEditor.putString(KEY_CONSUMER_COUNTRY_NAME, country.getName());
@@ -187,27 +189,16 @@ public class UserData
         return mPreferences.getString(KEY_CONSUMER_NICKNAME, "");
     }
 
-    public void HasAccpetedTerms(boolean pAccepted)
-    {
-        mEditor.putBoolean(KEY_HAS_ACCEPTED_TERMS, pAccepted);
-        mEditor.commit();
-    }
 
-    public void HasSelectedCountry(boolean pSelectedCountry)
+    public void hasSelectedCountry(boolean pSelectedCountry)
     {
         mEditor.putBoolean(KEY_HAS_SELECTED_COUNTRY, pSelectedCountry);
         mEditor.commit();
     }
 
-    public void HasConfirmedPhone(boolean pConfirmedPhone)
+    public void hasConfirmedPhone(boolean pConfirmedPhone)
     {
         mEditor.putBoolean(KEY_HAS_CONFIRMED_PHONE, pConfirmedPhone);
-        mEditor.commit();
-    }
-
-    public void HasGrantedDevicePermissions(boolean pGrantedPermissions)
-    {
-        mEditor.putBoolean(KEY_HAS_GRANTED_DEVICE_PERMISSIONS, pGrantedPermissions);
         mEditor.commit();
     }
 
@@ -242,6 +233,7 @@ public class UserData
         mEditor.commit();
     }
 
+<<<<<<< HEAD
     public void saveBrandsData(String rawData)
     {
         mEditor.putString(KEY_BRANDS_RAW_DATA, rawData);
@@ -268,4 +260,52 @@ public class UserData
     {
         return mPreferences.getString(KEY_AUTH_PROVIDER_ID, "");
     }
+=======
+    public void saveSimpleUserPhone(String pUserPhone)
+    {
+        mEditor.putString(KEY_CONSUMER_SIMPLE_PHONE, pUserPhone);
+        mEditor.commit();
+    }
+
+    public Country getSelectedCountry()
+    {
+        Country country = new Country();
+        try
+        {
+            country.setCode(mPreferences.getString(KEY_CONSUMER_COUNTRY_ID, ""));
+            country.setPhoneCode(mPreferences.getString(KEY_CONSUMER_COUNTRY_PHONE_CODE, ""));
+            country.setCountryCode(mPreferences.getString(KEY_CONSUMER_COUNTRY_IS3CODE, ""));
+            country.setName(mPreferences.getString(KEY_CONSUMER_COUNTRY_NAME, ""));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+
+        return country;
+    }
+
+    public void saveUserPhoneInfo(String countryID, String countryPhoneCode, String iso3Code, String countryName, String phone, int consumerID)
+    {
+        mEditor.putString(KEY_CONSUMER_COUNTRY_ID, countryID);
+        mEditor.putString(KEY_CONSUMER_COUNTRY_PHONE_CODE, countryPhoneCode);
+        mEditor.putString(KEY_CONSUMER_COUNTRY_IS3CODE, iso3Code);
+        mEditor.putString(KEY_CONSUMER_COUNTRY_NAME, countryName);
+        mEditor.putString(KEY_CONSUMER_PHONE, phone);
+        mEditor.putInt(KEY_CONSUMER_ID, consumerID);
+        mEditor.commit();
+    }
+
+    public boolean is3DCompatibleDevice()
+    {
+        return mPreferences.getBoolean(KEY_3D_COMPATIBLE_DEVICE, false);
+    }
+
+    public void setHasConfirmedLimitedFunctionality(boolean confirmed)
+    {
+        mEditor.putBoolean(KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY, confirmed);
+        mEditor.commit();
+    }
+
+>>>>>>> feature/Authentication
 }

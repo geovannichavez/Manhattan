@@ -93,8 +93,8 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
         }
         else
         {
-            UserData.getInstance(mContext).HasConfirmedPhone(true);
-            UserData.getInstance(mContext).HasSelectedCountry(true);
+            UserData.getInstance(mContext).hasConfirmedPhone(true);
+            UserData.getInstance(mContext).hasSelectedCountry(true);
             mView.navigateHome();
         }
     }

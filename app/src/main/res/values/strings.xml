@@ -36,6 +36,7 @@
     <string name="title_dialog_invalid_name">Nombre Inválido</string>
     <string name="label_dialog_invalid_name">Este nombre no es válido. Intenta uno diferente</string>
     <string name="title_dialog_nickname_already_exists">Nombre en uso</string>
+<<<<<<< HEAD
     <string name="dialog_title_activate_location">ACTIVAR UBICACIÓN</string>
     <string name="dialog_content_activate_location">Debes activar la ubicación para un uso correcto del mapa.</string>
     <string name="dialog_permissions_title">Permisos</string>
@@ -43,6 +44,21 @@
     <string name="toast_mock_apps_may_be_installed">¡Asegúrate de no tener instaladas aplicaciones de ubicaciones falsas!</string>
     <string name="title_wildcard_pointer">¡Suerte!</string>
     <string name="label_wildcard_pointer">Averigua el secreto</string>
+=======
+    <string name="title_phone_already_exists">Teléfono ya registrado</string>
+    <string name="label_phone_already_exists">El número de teléfono que ingresaste ya está en uso</string>
+    <string name="error_content_something_went_wrong_try_again">¡Revisa tu conexión!</string>
+    <string name="title_update_required">¡Actualiza tu aplicación!</string>
+    <string name="content_update_required">¡Debes actualizar tu aplicación a la versión %1$s para continuar!</string>
+    <string name="title_await_please">Espera un momento</string>
+    <string name="error_title_incorrect_token">Código</string>
+    <string name="error_label_incorrect_token">Código incorrecto, inténtalo nuevamente.</string>
+    <string name="label_portable_phone_number_part1">Si tu número es portado, no recibirás el SMS de confirmación. Por favor, comunícate con nosotros por WhatsApp al número </string>
+    <string name="label_portable_phone_number_part2"> para obtener tu código.</string>
+    <string name="label_callcenter_phone_number">7768-1443</string>
+    <string name="label_type_token_part1">Hemos enviado un SMS al número</string>
+    <string name="label_type_token_part2">, ingresa el código de confirmación</string>
+>>>>>>> feature/Authentication
 
     <!--    NICKNAME    -->
     <string name="title_nickname">NICKNAME (APODO)</string>

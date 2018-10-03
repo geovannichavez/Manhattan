@@ -14,7 +14,10 @@ import us.globalpay.manhattan.models.api.BrandsReqBody;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Countries;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
+import us.globalpay.manhattan.models.api.RegisterClientResponse;
+import us.globalpay.manhattan.models.api.RegisterPhoneConsumerReqBody;
 import us.globalpay.manhattan.models.api.SimpleResultResponse;
+import us.globalpay.manhattan.models.api.SmsValidationReqBody;
 import us.globalpay.manhattan.utils.StringsURL;
 
 /**
@@ -41,12 +44,30 @@ public interface ApiInterface
                                                 @Header("PackageName") String packageName);
 
     @Headers("Content-Type: application/json")
+<<<<<<< HEAD
     @POST(StringsURL.GET_BRANDS)
     Call<JsonObject> getBrands(@Body BrandsReqBody requestBody,
                                @Header("authenticationKey") String userAuthenticationKey,
                                @Header("AppVersion") String versionName,
                                @Header("Platform") String platform,
                                @Header("PackageName") String packageName);
+=======
+    @POST(StringsURL.REGISTER_PHONE_CONSUMER)
+    Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey,
+                                                  @Header("AppVersion") String pAppVersion,
+                                                  @Header("Platform") String pPlatform,
+                                                  @Header("PackageName") String packageName,
+                                                  @Body RegisterPhoneConsumerReqBody registerConsumerBody);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.VALIDATE_TOKEN_LOCAL_AUTH)
+    Call<JsonObject> requestSmsValidation(@Body SmsValidationReqBody pTokenValBody,
+                                          @Header("authenticationKey") String pAuthKey,
+                                          @Header("AppVersion") String pAppVersion,
+                                          @Header("Platform") String pPlatform,
+                                          @Header("PackageName") String packageName);
+
+>>>>>>> feature/Authentication
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_INITIAL_DATA)

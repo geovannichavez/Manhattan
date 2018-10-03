@@ -8,4 +8,6 @@ public interface IPhoneValidationPresenter
     void initailize();
     void retrieveCountries();
     void saveSelectedCountry(Country mSelectedCountry);
+    void requestToken(String phoneNumber, String authType);
+    void saveUserGeneralData(String rawPhone, int consumerID);
 }
