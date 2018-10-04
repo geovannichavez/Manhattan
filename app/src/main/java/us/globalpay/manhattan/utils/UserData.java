@@ -296,7 +296,7 @@ public class UserData
         mEditor.commit();
     }
 
-    public boolean is3DCompatibleDevice()
+    public boolean deviceFullCompatible()
     {
         return mPreferences.getBoolean(KEY_3D_COMPATIBLE_DEVICE, false);
     }

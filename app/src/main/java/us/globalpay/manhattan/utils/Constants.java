@@ -12,6 +12,8 @@ public class Constants
     public static final int REQUEST_PERMISSION_CODE = 1;
     public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";
     public static final String BUNDLE_PHONE_RETYPE = "bundle_data_phone_retype";
+    public static final String CHEST_STATE_OPEN = "open";
+    public static final String CHEST_STATE_CLOSED = "closed";
 
     //Location
     public static final int LOCATION_REQUEST_INTERVAL = 8000;
