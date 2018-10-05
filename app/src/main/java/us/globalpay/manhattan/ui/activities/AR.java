@@ -83,7 +83,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         mFirbaseObjects = new HashMap<>();
 
         mPresenter = new ARPresenter(this, this, this);
-
+        mPresenter.retrieveUserTracking();
 
 
         try
@@ -102,7 +102,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         try
         {
             LatLng location = new LatLng(latitude, longitude);
-            //mPresenter.updatePrizePntCriteria(location);
+            mPresenter.updateChestPntCriteria(location);
             architectView.setLocation(latitude, longitude, accuracy);
         }
         catch (Exception ex)
@@ -117,7 +117,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         try
         {
             LatLng location = new LatLng(latitude, longitude);
-            //this.mPresenter.prizePointsQuery(location);
+            this.mPresenter.chestPointsQuery(location);
             architectView.setLocation(latitude, longitude, accuracy);
         }
         catch (Exception ex)
@@ -152,18 +152,11 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         });
     }
 
-    @Override
-    public void on3DChestClick()
-    {
-
-    }
-
     //Wikitude listener
     @Override
     public void onJSONObjectReceived(JSONObject jsonObject)
     {
-        //TODO: Handle interaction from JS ro Java for 3D models
-
+        mPresenter.openChest(jsonObject);
     }
 
     @Override
@@ -191,11 +184,6 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         DialogGenerator.showDialog(this, messageModel, clickListener);
     }
 
-    @Override
-    public void showImageDialog(DialogModel dialogModel, int resource, boolean closeActivity)
-    {
-
-    }
 
     @Override
     public void showLoadingDialog(String content)
@@ -216,12 +204,6 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
                 mProgressDialog.dismiss();
         }
         catch (Exception ex) {  ex.printStackTrace();   }
-    }
-
-    @Override
-    public void obtainUserProgress()
-    {
-        mPresenter.retrieveUserTracking();
     }
 
     @Override
@@ -259,7 +241,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
     }
 
     @Override
-    public void on2DChestTouch(int await, int eraID)
+    public void on2DChestTouch(int await)
     {
         removeBlinkingAnimation();
 
@@ -502,11 +484,6 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         ivPrize.setEnabled(enabled);
     }
 
-    @Override
-    public void startShowcaseAR(boolean accelormeterDevice)
-    {
-
-    }
 
     @Override
     public void drawChest2D(String pKey, LatLng pLocation, int chestTypeValue)

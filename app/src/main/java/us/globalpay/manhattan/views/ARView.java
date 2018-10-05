@@ -15,19 +15,17 @@ public interface ARView
     void locationManagerConnected(double latitude, double longitude, double accuracy);
 
     void setClickListeners();
-    void on3DChestClick();
     void on2DChestClick();
     void hideArchViewLoadingMessage();
     void showGenericDialog(DialogModel messageModel, DialogInterface.OnClickListener clickListener);
-    void showImageDialog(DialogModel dialogModel, int resource, boolean closeActivity);
+    //void showImageDialog(DialogModel dialogModel, int resource, boolean closeActivity);
     void showLoadingDialog(String pLabel);
     void hideLoadingDialog();
-    void obtainUserProgress();
     void switchChestVisible(boolean isVisible);
     void makeChestBlink();
     void showToast(String pText);
     void removeBlinkingAnimation();
-    void on2DChestTouch(int await, int eraID);
+    void on2DChestTouch(int await);
     void removeRunnableCallback();
     void deleteModelAR();
 
@@ -51,7 +49,6 @@ public interface ARView
 
     void navigateToPrizeDetails();
     void setEnabledChestImage(boolean enabled);
-    void startShowcaseAR(boolean accelormeterDevice);
 
     void drawChest2D(String pKey, LatLng pLocation, int chestTypeValue);
 }

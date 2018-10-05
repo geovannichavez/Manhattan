@@ -13,6 +13,7 @@ import us.globalpay.manhattan.models.api.AuthenticateResponse;
 import us.globalpay.manhattan.models.api.BrandsReqBody;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Countries;
+import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
 import us.globalpay.manhattan.models.api.RegisterClientResponse;
 import us.globalpay.manhattan.models.api.RegisterPhoneConsumerReqBody;
@@ -73,4 +74,11 @@ public interface ApiInterface
                                    @Header("AppVersion") String versionName,
                                    @Header("Platform") String platform,
                                    @Header("PackageName") String packageName);
-}
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.GET_COUPON)
+    Call<GetCouponResponse> getCouponByCoins(@Header("authenticationKey") String userAuthenticationKey,
+                                             @Header("AppVersion") String versionName,
+                                             @Header("Platform") String platform,
+                                             @Header("PackageName") String packageName);
+    }

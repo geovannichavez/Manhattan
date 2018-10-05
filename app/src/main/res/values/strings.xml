@@ -6,6 +6,8 @@
     <!-- Facebook -->
     <string name="facebook_app_id">678060775913586</string>
     <string name="fb_login_protocol_scheme">fb678060775913586</string>
+
+
     <string name="label_coupons">CUPONES</string>
     <string name="hint_user_phone_input">+000 Escribe tu N° de Teléfono</string>
     <string name="label_provide_communication_way_required">Si obtienes una súper promoción necesitaremos comunicarnos contigo</string>
@@ -58,6 +60,9 @@
     <string name="label_type_token_part1">Hemos enviado un SMS al número</string>
     <string name="label_type_token_part2">, ingresa el código de confirmación</string>
     <string name="m4nh_0310018_315_jswikt_th4n_lck">sDhQ4W0tbAycdZMFcwYR2dVTNNNYgX38e61aDP1dE1tHpD0Cs7F1C85DZYVLisPytso30pc40JVHVKHP8+Q5PLo1BQ5KEgS5rAgtTRS9yHklcJL/XQqqgPFKtHHdrwKzJNTv2xAnvDDaVQv+NIJ4g6BDM6vJH6zOG/hukmW+y0FTYWx0ZWRfXywK/kdaLX2JDcQrkdWGD3byR204FA8Lwn0ubcMp2137jADN+MZ6wqjryxkgIc9j+fHd4KeJK1lG9TftwUcBa7FkrZ+oV+3hmhgls8KJwcc1C1pk0P0nrOIFrRxdf+NyDFwDjvvV3mqChHW7HrfRBk/SWQuKYLHcBr/sHrEYJ+wyWJz5gEvcszhrAdNjfaG4A1093WhPTllp+est2+iCV7JqQYT3Kzjj3wBZQ+ax9Yhohnhy0ufK09c/fPV05bui7pZ9CQ7w5h6fPIwv+44zHyFrMfN6mz4xPDWY+G0lDXW/KH+MNuyii+fkbTYMSN4/3/BVd+wbcDi4PmtNSa7VNJ++oKamVf6u0Qnoj5WBY8IQVt9sH1AXzHg+mSTW09qC/n2wYmxOEub8+5wAiD7JnfH2MzBogQEVOgAOx5F3wbtcylKbqUmYr6mN2tU2wmutKauu+1wkWtEQ3JcUzMO2oI01KJumB7rLT1hiSh/VkzE8mMg5s+El9DM=</string>
+    <string name="cant_redeem_title">¡No tan Rápido!</string>
+    <string name="redeem_prize_interval">¡Solo te faltan %1$s hora(s) para canjear tu premio! ¡No te canses de jugar, buena suerte!</string>
+
 
     <!--    NICKNAME    -->
     <string name="title_nickname">NICKNAME (APODO)</string>
@@ -91,6 +96,14 @@
     <string name="validation_required_nickname">El nickname es requerido.</string>
     <string name="validation_title_invalid_nickname">Nick</string>
     <string name="validation_not_valid_nickname">Este nickname no es válido. Intenta con otro</string>
+    <string name="label_loading_exchanging_chest">¡Abriendo objeto, espera!</string>
 
+    <string name="title_not_enough_coins">Sin Monedas...</string>
+    <string name="label_not_enough_coins">No tienes suficientes monedas para canjear un premio. ¡Abre más cofres y conseguirás monedas!</string>
+    <string name="label_redeeming_prize_wait">¡Canjeando premio, espera!</string>
+    <string name="toast_keep_pressed_three_seconds">Mantén presionado por 3 segundos</string>
+    <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
+    <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
+    <string name="toast_bronze_out_of_search_range">BRONCE: Saliste del rango de búsqueda</string>
 
 </resources>
