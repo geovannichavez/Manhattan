@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +21,8 @@ import com.bumptech.glide.Glide;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.presenters.NicknamePresenter;
+import us.globalpay.manhattan.utils.ButtonAnimator;
+import us.globalpay.manhattan.utils.DialogGenerator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.Validation;
 import us.globalpay.manhattan.views.NicknameView;
@@ -66,6 +67,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.animateButton(v);
                 validateNickname();
             }
         });
@@ -95,9 +97,9 @@ public class Nickname extends AppCompatActivity implements NicknameView
     }
 
     @Override
-    public void showGenericMessage(DialogModel dialog)
+    public void showGenericMessage(DialogModel dialog, DialogInterface.OnClickListener clickListener)
     {
-        //TODO: Consumir mecanismo previamente creado
+        DialogGenerator.showDialog(this, dialog, clickListener);
     }
 
     @Override

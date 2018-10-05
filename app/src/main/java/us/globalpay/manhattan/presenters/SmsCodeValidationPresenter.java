@@ -94,8 +94,8 @@ public class SmsCodeValidationPresenter implements ISmsCodeValidationPresenter, 
             //OneSignal ID tag
             OneSignal.sendTag(Constants.ONESIGNAL_USER_TAG_KEY, UserData.getInstance(mContext).getUserPhone());
 
-            UserData.getInstance(mContext).hasSelectedCountry(true);
-            UserData.getInstance(mContext).hasConfirmedPhone(true);
+            UserData.getInstance(mContext).setSelectedRegCountry(true);
+            UserData.getInstance(mContext).setConfirmedPhone(true);
 
             //If nickname comes empty, is a new user registration. Must complete profile
             if(TextUtils.isEmpty(UserData.getInstance(mContext).getNickname()))
@@ -104,7 +104,7 @@ public class SmsCodeValidationPresenter implements ISmsCodeValidationPresenter, 
             }
             else
             {
-                UserData.getInstance(mContext).hasAuthenticated(true);
+                UserData.getInstance(mContext).setAuthenticated(true);
                 UserData.getInstance(mContext).hasSetNickname(true);
 
                 mView.navigateHome(UserData.getInstance(mContext).deviceFullCompatible());

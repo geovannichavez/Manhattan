@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.presenters.TermsPresenter;
+import us.globalpay.manhattan.utils.ButtonAnimator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.views.TermsView;
 
@@ -62,6 +63,7 @@ public class Terms extends AppCompatActivity implements TermsView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.animateButton(v);
                 mPresenter.presentTerms();
             }
         });
@@ -120,6 +122,7 @@ public class Terms extends AppCompatActivity implements TermsView
                 @Override
                 public void onClick(View v)
                 {
+                    ButtonAnimator.animateButton(v);
                     mPresenter.acceptTerms();
                     Intent accept;
 

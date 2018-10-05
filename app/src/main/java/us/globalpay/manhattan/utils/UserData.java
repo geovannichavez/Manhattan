@@ -42,10 +42,7 @@ public class UserData
     private static final String KEY_HAS_GRANTED_DEVICE_PERMISSIONS = "usr_has_granted_device_permissions";
     private static final String KEY_HAS_AUTHENTICATED = "usr_has_authenticated";
     private static final String KEY_AUTHENTICATION_KEY = "usr_authentication_key";
-    private static final String KEY_HAS_READ_INTRO = "usr_has_read_intro";
     private static final String KEY_HAS_CONFIRMED_LIMITED_FUNCTIONALIITY = "usr_has_confirmed_limited_functionalty";
-    private static final String KEY_HAS_SEEN_INTRO = "usr_has_seen_intro";
-    private static final String KEY_HAS_SELECTED_ERA = "usr_has_selected_era";
     private static final String KEY_HAS_SET_NICKNAME = "usr_has_set_nickname";
     private static final String KEY_WELCOME_CHEST_AVAILABLE = "key_welcome_chest_available";
 
@@ -179,10 +176,15 @@ public class UserData
         mEditor.commit();
     }
 
-    public void hasAuthenticated(boolean authenticated)
+    public void setAuthenticated(boolean authenticated)
     {
         mEditor.putBoolean(KEY_HAS_AUTHENTICATED, authenticated);
         mEditor.commit();
+    }
+
+    public boolean isUserAuthenticated()
+    {
+        return mPreferences.getBoolean(KEY_HAS_AUTHENTICATED, false);
     }
 
     public void saveCountryID(String countryID)
@@ -214,18 +216,27 @@ public class UserData
     }
 
 
-    public void hasSelectedCountry(boolean pSelectedCountry)
+    public void setSelectedRegCountry(boolean pSelectedCountry)
     {
         mEditor.putBoolean(KEY_HAS_SELECTED_COUNTRY, pSelectedCountry);
         mEditor.commit();
     }
 
-    public void hasConfirmedPhone(boolean pConfirmedPhone)
+    public boolean hasSelectedCountry()
+    {
+        return mPreferences.getBoolean(KEY_HAS_SELECTED_COUNTRY, false);
+    }
+
+    public void setConfirmedPhone(boolean pConfirmedPhone)
     {
         mEditor.putBoolean(KEY_HAS_CONFIRMED_PHONE, pConfirmedPhone);
         mEditor.commit();
     }
 
+    public boolean hasVerifiedPhone()
+    {
+        return mPreferences.getBoolean(KEY_HAS_CONFIRMED_PHONE, false);
+    }
 
     public void save3DCompatibleValue(boolean hasAllRequirements)
     {
@@ -245,10 +256,20 @@ public class UserData
         mEditor.commit();
     }
 
-    public void hasAccpetedTerms(boolean accepted)
+    public boolean hasGrantedDevicePermissions()
+    {
+        return mPreferences.getBoolean(KEY_HAS_GRANTED_DEVICE_PERMISSIONS, false);
+    }
+
+    public void accpetedTerms(boolean accepted)
     {
         mEditor.putBoolean(KEY_HAS_ACCEPTED_TERMS, accepted);
         mEditor.commit();
+    }
+
+    public boolean hasAcceptedTerms()
+    {
+        return mPreferences.getBoolean(KEY_HAS_ACCEPTED_TERMS, false);
     }
 
     public void saveDeviceID(String deviceID)

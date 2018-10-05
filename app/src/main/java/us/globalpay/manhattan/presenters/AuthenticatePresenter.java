@@ -73,11 +73,13 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
         UserData.getInstance(mContext).saveUserGeneralInfo(response.getFirstName(), response.getLastName(), response.getEmail(), response.getPhone());
         UserData.getInstance(mContext).saveAuthenticationKey(response.getAuthenticationKey());
         UserData.getInstance(mContext).saveNickname(response.getNickname());
-        UserData.getInstance(mContext).hasAuthenticated(true);
+        UserData.getInstance(mContext).setAuthenticated(true);
         UserData.getInstance(mContext).saveCountryID(String.valueOf(response.getCountryID()));
 
         //Saves if user has nickname
-        if(response.getNickname() != null || !TextUtils.equals(response.getNickname(), ""))
+        if(!TextUtils.isEmpty(response.getNickname()))
+            UserData.getInstance(mContext).hasSetNickname(true);
+        else if (response.getNickname() != null)
             UserData.getInstance(mContext).hasSetNickname(true);
         else
             UserData.getInstance(mContext).hasSetNickname(false);
@@ -93,8 +95,8 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
         }
         else
         {
-            UserData.getInstance(mContext).hasConfirmedPhone(true);
-            UserData.getInstance(mContext).hasSelectedCountry(true);
+            UserData.getInstance(mContext).setConfirmedPhone(true);
+            UserData.getInstance(mContext).setSelectedRegCountry(true);
             mView.navigateHome();
         }
     }
@@ -119,7 +121,7 @@ public class AuthenticatePresenter implements IAuthenticatePresenter, Authentica
     @Override
     public void onFacebookEmailError()
     {
-        //Logs out the user if first was authenticated and then happened some error
+        //Logs out the user if first was setAuthenticated and then happened some error
         logoutFacebookUser();
     }
 

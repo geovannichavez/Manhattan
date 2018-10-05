@@ -1,5 +1,6 @@
 package us.globalpay.manhattan.views;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import us.globalpay.manhattan.models.DialogModel;
@@ -12,7 +13,7 @@ public interface NicknameView
     void initializeViews();
     void showLoading(String label);
     void hideLoading();
-    void showGenericMessage(DialogModel dialog);
+    void showGenericMessage(DialogModel dialog, DialogInterface.OnClickListener clickListener);
     void navigateNext(Intent nextActivity);
     void showGenericToast(String content);
     void createSnackbar(String content);

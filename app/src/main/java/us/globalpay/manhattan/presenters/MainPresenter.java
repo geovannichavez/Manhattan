@@ -1,6 +1,7 @@
 package us.globalpay.manhattan.presenters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
@@ -19,7 +20,6 @@ import com.google.gson.JsonObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.net.UnknownServiceException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +34,15 @@ import us.globalpay.manhattan.models.api.MainDataResponse;
 import us.globalpay.manhattan.models.geofire.PrizePointData;
 import us.globalpay.manhattan.models.geofire.WildcardPointData;
 import us.globalpay.manhattan.presenters.interfaces.IMainPresenter;
+import us.globalpay.manhattan.ui.activities.AddPhone;
+import us.globalpay.manhattan.ui.activities.Authenticate;
+import us.globalpay.manhattan.ui.activities.Nickname;
+import us.globalpay.manhattan.ui.activities.Permissions;
+import us.globalpay.manhattan.ui.activities.SmsCodeInput;
+import us.globalpay.manhattan.ui.activities.Terms;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.MockLocationUtility;
+import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.views.MainView;
 
@@ -49,6 +56,7 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     private Context mContext;
     private MainView mView;
     private MainInteractor mInteractor;
+    private AppCompatActivity mActivity;
     private FirebasePointInteractor mFirebaseInteractor;
 
     private Gson mGson;
@@ -59,6 +67,7 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     {
         this.mContext = context;
         this.mView = view;
+        this.mActivity = activity;
         this.mInteractor = new MainInteractor(mContext);
         this.mFirebaseInteractor = new FirebasePointInteractor(mContext, this);
 
@@ -86,6 +95,48 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
             String promos = String.valueOf(mainDataResponse.getData().getTotalNewPromo());
             mView.loadInitialValues(coins, promos);
         }
+    }
+
+    @Override
+    public void checkUserDataCompleted()
+    {
+        if(!UserData.getInstance(mContext).hasAcceptedTerms())
+        {
+            Intent acceptTerms = new Intent(mActivity, Terms.class);
+            NavFlagsUtil.addFlags(acceptTerms);
+            mContext.startActivity(acceptTerms);
+        }
+        else if(!UserData.getInstance(mContext).hasGrantedDevicePermissions())
+        {
+            Intent permissions = new Intent(mActivity, Permissions.class);
+            NavFlagsUtil.addFlags(permissions);
+            mContext.startActivity(permissions);
+        }
+        else if (!UserData.getInstance(mContext).isUserAuthenticated())
+        {
+            Intent authenticate = new Intent(mActivity, Authenticate.class);
+            NavFlagsUtil.addFlags(authenticate);
+            mContext.startActivity(authenticate);
+        }
+        else if (!UserData.getInstance(mContext).hasSelectedCountry())
+        {
+            Intent selectCountry = new Intent(mActivity, AddPhone.class);
+            NavFlagsUtil.addFlags(selectCountry);
+            mContext.startActivity(selectCountry);
+        }
+        else if(!UserData.getInstance(mContext).hasVerifiedPhone())
+        {
+            Intent inputToken = new Intent(mActivity, SmsCodeInput.class);
+            NavFlagsUtil.addFlags(inputToken);
+            mContext.startActivity(inputToken);
+        }
+        else if(TextUtils.isEmpty(UserData.getInstance(mContext).getNickname()))
+        {
+            Intent nickname = new Intent(mActivity, Nickname.class);
+            NavFlagsUtil.addFlags(nickname);
+            mContext.startActivity(nickname);
+        }
+
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 public interface IMainPresenter
 {
     void initialize();
+    void checkUserDataCompleted();
     void chekcLocationServiceEnabled();
     void checkPermissions();
     void connnectToLocationService();

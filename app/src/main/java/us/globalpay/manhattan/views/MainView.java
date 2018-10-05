@@ -17,6 +17,7 @@ public interface MainView
     void initialize();
     void renderMap();
     void renderCoupons();
+
     void loadInitialValues(String coins, String promos);
     void displayActivateLocationDialog();
     void navigateBrands();

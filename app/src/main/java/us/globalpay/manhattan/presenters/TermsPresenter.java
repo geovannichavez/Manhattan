@@ -43,7 +43,7 @@ public class TermsPresenter implements ITermsPresenter
     @Override
     public void acceptTerms()
     {
-        UserData.getInstance(mContext).hasAccpetedTerms(true);
+        UserData.getInstance(mContext).accpetedTerms(true);
 
         String uniqueID = UUID.randomUUID().toString().toUpperCase();
         UserData.getInstance(mContext).saveDeviceID(uniqueID);

@@ -1,6 +1,7 @@
 package us.globalpay.manhattan.presenters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
@@ -14,6 +15,7 @@ import us.globalpay.manhattan.interactors.NicknameListener;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.SimpleResultResponse;
 import us.globalpay.manhattan.presenters.interfaces.INicknamePresenter;
+import us.globalpay.manhattan.ui.activities.AddPhone;
 import us.globalpay.manhattan.ui.activities.Main;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.UserData;
@@ -65,8 +67,7 @@ public class NicknamePresenter implements INicknamePresenter, NicknameListener
 
         UserData.getInstance(mContext).hasSetNickname(true);
 
-        //UserData.getInstance(mContext).setWelcomeChestAvailable(true);
-        Intent next = new Intent(mActivity, Main.class);
+        Intent next = new Intent(mActivity, AddPhone.class);
         NavFlagsUtil.addFlags(next);
         mView.navigateNext(next);
     }
@@ -99,7 +100,14 @@ public class NicknamePresenter implements INicknamePresenter, NicknameListener
                     errorResponse.setTitle(dialogTitle);
                     errorResponse.setContent(dialogMessage);
                     errorResponse.setAcceptButton(dialogButton);
-                    this.mView.showGenericMessage(errorResponse);
+                    this.mView.showGenericMessage(errorResponse, new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
                 }
                 else
                 {
@@ -109,7 +117,14 @@ public class NicknamePresenter implements INicknamePresenter, NicknameListener
                     errorResponse.setTitle(dialogTitle);
                     errorResponse.setContent(dialogMessage);
                     errorResponse.setAcceptButton(dialogButton);
-                    this.mView.showGenericMessage(errorResponse);
+                    this.mView.showGenericMessage(errorResponse, new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
                 }
             }
             else
@@ -119,14 +134,28 @@ public class NicknamePresenter implements INicknamePresenter, NicknameListener
                     errorResponse.setTitle(mContext.getString(R.string.title_dialog_nickname_already_exists));
                     errorResponse.setContent(mContext.getString(R.string.validation_nickname_already_exists));
                     errorResponse.setAcceptButton(mContext.getString(R.string.button_accept));
-                    this.mView.showGenericMessage(errorResponse);
+                    this.mView.showGenericMessage(errorResponse, new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
                 }
                 else if(pCodeStatus == 403)
                 {
                     errorResponse.setTitle(mContext.getString(R.string.title_dialog_invalid_nickname));
                     errorResponse.setContent(mContext.getString(R.string.label_dialog_invalid_nickname));
                     errorResponse.setAcceptButton(mContext.getString(R.string.button_accept));
-                    this.mView.showGenericMessage(errorResponse);
+                    this.mView.showGenericMessage(errorResponse, new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            mView.initializeViews();
+                        }
+                    });
                 }
                 else
                 {
@@ -137,7 +166,14 @@ public class NicknamePresenter implements INicknamePresenter, NicknameListener
                     errorResponse.setTitle(dialogTitle);
                     errorResponse.setContent(dialogMessage);
                     errorResponse.setAcceptButton(dialogButton);
-                    this.mView.showGenericMessage(errorResponse);
+                    this.mView.showGenericMessage(errorResponse, new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
+                        {
+                            dialog.dismiss();
+                        }
+                    });
                 }
             }
         }

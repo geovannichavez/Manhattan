@@ -147,6 +147,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.animateButton(v);
                 mPresenter.redeemPrize();
             }
         });
@@ -167,6 +168,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.animateButton(v);
                 mPresenter.handle2DCoinTouch();
             }
         });

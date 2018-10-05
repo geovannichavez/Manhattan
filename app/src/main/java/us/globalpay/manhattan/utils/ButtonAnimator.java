@@ -56,25 +56,4 @@ public class ButtonAnimator
         return Color.argb(alpha, red, green, blue);
     }
 
-    /*public void animateButton2(View view)
-    {
-        try
-        {
-            Animation animation = new AlphaAnimation(1, (float)0.5); // Change alpha from fully visible to invisible
-            animation.setDuration(200); // duration - half a second
-            animation.setInterpolator(new LinearInterpolator()); // do not alter
-            // animation
-            // rate
-            animation.setRepeatCount(Animation.INFINITE); // Repeat animation
-            // infinitely
-            animation.setRepeatMode(Animation.REVERSE); // Reverse animation at the
-            // end so the button will
-            // fade back in
-            view.startAnimation(animation);
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
-    }*/
 }

@@ -103,6 +103,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
         mBitmapMarkers = new HashMap<>();
 
         mPresenter = new MainPresenter(this, this, this);
+        mPresenter.checkUserDataCompleted();
         mPresenter.initialize();
         mPresenter.retrieveData();
         mPresenter.chekcLocationServiceEnabled();
