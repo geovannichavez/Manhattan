@@ -17,7 +17,6 @@ import us.globalpay.manhattan.interactors.PhoneValidationListener;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Countries;
 import us.globalpay.manhattan.models.api.RegisterClientResponse;
-import us.globalpay.manhattan.models.api.SimpleResultResponse;
 import us.globalpay.manhattan.models.api.SmsValidationReqBody;
 import us.globalpay.manhattan.presenters.interfaces.ISmsCodeValidationPresenter;
 import us.globalpay.manhattan.utils.Constants;
@@ -108,7 +107,7 @@ public class SmsCodeValidationPresenter implements ISmsCodeValidationPresenter, 
                 UserData.getInstance(mContext).hasAuthenticated(true);
                 UserData.getInstance(mContext).hasSetNickname(true);
 
-                mView.navigateHome(UserData.getInstance(mContext).is3DCompatibleDevice());
+                mView.navigateHome(UserData.getInstance(mContext).deviceFullCompatible());
             }
 
         }

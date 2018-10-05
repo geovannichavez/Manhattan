@@ -20,7 +20,6 @@ public class UserData
 
     private static final String PREFERENCES_NAME = "manh4200918-451-t4n";
 
-
     //User Info
     private static final String KEY_CONSUMER_COUNTRY_ID = "usr_country_id";
     private static final String KEY_CONSUMER_COUNTRY_PHONE_CODE = "usr_country_phone_code";
@@ -66,6 +65,31 @@ public class UserData
     private static final String KEY_AUTH_PROVIDER_FULLNAME = "usr_auth_provider_fullname";
     private static final String KEY_AUTH_PROVIDER_ID = "usr_auth_provider_id";
     private static final String KEY_AUTH_PROVIDER_URL = "usr_auth_provider_url";
+
+    //Coins and Chests
+    private static final String KEY_TOTAL_WON_COINS = "usr_total_won_coins";
+    private static final String KEY_TOTAL_WON_PRIZES = "usr_total_won_prizes";
+    private static final String KEY_CURRENT_COINS_PROGRESS = "usr_current_coins_progress";
+    private static final String KEY_LAST_CHEST_EXCHANGED_VALUE = "usr_last_chest_exchanged_value";
+    private static final String KEY_AWAIT_TIME_PENDING = "usr_await_time_pending";
+    private static final String KEY_TOTAL_SOUVENIR = "usr_winned_souvenir";
+    private static final String KEY_LAST_CHEST_ID = "usr_last_chest_exchanged";
+    private static final String KEY_FIRST_CHEST_KEY_ENTERED = "key_last_chest_key_entered";
+    private static final String KEY_LAST_CHEST_LOCATION_LATITUDE = "key_last_chest_location_latitude";
+    private static final String KEY_LAST_CHEST_LOCATION_LONGITUDE = "key_last_chest_location_longitude";
+    private static final String KEY_LAST_CHEST_LOCATION_TIME = "key_last_chest_location_time";
+    private static final String KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID = "usr_last_wildcard_touched_firebase_id";
+    private static final String KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE = "usr_last_wildcard_touched_chest_type";
+
+    //Coupon
+    private static final String KEY_LAST_COUPON_TITLE = "key_last_coupon_type";
+    private static final String KEY_LAST_COUPON_DESCRIPTION = "key_last_coupon_description";
+    private static final String KEY_LAST_COUPON_URL_BACKGROUND = "key_last_coupon_url_background";
+    private static final String KEY_LAST_COUPON_URL_BACKGROUND_HISTORY = "key_last_coupon_url_background_history";
+    private static final String KEY_LAST_COUPON_PURCHASABLE = "key_last_coupon_purchasable";
+    private static final String KEY_LAST_COUPON_RESPONSE_CODE = "key_last_coupon_response_code";
+    private static final String KEY_LAST_COUPON_PIN_LEVEL = "key_last_coupon_pin_level";
+    private static final String KEY_LAST_COUPON_CODE = "key_last_coupon_code";
 
     //RAW Data
     private static final String KEY_BRANDS_RAW_DATA = "rsbrn-rw-dta260918305-ser-manh";
@@ -233,7 +257,7 @@ public class UserData
         mEditor.commit();
     }
 
-<<<<<<< HEAD
+
     public void saveBrandsData(String rawData)
     {
         mEditor.putString(KEY_BRANDS_RAW_DATA, rawData);
@@ -260,7 +284,7 @@ public class UserData
     {
         return mPreferences.getString(KEY_AUTH_PROVIDER_ID, "");
     }
-=======
+
     public void saveSimpleUserPhone(String pUserPhone)
     {
         mEditor.putString(KEY_CONSUMER_SIMPLE_PHONE, pUserPhone);
@@ -296,7 +320,7 @@ public class UserData
         mEditor.commit();
     }
 
-    public boolean is3DCompatibleDevice()
+    public boolean deviceFullCompatible()
     {
         return mPreferences.getBoolean(KEY_3D_COMPATIBLE_DEVICE, false);
     }
@@ -307,5 +331,165 @@ public class UserData
         mEditor.commit();
     }
 
->>>>>>> feature/Authentication
+    public void saveUserTrackingProgess(int pCoins, int pPrizes, int pCoinsProgress, int pSouvenirs, int pEraID)
+    {
+        //int coins = (pCoins < 0) ? 0 : pCoins;
+        //mEditor.putInt(KEY_TOTAL_WON_COINS, coins);
+        mEditor.putInt(KEY_TOTAL_WON_COINS, pCoins);
+        mEditor.putInt(KEY_TOTAL_WON_PRIZES, pPrizes);
+        mEditor.putInt(KEY_CURRENT_COINS_PROGRESS, pCoinsProgress);
+        mEditor.putInt(KEY_TOTAL_SOUVENIR, pSouvenirs);
+        mEditor.commit();
+    }
+
+
+    public int getCurrentCoinsProgress()
+    {
+        return mPreferences.getInt(KEY_CURRENT_COINS_PROGRESS, 0);
+    }
+
+    public int getSavedSouvenirsCount()
+    {
+        return mPreferences.getInt(KEY_TOTAL_SOUVENIR, 0);
+    }
+
+    public int getConsumerPrizes()
+    {
+        return mPreferences.getInt(KEY_TOTAL_WON_PRIZES, 0);
+    }
+
+    public int getTotalWonCoins()
+    {
+        return mPreferences.getInt(KEY_TOTAL_WON_COINS, 0);
+    }
+
+    public void saveLastWildcardTouched(String pFirebaseID, int chestType)
+    {
+        mEditor.putString(KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID, pFirebaseID);
+        mEditor.putInt(KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE, chestType);
+        mEditor.commit();
+    }
+
+    public void deleteFirstKeyEntered()
+    {
+        mEditor.remove(KEY_FIRST_CHEST_KEY_ENTERED);
+        mEditor.commit();
+    }
+
+    public String getFirstKeyEntered()
+    {
+        return mPreferences.getString(KEY_FIRST_CHEST_KEY_ENTERED, "");
+    }
+
+    public void saveFirstKeyEntered(String key)
+    {
+        mEditor.putString(KEY_FIRST_CHEST_KEY_ENTERED, key);
+        mEditor.commit();
+    }
+
+    public String getLastExchangedChestID()
+    {
+        return mPreferences.getString(KEY_LAST_CHEST_ID, "");
+    }
+
+    public void saveLastCouponTitle(String title)
+    {
+        mEditor.putString(KEY_LAST_COUPON_TITLE, title);
+        mEditor.commit();
+    }
+
+    public String getLastCouponTitle()
+    {
+        return mPreferences.getString(KEY_LAST_COUPON_TITLE, "");
+    }
+
+    public void saveLastCouponDescription(String description)
+    {
+        mEditor.putString(KEY_LAST_COUPON_DESCRIPTION, description);
+        mEditor.commit();
+    }
+
+    public String getLastCouponDescription()
+    {
+        return mPreferences.getString(KEY_LAST_COUPON_DESCRIPTION, "");
+    }
+
+    public void saveLastCouponUrlBackground(String urlBackground)
+    {
+        mEditor.putString(KEY_LAST_COUPON_URL_BACKGROUND, urlBackground);
+        mEditor.commit();
+    }
+
+    public String getLastCouponUrlBackground()
+    {
+        return mPreferences.getString(KEY_LAST_COUPON_URL_BACKGROUND, "");
+    }
+
+    public void saveLastCouponUrlBackgroundHistory(String urlBackground)
+    {
+        mEditor.putString(KEY_LAST_COUPON_URL_BACKGROUND_HISTORY, "");
+        mEditor.commit();
+    }
+
+    public String getLastCouponUrlBackgroundHistory()
+    {
+        return mPreferences.getString(KEY_LAST_COUPON_URL_BACKGROUND_HISTORY, "");
+    }
+
+    public void saveLastCouponPurchasable(boolean isPurchasable)
+    {
+        mEditor.putBoolean(KEY_LAST_COUPON_PURCHASABLE, isPurchasable);
+        mEditor.commit();
+    }
+
+    public boolean getLastCouponIsPurchasable()
+    {
+        return mPreferences.getBoolean(KEY_LAST_COUPON_PURCHASABLE, false);
+    }
+
+    public void saveLastCouponCode(String couponCode)
+    {
+        mEditor.putString(KEY_LAST_COUPON_CODE, couponCode);
+        mEditor.commit();
+    }
+
+    public String getLastCouponCode()
+    {
+        return mPreferences.getString(KEY_LAST_COUPON_CODE, "");
+    }
+
+    public void saveLastCouponPinLevel(int pinLevel)
+    {
+        mEditor.putInt(KEY_LAST_COUPON_PIN_LEVEL, pinLevel);
+        mEditor.commit();
+    }
+
+    public int getLastCouponPinLevel()
+    {
+        return mPreferences.getInt(KEY_LAST_COUPON_PIN_LEVEL, 0);
+    }
+
+    public void saveLastCouponResponseCode(String responseCode)
+    {
+        mEditor.putString(KEY_LAST_COUPON_RESPONSE_CODE, responseCode);
+        mEditor.commit();
+    }
+
+    public String getLastChanceResponseCode()
+    {
+        return mPreferences.getString(KEY_LAST_COUPON_RESPONSE_CODE, "");
+    }
+
+    public void saveAwaitTime(String pTime)
+    {
+        mEditor.putString(KEY_AWAIT_TIME_PENDING, pTime);
+        mEditor.commit();
+    }
+
+    public String getAwaitTimePending()
+    {
+        return mPreferences.getString(KEY_AWAIT_TIME_PENDING, "");
+    }
+
+
 }

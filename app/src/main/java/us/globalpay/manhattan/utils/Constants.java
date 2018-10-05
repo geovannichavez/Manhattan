@@ -12,6 +12,13 @@ public class Constants
     public static final int REQUEST_PERMISSION_CODE = 1;
     public static final String  INTENT_BUNDLE_AUTH_TYPE = "intent_bundle_auth_type";
     public static final String BUNDLE_PHONE_RETYPE = "bundle_data_phone_retype";
+    public static final String CHEST_STATE_OPEN = "open";
+    public static final String CHEST_STATE_CLOSED = "closed";
+    public static final int REQUIRED_TIME_TOUCH_MILLISECONDS = 1000;
+
+    //Wikitude
+    public static final double AR_POI_RADIOS_KM = 0.017;
+    public static final double RECARSTOP_2D_RADIUS_KM = 0.015;
 
     //Location
     public static final int LOCATION_REQUEST_INTERVAL = 8000;

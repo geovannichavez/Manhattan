@@ -13,6 +13,7 @@ import us.globalpay.manhattan.models.api.AuthenticateResponse;
 import us.globalpay.manhattan.models.api.BrandsReqBody;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Countries;
+import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
 import us.globalpay.manhattan.models.api.RegisterClientResponse;
 import us.globalpay.manhattan.models.api.RegisterPhoneConsumerReqBody;
@@ -44,14 +45,14 @@ public interface ApiInterface
                                                 @Header("PackageName") String packageName);
 
     @Headers("Content-Type: application/json")
-<<<<<<< HEAD
+
     @POST(StringsURL.GET_BRANDS)
     Call<JsonObject> getBrands(@Body BrandsReqBody requestBody,
                                @Header("authenticationKey") String userAuthenticationKey,
                                @Header("AppVersion") String versionName,
                                @Header("Platform") String platform,
                                @Header("PackageName") String packageName);
-=======
+
     @POST(StringsURL.REGISTER_PHONE_CONSUMER)
     Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey,
                                                   @Header("AppVersion") String pAppVersion,
@@ -67,12 +68,17 @@ public interface ApiInterface
                                           @Header("Platform") String pPlatform,
                                           @Header("PackageName") String packageName);
 
->>>>>>> feature/Authentication
-
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_INITIAL_DATA)
     Call<JsonObject> getInitialData(@Header("authenticationKey") String userAuthenticationKey,
                                    @Header("AppVersion") String versionName,
                                    @Header("Platform") String platform,
                                    @Header("PackageName") String packageName);
-}
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.GET_COUPON)
+    Call<GetCouponResponse> getCouponByCoins(@Header("authenticationKey") String userAuthenticationKey,
+                                             @Header("AppVersion") String versionName,
+                                             @Header("Platform") String platform,
+                                             @Header("PackageName") String packageName);
+    }
