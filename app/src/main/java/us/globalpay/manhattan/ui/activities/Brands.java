@@ -116,7 +116,7 @@ public class Brands extends AppCompatActivity implements BrandsView
         @Override
         public void onClick(View view)
         {
-            ButtonAnimator.animateButton(view);
+            ButtonAnimator.shadowButton(view);
             navigateBack();
         }
     };

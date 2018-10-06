@@ -67,7 +67,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
                 validateNickname();
             }
         });

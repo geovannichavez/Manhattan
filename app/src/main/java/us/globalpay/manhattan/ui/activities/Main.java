@@ -1,7 +1,6 @@
 package us.globalpay.manhattan.ui.activities;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,12 +10,10 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
@@ -24,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -43,7 +39,6 @@ import java.util.Map;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.FavoriteCuppon;
-import us.globalpay.manhattan.models.MarkerData;
 import us.globalpay.manhattan.presenters.MainPresenter;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
 import us.globalpay.manhattan.utils.ButtonAnimator;
@@ -148,7 +143,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
             }
         });
 
@@ -157,7 +152,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
                 navigateBrands();
             }
         });

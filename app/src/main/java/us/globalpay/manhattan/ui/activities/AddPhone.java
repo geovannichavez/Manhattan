@@ -85,7 +85,7 @@ public class AddPhone extends AppCompatActivity implements AddPhoneView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
                 displayCountries();
             }
         });
@@ -97,7 +97,7 @@ public class AddPhone extends AppCompatActivity implements AddPhoneView
             {
                 try
                 {
-                    ButtonAnimator.animateButton(v);
+                    ButtonAnimator.shadowButton(v);
                     String phoneNumber = etPhoneInput.getText().toString();
                     phoneNumber = phoneNumber.replace("-", "");
 

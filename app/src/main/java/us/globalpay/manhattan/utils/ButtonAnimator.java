@@ -11,8 +11,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
+
+import us.globalpay.manhattan.R;
 
 /**
  * Created by Josué Chávez on 10/09/2018.
@@ -22,7 +25,7 @@ public class ButtonAnimator
     private static final String TAG = ButtonAnimator.class.getSimpleName();
 
 
-    public static void animateButton(View view)
+    public static void shadowButton(View view)
     {
         final ImageView imageButton = (ImageView) view;
         final ValueAnimator colorAnim = ObjectAnimator.ofFloat(0f, 1f);
@@ -45,6 +48,19 @@ public class ButtonAnimator
         colorAnim.setRepeatCount(1);
         colorAnim.start();
 
+    }
+
+    public static void floatingButton(Context context, View view)
+    {
+        final ImageView imageButton = (ImageView) view;
+        final Animation myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        imageButton.startAnimation(myAnim);
+
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        BounceInterpolator interpolator = new BounceInterpolator(0.1, 15);
+        myAnim.setInterpolator(interpolator);
+
+        imageButton.startAnimation(myAnim);
     }
 
     private static int adjustAlpha(int color, float factor)

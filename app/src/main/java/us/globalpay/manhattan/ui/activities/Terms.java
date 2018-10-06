@@ -14,10 +14,8 @@ import android.view.Window;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
@@ -63,7 +61,7 @@ public class Terms extends AppCompatActivity implements TermsView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.floatingButton(Terms.this, v);
                 mPresenter.presentTerms();
             }
         });
@@ -122,7 +120,8 @@ public class Terms extends AppCompatActivity implements TermsView
                 @Override
                 public void onClick(View v)
                 {
-                    ButtonAnimator.animateButton(v);
+
+                    ButtonAnimator.floatingButton(Terms.this, v);
                     mPresenter.acceptTerms();
                     Intent accept;
 

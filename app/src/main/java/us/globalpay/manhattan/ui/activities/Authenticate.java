@@ -3,13 +3,10 @@ package us.globalpay.manhattan.ui.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -62,7 +59,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
                 btnFacebookLogin.performClick();
                 mPresenter.facebookSigin();
             }
@@ -73,7 +70,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
             }
         });
     }

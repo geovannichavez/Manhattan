@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.text.style.StyleSpan;
 import android.view.View;
@@ -74,7 +73,7 @@ public class SmsCodeInput extends AppCompatActivity implements SmsCodeInputView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.animateButton(v);
+                ButtonAnimator.shadowButton(v);
                 String code = etCodeInput.getText().toString();
                 mPresenter.validateSmsCode(code);
             }
