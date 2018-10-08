@@ -1,18 +1,14 @@
-package us.globalpay.manhattan.utils;
+package us.globalpay.manhattan.utils.ui;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
-import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
 import us.globalpay.manhattan.R;
@@ -53,14 +49,14 @@ public class ButtonAnimator
     public static void floatingButton(Context context, View view)
     {
         final ImageView imageButton = (ImageView) view;
-        final Animation myAnim = AnimationUtils.loadAnimation(context, R.anim.bounce);
-        imageButton.startAnimation(myAnim);
+        final Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
+        imageButton.startAnimation(anim);
 
         // Use bounce interpolator with amplitude 0.2 and frequency 20
-        BounceInterpolator interpolator = new BounceInterpolator(0.1, 15);
-        myAnim.setInterpolator(interpolator);
+        BounceInterpolator interpolator = new BounceInterpolator(0.05, 5);
+        anim.setInterpolator(interpolator);
 
-        imageButton.startAnimation(myAnim);
+        imageButton.startAnimation(anim);
     }
 
     private static int adjustAlpha(int color, float factor)

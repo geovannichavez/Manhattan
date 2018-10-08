@@ -20,7 +20,7 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.Category;
 import us.globalpay.manhattan.presenters.BrandsPresenter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.views.BrandsView;
 import us.globalpay.manhattan.ui.adapters.BrandsAdapter;

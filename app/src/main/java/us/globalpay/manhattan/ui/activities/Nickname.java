@@ -21,8 +21,8 @@ import com.bumptech.glide.Glide;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.presenters.NicknamePresenter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
-import us.globalpay.manhattan.utils.DialogGenerator;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.Validation;
 import us.globalpay.manhattan.views.NicknameView;
@@ -67,7 +67,7 @@ public class Nickname extends AppCompatActivity implements NicknameView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.shadowButton(v);
+                ButtonAnimator.floatingButton(Nickname.this, v);
                 validateNickname();
             }
         });

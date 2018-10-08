@@ -41,9 +41,9 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.FavoriteCuppon;
 import us.globalpay.manhattan.presenters.MainPresenter;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.Constants;
-import us.globalpay.manhattan.utils.DialogGenerator;
+import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.views.MainView;
 
 public class Main extends AppCompatActivity implements OnMapReadyCallback, MainView

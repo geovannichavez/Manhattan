@@ -31,7 +31,7 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Country;
 import us.globalpay.manhattan.models.api.RegisterClientResponse;
 import us.globalpay.manhattan.presenters.PhoneValidationPresenter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.views.AddPhoneView;
@@ -97,7 +97,7 @@ public class AddPhone extends AppCompatActivity implements AddPhoneView
             {
                 try
                 {
-                    ButtonAnimator.shadowButton(v);
+                    ButtonAnimator.floatingButton(AddPhone.this, v);
                     String phoneNumber = etPhoneInput.getText().toString();
                     phoneNumber = phoneNumber.replace("-", "");
 

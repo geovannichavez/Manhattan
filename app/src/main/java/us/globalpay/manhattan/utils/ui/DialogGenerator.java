@@ -1,4 +1,4 @@
-package us.globalpay.manhattan.utils;
+package us.globalpay.manhattan.utils.ui;
 
 import android.content.Context;
 import android.content.DialogInterface;

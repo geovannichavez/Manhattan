@@ -15,7 +15,7 @@ import com.facebook.login.widget.LoginButton;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.presenters.AuthenticatePresenter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.views.AuthenticateView;
 
@@ -59,7 +59,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.shadowButton(v);
+                ButtonAnimator.floatingButton(Authenticate.this, v);
                 btnFacebookLogin.performClick();
                 mPresenter.facebookSigin();
             }
@@ -70,7 +70,7 @@ public class Authenticate extends AppCompatActivity implements AuthenticateView
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.shadowButton(v);
+                ButtonAnimator.floatingButton(Authenticate.this, v);
             }
         });
     }

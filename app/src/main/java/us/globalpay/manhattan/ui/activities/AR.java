@@ -30,10 +30,10 @@ import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.ChestData2D;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.presenters.ARPresenter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
-import us.globalpay.manhattan.utils.ChestSelector;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.ChestSelector;
 import us.globalpay.manhattan.utils.Constants;
-import us.globalpay.manhattan.utils.DialogGenerator;
+import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.views.ARView;
@@ -147,7 +147,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.shadowButton(v);
+                ButtonAnimator.floatingButton(AR.this, v);
                 mPresenter.redeemPrize();
             }
         });

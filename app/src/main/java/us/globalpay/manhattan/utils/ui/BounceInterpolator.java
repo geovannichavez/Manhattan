@@ -1,4 +1,4 @@
-package us.globalpay.manhattan.utils;
+package us.globalpay.manhattan.utils.ui;
 
 /**
  * Created by Josué Chávez on 05/10/2018.

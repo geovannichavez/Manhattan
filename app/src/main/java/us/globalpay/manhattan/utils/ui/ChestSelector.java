@@ -1,4 +1,4 @@
-package us.globalpay.manhattan.utils;
+package us.globalpay.manhattan.utils.ui;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 
 import us.globalpay.manhattan.R;
+import us.globalpay.manhattan.utils.Constants;
 
 /**
  * Created by Josué Chávez on 04/10/2018.
