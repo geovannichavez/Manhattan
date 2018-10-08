@@ -8,6 +8,12 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Cupon
 {
+    @SerializedName("$id")
+    @Expose
+    private String $id;
+    @SerializedName("CuponID")
+    @Expose
+    private int cuponID;
     @SerializedName("Title")
     @Expose
     private String title;
@@ -23,6 +29,9 @@ public class Cupon
     @SerializedName("Purchasable")
     @Expose
     private boolean purchasable;
+    @SerializedName("Favorite")
+    @Expose
+    private boolean favorite;
     @SerializedName("ResponseCode")
     @Expose
     private String responseCode;
@@ -32,6 +41,48 @@ public class Cupon
     @SerializedName("Code")
     @Expose
     private String code;
+    @SerializedName("BrandName")
+    @Expose
+    private String brandName;
+    @SerializedName("UrlLogo")
+    @Expose
+    private String urlLogo;
+    @SerializedName("UrlBackgroundBrand")
+    @Expose
+    private String urlBackgroundBrand;
+    @SerializedName("LogoColor")
+    @Expose
+    private String logoColor;
+    @SerializedName("MarkerLogo")
+    @Expose
+    private String markerLogo;
+    @SerializedName("UrlImageCategory")
+    @Expose
+    private String urlImageCategory;
+    @SerializedName("Price")
+    @Expose
+    private int price;
+
+
+    public String get$id()
+    {
+        return $id;
+    }
+
+    public void set$id(String $id)
+    {
+        this.$id = $id;
+    }
+
+    public int getCuponID()
+    {
+        return cuponID;
+    }
+
+    public void setCuponID(int cuponID)
+    {
+        this.cuponID = cuponID;
+    }
 
     public String getTitle()
     {
@@ -83,6 +134,16 @@ public class Cupon
         this.purchasable = purchasable;
     }
 
+    public boolean isFavorite()
+    {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite)
+    {
+        this.favorite = favorite;
+    }
+
     public String getResponseCode()
     {
         return responseCode;
@@ -111,5 +172,75 @@ public class Cupon
     public void setCode(String code)
     {
         this.code = code;
+    }
+
+    public String getBrandName()
+    {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName)
+    {
+        this.brandName = brandName;
+    }
+
+    public String getUrlLogo()
+    {
+        return urlLogo;
+    }
+
+    public void setUrlLogo(String urlLogo)
+    {
+        this.urlLogo = urlLogo;
+    }
+
+    public String getUrlBackgroundBrand()
+    {
+        return urlBackgroundBrand;
+    }
+
+    public void setUrlBackgroundBrand(String urlBackgroundBrand)
+    {
+        this.urlBackgroundBrand = urlBackgroundBrand;
+    }
+
+    public String getLogoColor()
+    {
+        return logoColor;
+    }
+
+    public void setLogoColor(String logoColor)
+    {
+        this.logoColor = logoColor;
+    }
+
+    public String getMarkerLogo()
+    {
+        return markerLogo;
+    }
+
+    public void setMarkerLogo(String markerLogo)
+    {
+        this.markerLogo = markerLogo;
+    }
+
+    public String getUrlImageCategory()
+    {
+        return urlImageCategory;
+    }
+
+    public void setUrlImageCategory(String urlImageCategory)
+    {
+        this.urlImageCategory = urlImageCategory;
+    }
+
+    public int getPrice()
+    {
+        return price;
+    }
+
+    public void setPrice(int price)
+    {
+        this.price = price;
     }
 }

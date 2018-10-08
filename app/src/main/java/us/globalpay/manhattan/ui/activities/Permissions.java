@@ -48,7 +48,7 @@ public class Permissions extends AppCompatActivity implements PermissionsView
             public void onClick(View v)
             {
                 ButtonAnimator.floatingButton(Permissions.this, v);
-                //mPresenter.checkPermission();
+                mPresenter.checkPermission();
             }
         });
     }

@@ -44,6 +44,7 @@ import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
 import us.globalpay.manhattan.utils.ButtonAnimator;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.DialogGenerator;
+import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.views.MainView;
 
 public class Main extends AppCompatActivity implements OnMapReadyCallback, MainView
@@ -144,6 +145,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
             public void onClick(View v)
             {
                 ButtonAnimator.shadowButton(v);
+                navigateCoupons();
             }
         });
 
@@ -315,6 +317,15 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
     {
         Intent brands = new Intent(this, Brands.class);
         startActivity(brands);
+    }
+
+    @Override
+    public void navigateCoupons()
+    {
+        Intent coupons = new Intent(this, Coupons.class);
+        NavFlagsUtil.addFlags(coupons);
+        startActivity(coupons);
+        finish();
     }
 
     @Override

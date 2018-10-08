@@ -21,6 +21,7 @@ public interface MainView
     void loadInitialValues(String coins, String promos);
     void displayActivateLocationDialog();
     void navigateBrands();
+    void navigateCoupons();
     void checkPermissions();
     void updateUserLocationOnMap(Location location);
     void showToast(String text);
