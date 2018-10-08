@@ -41,6 +41,7 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.FavoriteCuppon;
 import us.globalpay.manhattan.presenters.MainPresenter;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
+import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
@@ -55,6 +56,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
     private ImageView btnCuppons;
     private ImageView btnBrands;
     private ImageView btnToggleBar;
+    private ImageView btnCamera;
     private TextView tvCoinsCounter;
     private TextView tvBadge;
     private GridView gvCuppons;
@@ -87,6 +89,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
         btnCuppons = (ImageView) findViewById(R.id.btnCuppons);
         gvCuppons = (GridView) findViewById(R.id.gvCuppons);
         btnBrands = (ImageView) findViewById(R.id.btnBrands);
+        btnCamera = (ImageView) findViewById(R.id.btnCamera);
         tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
         tvBadge = (TextView) findViewById(R.id.tvBadge);
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheetLayout));
@@ -171,6 +174,19 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
                         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                         break;
                 }
+            }
+        });
+
+        //Camera
+        btnCamera.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent ar = new Intent(Main.this, AR.class);
+                NavFlagsUtil.addFlags(ar);
+                startActivity(ar);
+                finish();
             }
         });
 

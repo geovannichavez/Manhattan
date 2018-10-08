@@ -23,6 +23,7 @@ import com.wikitude.architect.ArchitectView;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -83,6 +84,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         mFirbaseObjects = new HashMap<>();
 
         mPresenter = new ARPresenter(this, this, this);
+        mPresenter.initialize();
         mPresenter.retrieveUserTracking();
 
 
@@ -93,6 +95,21 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         catch (Exception ex)
         {
             ex.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState)
+    {
+        super.onPostCreate(savedInstanceState);
+        this.architectView.onPostCreate();
+        try
+        {
+            this.architectView.load("index.html");
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
 

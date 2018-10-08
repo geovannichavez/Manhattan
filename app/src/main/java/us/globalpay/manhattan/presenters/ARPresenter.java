@@ -216,7 +216,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     @Override
     public void retrieveUserTracking()
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
+        //mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
         mInteractor.retrieveConsumerTracking();
     }
 
