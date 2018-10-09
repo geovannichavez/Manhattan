@@ -3,6 +3,7 @@
     <string name="title_activity_main">Map</string>
     <string name="title_activity_brands">Marcas</string>
     <string name="title_activity_promos">Promociones</string>
+    <string name="title_activity_coupons">Cupones</string>
 
     <!-- Facebook -->
     <string name="facebook_app_id">678060775913586</string>

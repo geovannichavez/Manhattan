@@ -21,7 +21,9 @@ public class StringsURL
 
     public final static String VALIDATE_TOKEN_LOCAL_AUTH = "ValidateToken";
 
-    public final static String GET_COUPON = "WinCupon";
+    public final static String RECLAIM_COUPON = "WinCupon";
+
+    public static final String GET_COUPONS = "GetCupon";
 
     public final static String GET_PROMOS = "GetPromos";
 

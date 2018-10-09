@@ -8,10 +8,11 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import us.globalpay.manhattan.models.api.CouponsRequest;
+import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.models.api.AuthenticateReqBody;
 import us.globalpay.manhattan.models.api.AuthenticateResponse;
 import us.globalpay.manhattan.models.api.BrandsReqBody;
-import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Countries;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
@@ -77,12 +78,13 @@ public interface ApiInterface
                                    @Header("PackageName") String packageName);
 
     @Headers("Content-Type: application/json")
-    @POST(StringsURL.GET_COUPON)
+    @POST(StringsURL.RECLAIM_COUPON)
     Call<GetCouponResponse> getCouponByCoins(@Header("authenticationKey") String userAuthenticationKey,
                                              @Header("AppVersion") String versionName,
                                              @Header("Platform") String platform,
                                              @Header("PackageName") String packageName);
 
+                                             
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_PROMOS)
     Call<JsonObject> getPromos(@Body PromosRequest request,
@@ -91,4 +93,11 @@ public interface ApiInterface
                                              @Header("Platform") String platform,
                                              @Header("PackageName") String packageName);
 
-}
+
+    @POST(StringsURL.GET_COUPONS)
+    Call<JsonObject> getCoupons(@Body CouponsRequest couponsRequest,
+                                     @Header("authenticationKey") String userAuthenticationKey,
+                                     @Header("AppVersion") String versionName,
+                                     @Header("Platform") String platform,
+                                     @Header("PackageName") String packageName);
+    }
