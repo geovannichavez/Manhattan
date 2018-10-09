@@ -52,7 +52,7 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.CouponsV
             final Cupon coupon = mCouponsList.get(position);
 
             Glide.with(mContext).load(coupon.getUrlLogo()).into(holder.ivCoupon);
-            holder.tvDescription.setText(coupon.getDescription());
+            holder.tvDescription.setText(coupon.getTitle());
         }
         catch (Exception ex)
         {

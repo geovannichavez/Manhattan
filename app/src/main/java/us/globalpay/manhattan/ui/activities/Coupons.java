@@ -24,6 +24,7 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.CouponsPresenter;
 import us.globalpay.manhattan.ui.adapters.CouponsAdapter;
+import us.globalpay.manhattan.utils.ButtonAnimator;
 import us.globalpay.manhattan.utils.DialogGenerator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.views.CouponsView;
@@ -37,9 +38,11 @@ public class Coupons extends AppCompatActivity implements CouponsView
     ImageView btnFavorites;
     ImageView btnCoupons;
     ImageView btnRedeemed;
+    ImageView spLocation;
     TextView lblFavorites;
     TextView lblCoupons;
     TextView lblRedeemed;
+    TextView tvSpinnerLocation;
 
     RecyclerView gvCoupons;
     ProgressDialog mProgressDialog;
@@ -60,9 +63,11 @@ public class Coupons extends AppCompatActivity implements CouponsView
         btnFavorites = (ImageView) findViewById(R.id.btnFavorites);
         btnCoupons = (ImageView) findViewById(R.id.btnCoupons);
         btnRedeemed = (ImageView) findViewById(R.id.btnRedeemed);
+        spLocation = (ImageView) findViewById(R.id.spLocation);
         lblFavorites = (TextView) findViewById(R.id.lblFavorites);
         lblCoupons = (TextView) findViewById(R.id.lblCoupons);
         lblRedeemed = (TextView) findViewById(R.id.lblRedeemed);
+        tvSpinnerLocation = (TextView) findViewById(R.id.tvSpinnerLocation);
 
         mPresenter = new CouponsPresenter(this, this, this);
         mPresenter.initialize();
@@ -95,6 +100,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
         btnFavorites.setOnClickListener(favoritesListener);
         btnCoupons.setOnClickListener(couponsListener);
         btnRedeemed.setOnClickListener(redeemedListener);
+        spLocation.setOnClickListener(spinnerListener);
 
         // Set initial button set
         btnFavorites.setImageResource(R.drawable.btn_coupon_bar_left_off);
@@ -171,6 +177,8 @@ public class Coupons extends AppCompatActivity implements CouponsView
         @Override
         public void onClick(View v)
         {
+            ButtonAnimator.shadowButton(v);
+
             // Buttons color
             btnFavorites.setImageResource(R.drawable.btn_coupon_bar_left_on);
             btnCoupons.setImageResource(R.drawable.btn_coupon_bar_middle_off);
@@ -192,6 +200,9 @@ public class Coupons extends AppCompatActivity implements CouponsView
         @Override
         public void onClick(View v)
         {
+
+            ButtonAnimator.shadowButton(v);
+
             // Buttons color
             btnFavorites.setImageResource(R.drawable.btn_coupon_bar_left_off);
             btnCoupons.setImageResource(R.drawable.btn_coupon_bar_middle_on);
@@ -212,6 +223,9 @@ public class Coupons extends AppCompatActivity implements CouponsView
         @Override
         public void onClick(View v)
         {
+
+            ButtonAnimator.shadowButton(v);
+
             // Buttons color
             btnFavorites.setImageResource(R.drawable.btn_coupon_bar_left_off);
             btnCoupons.setImageResource(R.drawable.btn_coupon_bar_middle_off);
@@ -224,6 +238,15 @@ public class Coupons extends AppCompatActivity implements CouponsView
 
             //Request
             mPresenter.retrieveCoupons(2, 1); //TODO: Poner tienda
+        }
+    };
+
+    private View.OnClickListener spinnerListener = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View v)
+        {
+            ButtonAnimator.floatingButton(Coupons.this, v);
         }
     };
 

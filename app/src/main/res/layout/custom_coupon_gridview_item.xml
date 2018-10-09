@@ -61,7 +61,7 @@
                     android:gravity="center"
                     android:lineSpacingExtra="-3sp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="11sp"
+                    android:textSize="11dp"
                     tools:text="25% de descuento en tienda" />
 
                 <Space

@@ -67,7 +67,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="8" />
 
-                    <Spinner
+                    <ImageView
                         android:id="@+id/spLocation"
                         android:layout_width="0dp"
 
