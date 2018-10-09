@@ -514,7 +514,6 @@ public class UserData
         return mPreferences.getString(KEY_AWAIT_TIME_PENDING, "");
     }
 
-<<<<<<< HEAD
     public void savePromosData(String data)
     {
         mEditor.putString(KEY_PROMOS_RAW_DATA, data);
@@ -525,13 +524,13 @@ public class UserData
     {
         return mPreferences.getString(KEY_PROMOS_RAW_DATA, "");
     }
-=======
+
     public void saveCouponsData(String couponsData)
     {
         mEditor.putString(KEY_COUPONS_RAW_DATA, couponsData);
         mEditor.commit();
     }
->>>>>>> feature/Coupons
+
 
     public String getCouponsData()
     {

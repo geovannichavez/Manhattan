@@ -3,9 +3,8 @@ package us.globalpay.manhattan.ui.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,9 +23,9 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.CouponsPresenter;
 import us.globalpay.manhattan.ui.adapters.CouponsAdapter;
-import us.globalpay.manhattan.utils.ButtonAnimator;
-import us.globalpay.manhattan.utils.DialogGenerator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.views.CouponsView;
 
 public class Coupons extends AppCompatActivity implements CouponsView

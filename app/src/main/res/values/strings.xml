@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Manhattan</string>
+    <string name="app_name">ShoppingGO!</string>
     <string name="title_activity_main">Map</string>
     <string name="title_activity_brands">Marcas</string>
     <string name="title_activity_promos">Promociones</string>
