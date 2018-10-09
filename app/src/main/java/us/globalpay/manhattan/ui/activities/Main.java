@@ -7,10 +7,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.location.Location;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
-import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -41,9 +41,10 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.FavoriteCuppon;
 import us.globalpay.manhattan.presenters.MainPresenter;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
+import us.globalpay.manhattan.utils.Constants;
+import us.globalpay.manhattan.utils.MetricsUtils;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
-import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.views.MainView;
 
@@ -57,6 +58,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
     private ImageView btnBrands;
     private ImageView btnToggleBar;
     private ImageView btnCamera;
+    private ImageView ivPromoAlert;
     private TextView tvCoinsCounter;
     private TextView tvBadge;
     private GridView gvCuppons;
@@ -90,6 +92,7 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
         gvCuppons = (GridView) findViewById(R.id.gvCuppons);
         btnBrands = (ImageView) findViewById(R.id.btnBrands);
         btnCamera = (ImageView) findViewById(R.id.btnCamera);
+        ivPromoAlert = (ImageView) findViewById(R.id.ivPromoAlert);
         tvCoinsCounter = (TextView) findViewById(R.id.tvCoinsCounter);
         tvBadge = (TextView) findViewById(R.id.tvBadge);
         bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.bottomSheetLayout));
@@ -186,6 +189,20 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
                 Intent ar = new Intent(Main.this, AR.class);
                 NavFlagsUtil.addFlags(ar);
                 startActivity(ar);
+                finish();
+            }
+        });
+
+        //Promos
+        ivPromoAlert.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ButtonAnimator.floatingButton(Main.this, v);
+                Intent promos = new Intent(Main.this, Promos.class);
+                NavFlagsUtil.addFlags(promos);
+                startActivity(promos);
                 finish();
             }
         });

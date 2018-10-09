@@ -15,6 +15,7 @@ import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Countries;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
+import us.globalpay.manhattan.models.api.PromosRequest;
 import us.globalpay.manhattan.models.api.RegisterClientResponse;
 import us.globalpay.manhattan.models.api.RegisterPhoneConsumerReqBody;
 import us.globalpay.manhattan.models.api.SimpleResultResponse;
@@ -81,4 +82,13 @@ public interface ApiInterface
                                              @Header("AppVersion") String versionName,
                                              @Header("Platform") String platform,
                                              @Header("PackageName") String packageName);
-    }
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.GET_PROMOS)
+    Call<JsonObject> getPromos(@Body PromosRequest request,
+                                            @Header("authenticationKey") String userAuthenticationKey,
+                                             @Header("AppVersion") String versionName,
+                                             @Header("Platform") String platform,
+                                             @Header("PackageName") String packageName);
+
+}

@@ -23,4 +23,6 @@ public class StringsURL
 
     public final static String GET_COUPON = "WinCupon";
 
+    public final static String GET_PROMOS = "GetPromos";
+
 }

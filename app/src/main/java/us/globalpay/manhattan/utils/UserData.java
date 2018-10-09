@@ -91,6 +91,9 @@ public class UserData
     //RAW Data
     private static final String KEY_BRANDS_RAW_DATA = "rsbrn-rw-dta260918305-ser-manh";
     private static final String KEY_HOME_RAW_DATA = "rshm-rw-dta2709018948-ser-manh";
+    private static final String KEY_PROMOS_RAW_DATA = "rshm-rw-dta0910018706-ser-manh";
+
+
 
     private UserData(Context context)
     {
@@ -512,5 +515,15 @@ public class UserData
         return mPreferences.getString(KEY_AWAIT_TIME_PENDING, "");
     }
 
+    public void savePromosData(String data)
+    {
+        mEditor.putString(KEY_PROMOS_RAW_DATA, data);
+        mEditor.commit();
+    }
+
+    public String getPromosData()
+    {
+        return mPreferences.getString(KEY_PROMOS_RAW_DATA, "");
+    }
 
 }

@@ -31,7 +31,6 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-
     <application
         android:name=".core.ManhattanApplication"
         android:allowBackup="false"
@@ -99,16 +98,12 @@
         <activity android:name=".ui.activities.Authenticate" />
         <activity
             android:name=".ui.activities.AddPhone"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.activities.SmsCodeInput" />
         <activity android:name=".ui.activities.Nickname" />
         <activity
             android:name=".ui.activities.Terms"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".ui.activities.Splashscreen" />
         <activity android:name=".ui.activities.Brands" />
         <activity android:name=".ui.activities.Permissions" />
@@ -116,7 +111,7 @@
             android:name=".ui.activities.AR"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".ui.activities.Promos"></activity>
     </application>
 
 </manifest>

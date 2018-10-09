@@ -2,6 +2,7 @@
     <string name="app_name">Manhattan</string>
     <string name="title_activity_main">Map</string>
     <string name="title_activity_brands">Marcas</string>
+    <string name="title_activity_promos">Promociones</string>
 
     <!-- Facebook -->
     <string name="facebook_app_id">678060775913586</string>
@@ -105,5 +106,7 @@
     <string name="toast_gold_out_of_search_range">ORO: Saliste del rango de búsqueda</string>
     <string name="toast_silver_out_of_search_range">PLATA: Saliste del rango de búsqueda</string>
     <string name="toast_bronze_out_of_search_range">BRONCE: Saliste del rango de búsqueda</string>
+    <string name="label_promos_of_day">Promociones del %1$s</string>
+    <string name="label_promo_valid_date">Válido únicamente el %1$s</string>
 
 </resources>
