@@ -151,7 +151,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
             @Override
             public void onClick(View v)
             {
-                ButtonAnimator.shadowButton(v);
+                ButtonAnimator.backButton(AR.this, v);
                 Intent map = new Intent(AR.this, Main.class);
                 NavFlagsUtil.addFlags(map);
                 startActivity(map);

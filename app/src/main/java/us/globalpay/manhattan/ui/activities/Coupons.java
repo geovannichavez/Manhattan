@@ -92,6 +92,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             @Override
             public void onClick(View v)
             {
+                ButtonAnimator.backButton(Coupons.this, v);
                 navigateBack();
             }
         });

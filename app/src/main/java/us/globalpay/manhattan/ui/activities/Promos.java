@@ -142,7 +142,7 @@ public class Promos extends AppCompatActivity implements PromosView
         @Override
         public void onClick(View v)
         {
-            ButtonAnimator.shadowButton(v);
+            ButtonAnimator.backButton(Promos.this, v);
             navigateBack();
         }
     };

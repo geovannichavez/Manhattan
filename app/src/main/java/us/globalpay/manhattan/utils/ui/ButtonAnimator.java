@@ -59,6 +59,19 @@ public class ButtonAnimator
         imageButton.startAnimation(anim);
     }
 
+    public static void backButton(Context context, View view)
+    {
+        final ImageView imageButton = (ImageView) view;
+        final Animation anim = AnimationUtils.loadAnimation(context, R.anim.back_bounce);
+        imageButton.startAnimation(anim);
+
+        // Use bounce interpolator with amplitude 0.2 and frequency 20
+        BounceInterpolator interpolator = new BounceInterpolator(0.05, 20);
+        anim.setInterpolator(interpolator);
+
+        imageButton.startAnimation(anim);
+    }
+
     private static int adjustAlpha(int color, float factor)
     {
         int alpha = Math.round(Color.alpha(color) * factor);

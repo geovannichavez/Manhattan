@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -81,7 +80,6 @@
                                     android:src="@drawable/ic_counter" />
 
 
-
                             </LinearLayout>
 
                             <!-- Layer 2 -->
@@ -130,27 +128,29 @@
 
                 <!-- Content layer 1 -->
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_below="@id/toolbar"
                     android:orientation="vertical"
-                    android:weightSum="100"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:weightSum="100">
 
                     <Space
-                        android:layout_weight="2"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="2" />
 
                     <LinearLayout
-                        android:weightSum="100"
-                        android:orientation="horizontal"
-                        android:layout_weight="10"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp">
+                        android:layout_height="0dp"
+                        android:layout_weight="10"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+
                         <Space
-                            android:layout_weight="80"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="3" />
 
                         <ImageView
                             android:id="@+id/ivPromoAlert"
@@ -159,65 +159,90 @@
                             android:layout_weight="17"
                             android:scaleType="centerInside"
                             android:src="@drawable/ic_promo_alert_on" />
+
                         <Space
-                            android:layout_weight="3"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="80" />
 
                     </LinearLayout>
+
                     <Space
-                        android:layout_weight="88"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="88" />
                 </LinearLayout>
 
                 <!-- Content layer 2 -->
                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_below="@id/toolbar"
                     android:orientation="vertical"
-                    android:weightSum="100"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:weightSum="100">
 
                     <Space
-                        android:layout_weight="3"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="3" />
 
                     <LinearLayout
-                        android:weightSum="100"
-                        android:orientation="horizontal"
-                        android:layout_weight="4"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp">
-                        <Space
-                            android:layout_weight="80"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                        android:layout_height="0dp"
+                        android:layout_weight="4"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
 
-                        <TextView
-                            android:id="@+id/tvBadge"
+                        <Space
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:layout_weight="5.5"
-                            android:fontFamily="@font/baloo_regular"
-                            android:gravity="center"
-                            android:lineSpacingExtra="-3sp"
-                            android:maxLines="1"
-                            android:textColor="@color/color_white"
-                            android:textSize="12sp"
-                            tools:text="2" />
-                        <Space
-                            android:layout_weight="14.5"
+                            android:layout_weight="3.2" />
+
+                        <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="match_parent" />
+                            android:layout_height="match_parent"
+                            android:layout_weight="4.8"
+                            android:orientation="vertical"
+                            android:weightSum="100">
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="11" />
+
+                            <TextView
+                                android:id="@+id/tvBadge"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="80"
+                                android:fontFamily="@font/lato_semibold"
+                                android:gravity="center"
+                                android:maxLines="1"
+                                android:textColor="@color/color_white"
+                                android:textSize="12dp"
+                                android:textStyle="bold"
+                                tools:text="1" />
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="9" />
+
+                        </LinearLayout>
+
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="92" />
 
                     </LinearLayout>
+
                     <Space
-                        android:layout_weight="93"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="0dp"
+                        android:layout_weight="93" />
                 </LinearLayout>
 
 
