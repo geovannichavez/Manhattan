@@ -18,14 +18,18 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import okhttp3.Challenge;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.CouponsPresenter;
 import us.globalpay.manhattan.ui.adapters.CouponsAdapter;
+import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
+import us.globalpay.manhattan.utils.ui.RecyclerClickListener;
+import us.globalpay.manhattan.utils.ui.RecyclerTouchListener;
 import us.globalpay.manhattan.views.CouponsView;
 
 public class Coupons extends AppCompatActivity implements CouponsView
@@ -113,7 +117,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
     }
 
     @Override
-    public void renderCoupons(List<Cupon> couponsList)
+    public void renderCoupons(final List<Cupon> couponsList)
     {
         try
         {
@@ -125,6 +129,19 @@ public class Coupons extends AppCompatActivity implements CouponsView
             gvCoupons.setAdapter(mAdapter);
 
             mAdapter.notifyDataSetChanged();
+
+            gvCoupons.addOnItemTouchListener(new RecyclerTouchListener(this, gvCoupons, new RecyclerClickListener()
+            {
+                @Override
+                public void onClick(View view, int position)
+                {
+                    Cupon cupon = couponsList.get(position);
+                    Intent details = new Intent(Coupons.this, CouponDetail.class);
+                    details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cupon.get$id()));
+                    startActivity(details);
+                    finish();
+                }
+            }));
         }
         catch (Exception ex)
         {

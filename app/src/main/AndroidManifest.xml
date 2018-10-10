@@ -127,6 +127,10 @@
         <activity
             android:screenOrientation="portrait"
             android:name=".ui.activities.Promos" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ui.activities.CouponDetail"/>
+
     </application>
 
 </manifest>

@@ -12,7 +12,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <include layout="@layout/custom_toolbar_layout" />
+        <include
+            android:id="@+id/toolbarCoupDetail"
+            layout="@layout/custom_toolbar_layout" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -177,15 +179,16 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="8"
+                        android:layout_weight="14"
                         android:fontFamily="@font/lato_semibold"
-                        android:gravity="center_horizontal"
+                        android:gravity="center"
                         android:lineSpacingExtra="-3sp"
                         android:textColor="@color/color_purple"
-                        android:textSize="28sp"
-                        tools:text="Agrandado Gratis" />
+                        android:textSize="25dp"
+                        android:maxLines="2"
+                        tools:text="30% de Descuento en Juguetes" />
 
-                    <TextView
+                    <!--<TextView
                         android:id="@+id/tvSub"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -195,7 +198,7 @@
                         android:lineSpacingExtra="-3sp"
                         android:textColor="@color/color_purple"
                         android:textSize="18sp"
-                        tools:text="En combos" />
+                        tools:text="En combos" />-->
 
                     <Space
                         android:layout_width="match_parent"
@@ -215,7 +218,7 @@
                         tools:text="Recibe un agrandado gratis en tu bebida y papas fritas por la compra de un combo a precio normal. Restricciones aplican" />
 
                     <TextView
-                        android:id="@+id/tvEchangeMethod"
+                        android:id="@+id/tvExchangeMethod"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="6"

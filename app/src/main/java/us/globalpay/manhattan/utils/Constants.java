@@ -15,6 +15,7 @@ public class Constants
     public static final String CHEST_STATE_OPEN = "open";
     public static final String CHEST_STATE_CLOSED = "closed";
     public static final int REQUIRED_TIME_TOUCH_MILLISECONDS = 1000;
+    public static final String INTENT_BUNDLE_COUPON_ID = "intent_bundle_coupon_id";
 
     //Wikitude
     public static final double AR_POI_RADIOS_KM = 0.017;
@@ -58,4 +59,17 @@ public class Constants
 
     // Google Auth
     public static final String GOOGLE_OAUTH_CLIENT_ID = "764736593889-r30kkh6m26khvn8l8kcdckrvp1e593ol.apps.googleusercontent.com";
+
+    //Coupon details
+    public static final String BUNDLE_COUPON_ID = "bundle_coupon_id";
+    public static final String BUNDLE_COUPON_TITLE = "bundle_coupon_title";
+    public static final String BUNDLE_COUPON_DESCRIPTION = "bundle_coupon_description";
+    public static final String BUNDLE_COUPON_URL_BACKGROUND_BRAND = "bundle_coupon_url_background_brand";
+    public static final String BUNDLE_COUPON_URL_LOGO_DESC = "bundle_coupon_url_logo_desc";
+    public static final String BUNDLE_COUPON_URL_CATEGORY_ICON = "bundle_coupon_url_category_icon";
+    public static final String BUNDLE_COUPON_BRAND_NAME = "bundle_coupon_brand_name";
+    public static final String BUNDLE_COUPON_CODE = "bundle_coupon_code";
+    public static final String BUNDLE_COUPON_PIN_LEVEL = "bundle_coupon_pin_level";
+    public static final String BUNDLE_COUPON_PURCHASABLE = "bundle_coupon_purchasable";
+    public static final String BUNDLE_COUPON_FAVORITE = "bundle_coupon_favorite";
 }
