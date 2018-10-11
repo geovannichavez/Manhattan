@@ -27,4 +27,5 @@ public class StringsURL
 
     public final static String GET_PROMOS = "GetPromos";
 
+    public static final String GET_COUPONS_BY_BRAND = "GetCuponsByBrand";
 }

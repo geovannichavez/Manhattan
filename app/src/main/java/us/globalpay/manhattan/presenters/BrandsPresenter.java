@@ -78,11 +78,20 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
     @Override
     public void retrieveBrands()
     {
-        mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
-
         BrandsReqBody request = new BrandsReqBody();
         request.setStoreID(1); //TODO: Cambiar ID quemado
         mInteractor.retrieveBrands(request, this);
+    }
+
+    @Override
+    public void saveSelectedBrand(Brand selected)
+    {
+        try
+        {
+            String serialized = mGson.toJson(selected);
+            UserData.getInstance(mContext).saveSelectedBrand(serialized);
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage()); }
     }
 
     @Override

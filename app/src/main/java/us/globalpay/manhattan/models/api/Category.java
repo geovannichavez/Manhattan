@@ -28,6 +28,9 @@ public class Category
     @SerializedName("RegDate")
     @Expose
     private String regDate;
+    @SerializedName("UrlImg")
+    @Expose
+    private String urlImg;
     @SerializedName("Brands")
     @Expose
     private List<Brand> brands = null;
@@ -90,6 +93,16 @@ public class Category
     public void setRegDate(String regDate)
     {
         this.regDate = regDate;
+    }
+
+    public String getUrlImg()
+    {
+        return urlImg;
+    }
+
+    public void setUrlImg(String urlImg)
+    {
+        this.urlImg = urlImg;
     }
 
     public List<Brand> getBrands()

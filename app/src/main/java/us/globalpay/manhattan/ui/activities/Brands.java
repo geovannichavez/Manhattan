@@ -21,8 +21,10 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.Category;
 import us.globalpay.manhattan.presenters.BrandsPresenter;
+import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
+import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.views.BrandsView;
 import us.globalpay.manhattan.ui.adapters.BrandsAdapter;
 
@@ -30,12 +32,18 @@ public class Brands extends AppCompatActivity implements BrandsView
 {
     private static final String TAG = Brands.class.getSimpleName();
 
+    //Views
     ImageView ivBackground;
     ImageView btnBack;
+    ImageView spLocation;
+    TextView tvLocation;
     ExpandableListView mExpandable;
 
+    //Global variables
+    String mUrlCategory;
     BrandsAdapter mBrandsAdapter;
 
+    //MVP
     BrandsPresenter mPresenter;
 
 
@@ -49,6 +57,8 @@ public class Brands extends AppCompatActivity implements BrandsView
 
         ivBackground = (ImageView) findViewById(R.id.ivBackground);
         mExpandable = (ExpandableListView) findViewById(R.id.lvCategories);
+        spLocation = (ImageView) findViewById(R.id.spLocation);
+        tvLocation = (TextView) findViewById(R.id.tvLocation);
 
         mPresenter.init();
         mPresenter.retrieveBrands();
@@ -68,6 +78,15 @@ public class Brands extends AppCompatActivity implements BrandsView
         btnBack = toolbar.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(backListener);
 
+        spLocation.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                ButtonAnimator.floatingButton(Brands.this, v);
+            }
+        });
+
     }
 
     @Override
@@ -77,14 +96,28 @@ public class Brands extends AppCompatActivity implements BrandsView
         mBrandsAdapter = new BrandsAdapter(this, categories, filledCategories);
         mExpandable.setAdapter(mBrandsAdapter);
 
+        mExpandable.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener()
+        {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id)
+            {
+                Category category = (Category) mBrandsAdapter.getGroup(groupPosition);
+                mUrlCategory = category.getUrlImg();
+                return false;
+            }
+        });
         mExpandable.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
         {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
             {
-                final String selected = (String) mBrandsAdapter.getChild(
-                        groupPosition, childPosition);
-                Toast.makeText(getBaseContext(), selected, Toast.LENGTH_LONG)
-                        .show();
+                Brand selected = (Brand) mBrandsAdapter.getChild(groupPosition, childPosition);
+                mPresenter.saveSelectedBrand(selected);
+                Intent coupons = new Intent(Brands.this, BrandsCoupons.class);
+                coupons.putExtra(Constants.INTENT_BUNDLE_BRAND_ID, selected.get$id());
+                coupons.putExtra(Constants.INTENT_BUNDLE_CATEGORY_ICON, mUrlCategory);
+                NavFlagsUtil.addFlags(coupons);
+                startActivity(coupons);
+                finish();
 
                 return true;
             }
@@ -95,9 +128,9 @@ public class Brands extends AppCompatActivity implements BrandsView
     }
 
     @Override
-    public void showLoadingDialog(String string)
+    public void showLoadingDialog(String string, boolean isCancelable)
     {
-
+        DialogGenerator.showProgressDialog(this, string, isCancelable);
     }
 
     @Override

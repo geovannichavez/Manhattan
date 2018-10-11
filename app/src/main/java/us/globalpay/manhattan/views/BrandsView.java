@@ -14,7 +14,7 @@ public interface BrandsView
 {
     void initialize();
     void renderBrands(List<Category> categories, Map<String, List<Brand>> filledCategories);
-    void showLoadingDialog(String string);
+    void showLoadingDialog(String string, boolean isCancelable);
     void hideLoadingDialog();
     void showGenericDialog(DialogModel dialog);
 }

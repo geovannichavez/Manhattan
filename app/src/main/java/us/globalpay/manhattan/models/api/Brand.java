@@ -38,6 +38,12 @@ public class Brand
     @SerializedName("CategoryID")
     @Expose
     private int categoryID;
+    @SerializedName("LogoColor")
+    @Expose
+    private String logoColor;
+    @SerializedName("MarkerLogo")
+    @Expose
+    private String markerLogo;
 
     public String get$id()
     {
@@ -139,4 +145,23 @@ public class Brand
         this.categoryID = categoryID;
     }
 
+    public String getLogoColor()
+    {
+        return logoColor;
+    }
+
+    public void setLogoColor(String logoColor)
+    {
+        this.logoColor = logoColor;
+    }
+
+    public String getMarkerLogo()
+    {
+        return markerLogo;
+    }
+
+    public void setMarkerLogo(String markerLogo)
+    {
+        this.markerLogo = markerLogo;
+    }
 }

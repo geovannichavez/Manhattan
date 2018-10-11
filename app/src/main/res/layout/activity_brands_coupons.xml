@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activities.BrandsCoupons">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/toolbarBrandCoupons"
+            layout="@layout/custom_toolbar_layout" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Layer 1 -->
+            <LinearLayout
+                android:id="@+id/layer1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <ImageView
+                    android:id="@+id/ivBrandPhoto"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="23"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/ic_brand_photo" />
+
+                <ImageView
+                    android:id="@+id/ivBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="77"
+                    android:scaleType="fitXY"
+                    tools:src="@drawable/bg_blue_purple" />
+
+            </LinearLayout>
+
+            <!-- Layer 2 -->
+            <LinearLayout
+                android:id="@+id/layer2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="90"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="18"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <ImageView
+                            android:id="@+id/ivBrandLogo"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="35"
+                            android:src="@drawable/ic_brand_logo" />
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="52" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="13"
+                            android:orientation="vertical"
+                            android:weightSum="100">
+
+                            <ImageView
+                                android:id="@+id/ivCategoryIcon"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="50"
+                                android:scaleType="fitCenter"
+                                android:src="@drawable/ic_category_brand_restaurants" />
+
+                            <Space
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="50" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5" />
+            </LinearLayout>
+
+            <!-- Layer 3 -->
+            <LinearLayout
+                android:id="@+id/layer3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="25" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="13"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="90"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!-- Buttons bar -->
+                        <ImageView
+                            android:id="@+id/ivStores"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="55"
+                            android:src="@drawable/bg_general_description" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="45"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3" />
+
+                            <ImageView
+                                android:id="@+id/spLocation"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="94"
+                                android:background="@drawable/custom_spinner_coupons" />
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_weight="7"
+                    android:weightSum="100"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                    <View
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="28"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:background="@color/color_white"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="0dp"
+                        android:weightSum="100"
+                        android:layout_weight="44"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/lblCoupons"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="75"
+                            android:fontFamily="@font/baloo_regular"
+                            android:gravity="center"
+                            android:lineSpacingExtra="-4dp"
+                            android:text="@string/label_coupons"
+                            android:textColor="@color/color_white"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/ivIcon"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="25"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/ic_coupons_icon" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="28"
+                        android:layout_width="0dp"
+                        android:layout_height="2dp"
+                        android:background="@color/color_white"/>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <!-- Layer 4 -->
+            <LinearLayout
+                android:id="@+id/layer4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="25" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="13"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="80"
+                        android:orientation="vertical"
+                        android:weightSum="100">
+
+                        <!-- Buttons bar -->
+                        <TextView
+                            android:id="@+id/tvStores"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="45"
+                            android:fontFamily="@font/lato_semibold"
+                            android:gravity="center"
+                            android:maxLines="1"
+                            android:textColor="@color/color_white"
+                            android:textSize="14dp"
+                            tools:text="Sucursales: Multiplaza, Metrocentro, Gran Via, MetroSur" />
+                        <Space
+                            android:layout_weight="10"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="45"
+                            android:orientation="horizontal"
+                            android:weightSum="100">
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3" />
+
+                            <TextView
+                                android:id="@+id/tvSpinnerText"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="85"
+                                android:fontFamily="@font/lato_semibold"
+                                android:gravity="center_vertical"
+                                android:singleLine="true"
+                                android:textColor="@color/color_purple"
+                                android:textSize="12dp"
+                                tools:text="Multiplaza San Salvador" />
+
+                            <Space
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="12" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="10" />
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="62" />
+
+            </LinearLayout>
+
+            <!-- Layer 5 -->
+            <LinearLayout
+                android:id="@+id/layer5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="47" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:layout_weight="53"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp">
+
+                    <Space
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/gvBrandCoupons"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="90"
+                        android:numColumns="3"
+                        tools:listitem="@layout/custom_coupon_gridview_item" />
+                    <Space
+                        android:layout_weight="5"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -20,27 +20,33 @@ public class Categories
     @Expose
     private List<Category> categories = null;
 
-    public String get$id() {
+    public String get$id()
+    {
         return $id;
     }
 
-    public void set$id(String $id) {
+    public void set$id(String $id)
+    {
         this.$id = $id;
     }
 
-    public int getResponseCode() {
+    public int getResponseCode()
+    {
         return responseCode;
     }
 
-    public void setResponseCode(int responseCode) {
+    public void setResponseCode(int responseCode)
+    {
         this.responseCode = responseCode;
     }
 
-    public List<Category> getCategories() {
+    public List<Category> getCategories()
+    {
         return categories;
     }
 
-    public void setCategories(List<Category> categories) {
+    public void setCategories(List<Category> categories)
+    {
         this.categories = categories;
     }
 

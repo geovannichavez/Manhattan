@@ -72,4 +72,7 @@ public class Constants
     public static final String BUNDLE_COUPON_PIN_LEVEL = "bundle_coupon_pin_level";
     public static final String BUNDLE_COUPON_PURCHASABLE = "bundle_coupon_purchasable";
     public static final String BUNDLE_COUPON_FAVORITE = "bundle_coupon_favorite";
+    public static final String INTENT_BUNDLE_BRAND_ID = "intent_bundle_brand_id";
+    public static final String INTENT_BACKSTACK_BRAND_COUPON = "intent_backstack_brand_coupon";
+    public static final String INTENT_BUNDLE_CATEGORY_ICON = "intent_bundle_category_icon";
 }

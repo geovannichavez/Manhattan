@@ -88,6 +88,9 @@ public class UserData
     private static final String KEY_LAST_COUPON_PIN_LEVEL = "key_last_coupon_pin_level";
     private static final String KEY_LAST_COUPON_CODE = "key_last_coupon_code";
 
+    //Brands
+    private static final String KEY_SELECTED_BRAND = "key_selected_brand";
+
     //RAW Data
     private static final String KEY_BRANDS_RAW_DATA = "rsbrn-rw-dta260918305-ser-manh";
     private static final String KEY_HOME_RAW_DATA = "rshm-rw-dta2709018948-ser-manh";
@@ -535,5 +538,16 @@ public class UserData
     public String getCouponsData()
     {
         return mPreferences.getString(KEY_COUPONS_RAW_DATA, "");
+    }
+
+    public void saveSelectedBrand(String serialized)
+    {
+        mEditor.putString(KEY_SELECTED_BRAND, serialized);
+        mEditor.commit();
+    }
+
+    public String getSelectedBrand()
+    {
+        return mPreferences.getString(KEY_SELECTED_BRAND, "");
     }
 }

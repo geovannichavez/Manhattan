@@ -41,6 +41,8 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
     private TextView tvAvailability;
     private ProgressDialog mProgressDialog;
 
+    private boolean mBrandCoupon;
+
     private CouponDetailPresenter mPresenter;
 
     @Override
@@ -61,9 +63,13 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
         tvExchangeMethod = (TextView) findViewById(R.id.tvExchangeMethod);
         tvAvailability = (TextView) findViewById(R.id.tvAvailability);
 
+        mBrandCoupon = false;
+
         mPresenter = new CouponDetailPresenter(this, this, this);
         mPresenter.initialize();
         mPresenter.loadDetails(getIntent().getIntExtra(Constants.INTENT_BUNDLE_COUPON_ID, 0));
+
+        mBrandCoupon = getIntent().getBooleanExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, false);
     }
 
     @Override
@@ -158,7 +164,12 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
     {
         try
         {
-            Intent main = new Intent(CouponDetail.this, Coupons.class);
+            Intent main = null;
+            if(mBrandCoupon)
+                main = new Intent(CouponDetail.this, BrandsCoupons.class);
+            else
+                main = new Intent(CouponDetail.this, Coupons.class);
+
             NavFlagsUtil.addFlags(main);
             startActivity(main);
             finish();

@@ -92,6 +92,8 @@ public class BrandsAdapter extends BaseExpandableListAdapter
             convertView = infalInflater.inflate(R.layout.custom_category_brand_listview_parent_item, parent, false);
         }
         TextView item = (TextView) convertView.findViewById(R.id.tvCategoryName);
+        ImageView ivIcon = (ImageView) convertView.findViewById(R.id.ivIcon);
+        Glide.with(mContext).load(category.getUrlImg()).into(ivIcon);
         item.setText(category.getName());
         return convertView;
     }
@@ -113,7 +115,7 @@ public class BrandsAdapter extends BaseExpandableListAdapter
 
         Glide.with(mContext).load(brand.getUrlLogo()).into(logo);
         name.setText(brand.getName());
-        //description.setText(brand.);
+        //description.setText(brand.get);
 
         return convertView;
     }

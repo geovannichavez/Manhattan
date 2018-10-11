@@ -85,8 +85,8 @@
                 ******************************************************************************************
         -->
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Main" >
+            android:name=".ui.activities.Main"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -94,43 +94,43 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Coupons" />
+            android:name=".ui.activities.Coupons"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Authenticate" />
+            android:name=".ui.activities.Authenticate"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.AddPhone"
             android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.SmsCodeInput" />
+            android:name=".ui.activities.SmsCodeInput"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Nickname" />
+            android:name=".ui.activities.Nickname"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.Terms"
             android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Splashscreen" />
+            android:name=".ui.activities.Splashscreen"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Brands" />
+            android:name=".ui.activities.Brands"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Permissions" />
+            android:name=".ui.activities.Permissions"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activities.AR"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.Promos" />
+            android:name=".ui.activities.Promos"
+            android:screenOrientation="portrait" />
         <activity
-            android:screenOrientation="portrait"
-            android:name=".ui.activities.CouponDetail"/>
-
+            android:name=".ui.activities.CouponDetail"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activities.BrandsCoupons"></activity>
     </application>
 
 </manifest>
