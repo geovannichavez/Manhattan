@@ -109,5 +109,14 @@
     <string name="toast_bronze_out_of_search_range">BRONCE: Saliste del rango de búsqueda</string>
     <string name="label_promos_of_day">Promociones del %1$s</string>
     <string name="label_promo_valid_date">Válido únicamente el %1$s</string>
+    <string name="label_exchange_method_wildcard">Búscalo en Comodines</string>
+    <string name="label_exchange_method_chest">Búscalo en Regalos</string>
+    <string name="label_exchange_20_coins">Canjea 20 Monedas</string>
+    <string name="label_exchange_method_scan">Escanear las Imágenes</string>
+    <string name="label_exchange_method_trasure_hunt">Búsqueda del Tesoro</string>
+    <string name="label_exchange_method_shopping">Cómpralo por</string>
+    <string name="title_warning">¡Advertencia!</string>
+    <string name="label_purchase_coupon_confirmation">¿Deseas comprar un Cupón por 500 monedas?</string>
+
 
 </resources>

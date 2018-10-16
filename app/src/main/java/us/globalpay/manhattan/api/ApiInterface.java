@@ -9,6 +9,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import us.globalpay.manhattan.models.api.BrandCouponsReq;
+import us.globalpay.manhattan.models.api.CouponPurchaseReq;
 import us.globalpay.manhattan.models.api.CouponsRequest;
 import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.models.api.AuthenticateReqBody;
@@ -94,7 +95,7 @@ public interface ApiInterface
                                              @Header("Platform") String platform,
                                              @Header("PackageName") String packageName);
 
-
+    @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_COUPONS)
     Call<JsonObject> getCoupons(@Body CouponsRequest couponsRequest,
                                      @Header("authenticationKey") String userAuthenticationKey,
@@ -102,10 +103,22 @@ public interface ApiInterface
                                      @Header("Platform") String platform,
                                      @Header("PackageName") String packageName);
 
+    @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_COUPONS_BY_BRAND)
     Call<JsonObject> getBrandCoupons(@Body BrandCouponsReq couponsRequest,
                                 @Header("authenticationKey") String userAuthenticationKey,
                                 @Header("AppVersion") String versionName,
                                 @Header("Platform") String platform,
                                 @Header("PackageName") String packageName);
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.COUPON_PURCHASE)
+    Call<JsonObject> purchaseCoupon(@Body CouponPurchaseReq purchaseReq,
+                                    @Header("authenticationKey") String userAuthenticationKey,
+                                    @Header("AppVersion") String versionName,
+                                    @Header("Platform") String platform,
+                                    @Header("PackageName") String packageName);
+
+
+
     }

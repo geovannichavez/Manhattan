@@ -87,6 +87,7 @@ public class UserData
     private static final String KEY_LAST_COUPON_RESPONSE_CODE = "key_last_coupon_response_code";
     private static final String KEY_LAST_COUPON_PIN_LEVEL = "key_last_coupon_pin_level";
     private static final String KEY_LAST_COUPON_CODE = "key_last_coupon_code";
+    private static final String KEY_LAST_PURCHASED_COUPON = "key_last_purchased_coupon";
 
     //Brands
     private static final String KEY_SELECTED_BRAND = "key_selected_brand";
@@ -96,6 +97,7 @@ public class UserData
     private static final String KEY_HOME_RAW_DATA = "rshm-rw-dta2709018948-ser-manh";
     private static final String KEY_PROMOS_RAW_DATA = "rshm-rw-dta0910018706-ser-manh";
     private static final String KEY_COUPONS_RAW_DATA = "rscp-rw-dta06100181737-ser-manh";
+    private static final String KEY_BRAND_COUPONS_RAW_DATA = "rsbcp-rw-dta161018252-ser-manh";
 
     private UserData(Context context)
     {
@@ -549,5 +551,27 @@ public class UserData
     public String getSelectedBrand()
     {
         return mPreferences.getString(KEY_SELECTED_BRAND, "");
+    }
+
+    public void saveLastPurchasedCoupon(String serializedCoupon)
+    {
+        mEditor.putString(KEY_LAST_PURCHASED_COUPON, serializedCoupon);
+        mEditor.commit();
+    }
+
+    public String getLastPurchasedCoupon()
+    {
+        return mPreferences.getString(KEY_LAST_PURCHASED_COUPON, "");
+    }
+
+    public void saveSelectedBrandCoupons(String rawResponse)
+    {
+        mEditor.putString(KEY_BRAND_COUPONS_RAW_DATA, rawResponse);
+        mEditor.commit();
+    }
+
+    public String getSelectedBrandCoupons()
+    {
+        return mPreferences.getString(KEY_BRAND_COUPONS_RAW_DATA, "");
     }
 }

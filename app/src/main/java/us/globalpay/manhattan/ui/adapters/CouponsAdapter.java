@@ -15,7 +15,9 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import us.globalpay.manhattan.R;
+import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Cupon;
+import us.globalpay.manhattan.utils.Constants;
 
 /**
  * Created by Josué Chávez on 06/10/2018.
@@ -26,11 +28,13 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.CouponsV
 
     private Context mContext;
     private List<Cupon> mCouponsList;
+    private boolean mBrandCoupons;
 
-    public CouponsAdapter(Context context, List<Cupon> couponsList)
+    public CouponsAdapter(Context context, List<Cupon> couponsList, boolean fromBrandCoupons)
     {
         this.mContext = context;
         this.mCouponsList = couponsList;
+        this.mBrandCoupons = fromBrandCoupons;
     }
 
 
@@ -53,6 +57,47 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.CouponsV
 
             Glide.with(mContext).load(coupon.getUrlLogo()).into(holder.ivCoupon);
             holder.tvDescription.setText(coupon.getTitle());
+
+            //Unlocked item
+            holder.imgCouponBgLocked.setVisibility(View.INVISIBLE);
+            holder.ivExchangeType.setVisibility(View.INVISIBLE);
+            holder.ivExchangeBg.setVisibility(View.INVISIBLE);
+
+            if(mBrandCoupons)
+            {
+                if(!coupon.isUnlocked())
+                {
+                    holder.imgCouponBgLocked.setVisibility(View.VISIBLE);
+                    holder.ivExchangeType.setVisibility(View.VISIBLE);
+                    holder.ivExchangeBg.setVisibility(View.VISIBLE);
+
+                    switch (coupon.getMethodID())
+                    {
+                        case Constants.EXCHANGE_METHOD_1_WILDCARD:
+                            Glide.with(mContext).load(coupon.getUrlLogo()).into(holder.ivExchangeType);
+                            break;
+                        case Constants.EXCHANGE_METHOD_2_SCANNING:
+                            Glide.with(mContext).load(coupon.getUrlLogo()).into(holder.ivExchangeType);
+                            break;
+                        case Constants.EXCHANGE_METHOD_3_TREASURE_HUNT:
+                            Glide.with(mContext).load(coupon.getUrlLogo()).into(holder.ivExchangeType);
+                            break;
+                        case Constants.EXCHANGE_METHOD_4_COINS_EXCHANGE:
+                            Glide.with(mContext).load(R.drawable.ic_exchange_type_gift).into(holder.ivExchangeType);
+                            break;
+                        case Constants.EXCHANGE_METHOD_6_CHEST:
+                            Glide.with(mContext).load(R.drawable.ic_exchange_type_gift).into(holder.ivExchangeType);
+                            break;
+                        case Constants.EXCHANGE_METHOD_5_SHOPPING:
+                            Glide.with(mContext).load(R.drawable.ic_exchange_type_coins).into(holder.ivExchangeType);
+                            break;
+                        default:
+                            holder.ivExchangeType.setVisibility(View.INVISIBLE);
+                            holder.ivExchangeBg.setVisibility(View.INVISIBLE);
+                            break;
+                    }
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -69,12 +114,18 @@ public class CouponsAdapter extends RecyclerView.Adapter<CouponsAdapter.CouponsV
     class CouponsViewHolder extends RecyclerView.ViewHolder
     {
         ImageView ivCoupon;
+        ImageView ivExchangeType;
+        ImageView imgCouponBgLocked;
+        ImageView ivExchangeBg;
         TextView tvDescription;
 
         public CouponsViewHolder(View row)
         {
             super(row);
             ivCoupon = (ImageView) row.findViewById(R.id.ivBrandImage);
+            ivExchangeType = (ImageView) row.findViewById(R.id.ivExchangeType);
+            imgCouponBgLocked = (ImageView) row.findViewById(R.id.imgCouponBgLocked);
+            ivExchangeBg = (ImageView) row.findViewById(R.id.ivExchangeBg);
             tvDescription = (TextView) row.findViewById(R.id.tvDescription);
         }
     }

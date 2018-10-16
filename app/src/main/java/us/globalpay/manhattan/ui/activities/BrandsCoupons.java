@@ -130,11 +130,12 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
     {
         try
         {
-            mAdapter = new CouponsAdapter(this, couponsList);
+            mAdapter = new CouponsAdapter(this, couponsList, true);
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplication(), 3);
 
             gvBrandCoupons.setLayoutManager(layoutManager);
             gvBrandCoupons.setItemAnimator(new DefaultItemAnimator());
+            gvBrandCoupons.getRecycledViewPool().setMaxRecycledViews(1, 0);
             gvBrandCoupons.setAdapter(mAdapter);
 
             mAdapter.notifyDataSetChanged();
@@ -145,11 +146,19 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
                 public void onClick(View view, int position)
                 {
                     Cupon cupon = couponsList.get(position);
-                    Intent details = new Intent(BrandsCoupons.this, CouponDetail.class);
-                    details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cupon.get$id()));
-                    details.putExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, true);
-                    startActivity(details);
-                    finish();
+
+                    if(cupon.isPurchasable())
+                    {
+                        if(!cupon.isUnlocked())
+                            mPresenter.couponActions(cupon);
+                        else
+                            navigateDetails(cupon.getCuponID(), true, false);
+                    }
+                    else
+                    {
+                        navigateDetails(cupon.getCuponID(), true, false);
+                    }
+
                 }
             }));
         }
@@ -157,6 +166,17 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
         {
             Log.e(TAG, "Error: " + ex.getMessage());
         }
+    }
+
+    @Override
+    public void navigateDetails(int cuponID, boolean fromBrandCoupon, boolean isPurchase)
+    {
+        Intent details = new Intent(BrandsCoupons.this, CouponDetail.class);
+        details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cuponID));
+        details.putExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, fromBrandCoupon);
+        details.putExtra(Constants.INTENT_BACKSTACK_COUPON_PURCHASED, isPurchase);
+        startActivity(details);
+        finish();
     }
 
     @Override
@@ -175,6 +195,12 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
     public void showDialog(DialogModel model, DialogInterface.OnClickListener clickListener)
     {
         DialogGenerator.showDialog(this, model, clickListener);
+    }
+
+    @Override
+    public void showCouponDialog(Cupon coupon, View.OnClickListener clickListener)
+    {
+        DialogGenerator.showCouponDialog(this, coupon, clickListener);
     }
 
     @Override

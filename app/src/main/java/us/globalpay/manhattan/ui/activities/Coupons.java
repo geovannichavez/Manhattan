@@ -121,7 +121,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
     {
         try
         {
-            mAdapter = new CouponsAdapter(this, couponsList);
+            mAdapter = new CouponsAdapter(this, couponsList, false);
             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplication(), 3);
 
             gvCoupons.setLayoutManager(layoutManager);
@@ -135,11 +135,15 @@ public class Coupons extends AppCompatActivity implements CouponsView
                 @Override
                 public void onClick(View view, int position)
                 {
-                    Cupon cupon = couponsList.get(position);
-                    Intent details = new Intent(Coupons.this, CouponDetail.class);
-                    details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cupon.get$id()));
-                    startActivity(details);
-                    finish();
+                    try
+                    {
+                        Cupon cupon = couponsList.get(position);
+                        Intent details = new Intent(Coupons.this, CouponDetail.class);
+                        details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cupon.getCuponID()));
+                        startActivity(details);
+                        finish();
+                    }
+                    catch (IndexOutOfBoundsException ex) { Log.e(TAG, "index: " + String.valueOf(position));}
                 }
             }));
         }

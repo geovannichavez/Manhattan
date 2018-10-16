@@ -116,6 +116,18 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
         handleError(codeStatus, throwable, raw);
     }
 
+    @Override
+    public void onPurchase(JsonObject result)
+    {
+
+    }
+
+    @Override
+    public void onPurchaseError(int codeStatus, Throwable throwable, String raw)
+    {
+
+    }
+
 
 
 

@@ -669,7 +669,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
                 UserData.getInstance(mContext).saveLastCouponPurchasable(response.getCupon().isPurchasable());
                 UserData.getInstance(mContext).saveLastCouponCode(response.getCupon().getCode());
                 UserData.getInstance(mContext).saveLastCouponResponseCode(response.getCupon().getResponseCode());
-                UserData.getInstance(mContext).saveLastCouponPinLevel(response.getCupon().getPinLevel());
+                UserData.getInstance(mContext).saveLastCouponPinLevel(response.getCupon().getLevel());
 
                 mView.navigateToPrizeDetails();
             }

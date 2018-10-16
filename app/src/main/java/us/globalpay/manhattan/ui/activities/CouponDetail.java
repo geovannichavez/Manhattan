@@ -1,7 +1,6 @@
 package us.globalpay.manhattan.ui.activities;
 
 import android.app.ProgressDialog;
-import android.arch.lifecycle.GenericLifecycleObserver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -64,12 +63,13 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
         tvAvailability = (TextView) findViewById(R.id.tvAvailability);
 
         mBrandCoupon = false;
+        mBrandCoupon = getIntent().getBooleanExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, false);
 
         mPresenter = new CouponDetailPresenter(this, this, this);
         mPresenter.initialize();
-        mPresenter.loadDetails(getIntent().getIntExtra(Constants.INTENT_BUNDLE_COUPON_ID, 0));
+        mPresenter.loadDetails(getIntent().getIntExtra(Constants.INTENT_BUNDLE_COUPON_ID, 0),
+                getIntent().getBooleanExtra(Constants.INTENT_BACKSTACK_COUPON_PURCHASED, false), mBrandCoupon);
 
-        mBrandCoupon = getIntent().getBooleanExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, false);
     }
 
     @Override

@@ -8,12 +8,16 @@ import com.google.gson.annotations.SerializedName;
  */
 public class Cupon
 {
+
     @SerializedName("$id")
     @Expose
     private String $id;
     @SerializedName("CuponID")
     @Expose
     private int cuponID;
+    @SerializedName("PinID")
+    @Expose
+    private int pinID;
     @SerializedName("Title")
     @Expose
     private String title;
@@ -35,9 +39,9 @@ public class Cupon
     @SerializedName("ResponseCode")
     @Expose
     private String responseCode;
-    @SerializedName("PinLevel")
+    @SerializedName("Level")
     @Expose
-    private int pinLevel;
+    private int level;
     @SerializedName("Code")
     @Expose
     private String code;
@@ -62,7 +66,15 @@ public class Cupon
     @SerializedName("Price")
     @Expose
     private int price;
-
+    @SerializedName("MethodID")
+    @Expose
+    private int methodID;
+    @SerializedName("Free")
+    @Expose
+    private boolean free;
+    @SerializedName("Unlocked")
+    @Expose
+    private boolean unlocked;
 
     public String get$id()
     {
@@ -82,6 +94,16 @@ public class Cupon
     public void setCuponID(int cuponID)
     {
         this.cuponID = cuponID;
+    }
+
+    public int getPinID()
+    {
+        return pinID;
+    }
+
+    public void setPinID(int pinID)
+    {
+        this.pinID = pinID;
     }
 
     public String getTitle()
@@ -154,14 +176,14 @@ public class Cupon
         this.responseCode = responseCode;
     }
 
-    public int getPinLevel()
+    public int getLevel()
     {
-        return pinLevel;
+        return level;
     }
 
-    public void setPinLevel(int pinLevel)
+    public void setLevel(int level)
     {
-        this.pinLevel = pinLevel;
+        this.level = level;
     }
 
     public String getCode()
@@ -243,4 +265,36 @@ public class Cupon
     {
         this.price = price;
     }
+
+    public int getMethodID()
+    {
+        return methodID;
+    }
+
+    public void setMethodID(int methodID)
+    {
+        this.methodID = methodID;
+    }
+
+    public boolean isFree()
+    {
+        return free;
+    }
+
+    public void setFree(boolean free)
+    {
+        this.free = free;
+    }
+
+    public boolean isUnlocked()
+    {
+        return unlocked;
+    }
+
+    public void setUnlocked(boolean unlocked)
+    {
+        this.unlocked = unlocked;
+    }
+
+
 }

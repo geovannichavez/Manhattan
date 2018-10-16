@@ -47,21 +47,35 @@ public class CouponDetailPresenter implements ICouponDetailPresenter
     }
 
     @Override
-    public void loadDetails(int couponID)
+    public void loadDetails(int couponID, boolean isPurchase, boolean isBrandCoupon)
     {
         try
         {
-            CouponsResponse serialized = mGson.fromJson(UserData.getInstance(mContext).getCouponsData(), CouponsResponse.class);
             Cupon selectedCoupon = null;
 
-            for(Cupon item : serialized.getCupons().getCupons())
+            if(!isPurchase)
             {
-                if(Integer.valueOf(item.get$id()) == couponID)
+                CouponsResponse serialized = null;
+
+                if(!isBrandCoupon)
+                    serialized = mGson.fromJson(UserData.getInstance(mContext).getCouponsData(), CouponsResponse.class);
+                else
+                    serialized = mGson.fromJson(UserData.getInstance(mContext).getSelectedBrandCoupons(), CouponsResponse.class);
+
+                for(Cupon item : serialized.getCupons().getCupons())
                 {
-                    selectedCoupon = item;
-                    break;
+                    if(item.getCuponID() == couponID)
+                    {
+                        selectedCoupon = item;
+                        break;
+                    }
                 }
             }
+            else
+            {
+                selectedCoupon = mGson.fromJson(UserData.getInstance(mContext).getLastPurchasedCoupon(), Cupon.class);
+            }
+
 
             if(selectedCoupon != null)
             {
@@ -74,7 +88,7 @@ public class CouponDetailPresenter implements ICouponDetailPresenter
                 details.putString(Constants.BUNDLE_COUPON_URL_CATEGORY_ICON, selectedCoupon.getUrlImageCategory());
                 details.putString(Constants.BUNDLE_COUPON_BRAND_NAME, selectedCoupon.getBrandName());
                 details.putString(Constants.BUNDLE_COUPON_CODE, selectedCoupon.getCode());
-                details.putInt(Constants.BUNDLE_COUPON_PIN_LEVEL, selectedCoupon.getPinLevel());
+                details.putInt(Constants.BUNDLE_COUPON_PIN_LEVEL, selectedCoupon.getLevel());
                 details.putBoolean(Constants.BUNDLE_COUPON_PURCHASABLE, selectedCoupon.isPurchasable());
                 details.putBoolean(Constants.BUNDLE_COUPON_FAVORITE, selectedCoupon.isFavorite());
 

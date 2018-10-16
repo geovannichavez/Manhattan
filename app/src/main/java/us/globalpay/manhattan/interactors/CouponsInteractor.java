@@ -14,8 +14,8 @@ import us.globalpay.manhattan.api.ApiClient;
 import us.globalpay.manhattan.api.ApiInterface;
 import us.globalpay.manhattan.interactors.interfaces.ICouponsInteractors;
 import us.globalpay.manhattan.models.api.BrandCouponsReq;
+import us.globalpay.manhattan.models.api.CouponPurchaseReq;
 import us.globalpay.manhattan.models.api.CouponsRequest;
-import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.utils.VersionName;
@@ -98,6 +98,39 @@ public class CouponsInteractor implements ICouponsInteractors
             public void onFailure(Call<JsonObject> call, Throwable t)
             {
                 listener.onCouponsError(0, t, null);
+            }
+        });
+    }
+
+    @Override
+    public void purchaseCoupon(CouponPurchaseReq request, final CouponsListener listener)
+    {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<JsonObject> call = apiService.purchaseCoupon(request,
+                UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG),
+                Constants.PLATFORM,
+                VersionName.getPackageName(mContext, TAG));
+
+        call.enqueue(new Callback<JsonObject>()
+        {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response)
+            {
+                try
+                {
+                    if(response.isSuccessful())
+                        listener.onPurchase(response.body());
+                    else
+                        listener.onPurchaseError(response.code(), null, response.errorBody().string());
+                }
+                catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());     }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t)
+            {
+                listener.onPurchaseError(0, t, null);
             }
         });
     }

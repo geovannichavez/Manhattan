@@ -2,6 +2,7 @@ package us.globalpay.manhattan.interactors.interfaces;
 
 import us.globalpay.manhattan.interactors.CouponsListener;
 import us.globalpay.manhattan.models.api.BrandCouponsReq;
+import us.globalpay.manhattan.models.api.CouponPurchaseReq;
 import us.globalpay.manhattan.models.api.CouponsRequest;
 
 /**
@@ -11,4 +12,5 @@ public interface ICouponsInteractors
 {
     void retrieveCoupons(CouponsRequest request, CouponsListener listener);
     void retrieveBrandsCoupons(BrandCouponsReq request, CouponsListener listener);
+    void purchaseCoupon(CouponPurchaseReq request, CouponsListener listener);
 }

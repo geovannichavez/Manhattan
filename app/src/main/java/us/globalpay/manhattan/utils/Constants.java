@@ -74,5 +74,13 @@ public class Constants
     public static final String BUNDLE_COUPON_FAVORITE = "bundle_coupon_favorite";
     public static final String INTENT_BUNDLE_BRAND_ID = "intent_bundle_brand_id";
     public static final String INTENT_BACKSTACK_BRAND_COUPON = "intent_backstack_brand_coupon";
+    public static final String INTENT_BACKSTACK_COUPON_PURCHASED = "intent_backstack_coupon_purchased";
     public static final String INTENT_BUNDLE_CATEGORY_ICON = "intent_bundle_category_icon";
+    public static final int EXCHANGE_METHOD_1_WILDCARD = 1;
+    public static final int EXCHANGE_METHOD_2_SCANNING = 2;
+    public static final int EXCHANGE_METHOD_3_TREASURE_HUNT = 3;
+    public static final int EXCHANGE_METHOD_4_COINS_EXCHANGE = 4;
+    public static final int EXCHANGE_METHOD_5_SHOPPING = 5;
+    public static final int EXCHANGE_METHOD_6_CHEST = 6;
+
 }

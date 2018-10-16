@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -14,10 +15,16 @@ import us.globalpay.manhattan.interactors.CouponsListener;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.BrandCouponsReq;
+import us.globalpay.manhattan.models.api.CouponPurchaseReq;
+import us.globalpay.manhattan.models.api.CouponPurchaseResponse;
 import us.globalpay.manhattan.models.api.CouponsResponse;
+import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.interfaces.IBrandCouponsPresenter;
+import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavigatePlayStore;
 import us.globalpay.manhattan.utils.UserData;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
+import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.views.BrandsCouponsView;
 
 /**
@@ -71,12 +78,67 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
     }
 
     @Override
+    public void couponActions(final Cupon cupon)
+    {
+        try
+        {
+            mView.showCouponDialog(cupon, new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    if(cupon.getMethodID() == Constants.EXCHANGE_METHOD_1_WILDCARD)
+                    {
+                        ButtonAnimator.floatingButton(mContext, view);
+
+                        final DialogModel content = new DialogModel();
+                        content.setTitle(mContext.getString(R.string.title_warning));
+                        content.setContent(mContext.getString(R.string.label_purchase_coupon_confirmation));
+                        content.setAcceptButton(mContext.getString(R.string.button_accept));
+                        DialogGenerator.showImageDialog(mContext, null,
+                                R.drawable.ic_coins_stacked_medium, content, new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                ButtonAnimator.floatingButton(mContext, v);
+                                handlePurchaseAction(cupon);
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void handlePurchaseAction(Cupon coupon)
+    {
+        try
+        {
+            mView.showLoadingDialog(mContext.getString(R.string.label_please_wait), true);
+            CouponPurchaseReq request = new CouponPurchaseReq();
+            request.setCost(coupon.getPrice());
+            request.setCuponID(coupon.getCuponID());
+            mInteractor.purchaseCoupon(request, BrandCouponsPresenter.this);
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
+    }
+
+    @Override
     public void onCoupons(JsonObject response)
     {
         try
         {
             mView.hideLoadingDialog();
             String rawResponse = mGson.toJson(response);
+
+            //Saves selected brand coupons
+            UserData.getInstance(mContext).saveSelectedBrandCoupons(rawResponse);
 
             //Deserializes response
             CouponsResponse deserialized = mGson.fromJson(rawResponse, CouponsResponse.class);
@@ -92,6 +154,40 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
 
     @Override
     public void onCouponsError(int codeStatus, Throwable throwable, String raw)
+    {
+        mView.hideLoadingDialog();
+        handleError(codeStatus, throwable, raw);
+    }
+
+    @Override
+    public void onPurchase(JsonObject result)
+    {
+        try
+        {
+            mView.hideLoadingDialog();
+
+            //Deserializes response
+            String rawResponse = mGson.toJson(result);
+            CouponPurchaseResponse deserialized = mGson.fromJson(rawResponse, CouponPurchaseResponse.class);
+
+            Cupon purchased = deserialized.getCupon();
+
+            //Saves serialized purchase
+            String serializedCoupon = mGson.toJson(purchased);
+            UserData.getInstance(mContext).saveLastPurchasedCoupon(serializedCoupon);
+
+            //Navigates to details
+            mView.navigateDetails(purchased.getCuponID(), true, true);
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onPurchaseError(int codeStatus, Throwable throwable, String raw)
     {
         mView.hideLoadingDialog();
         handleError(codeStatus, throwable, raw);

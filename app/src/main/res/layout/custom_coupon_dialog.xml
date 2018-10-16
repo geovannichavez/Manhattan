@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Layer 1  -->
+        <LinearLayout
+            android:id="@+id/layer1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15" />
+
+                <ImageView
+                    android:id="@+id/ivCouponDialohBackg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="70"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_coupon_item" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="15" />
+
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+        </LinearLayout>
+
+        <!-- Layer 2 -->
+        <LinearLayout
+            android:id="@+id/layer2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="18" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12" />
+
+                <ImageView
+                    android:id="@+id/btnCouponDialogClose"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="12"
+                    android:src="@drawable/ic_back_circle" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="76" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="48" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="27" />
+
+                <ImageView
+                    android:id="@+id/btnCouponDialogAccept"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="46"
+                    android:src="@drawable/btn_accept_big" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="27" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+        </LinearLayout>
+
+        <!-- Layer 3 -->
+        <LinearLayout
+            android:id="@+id/layer3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="25" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="25"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="22" />
+
+                <ImageView
+                    android:id="@+id/ivCouponDialogLogo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="56"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_gift" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="22" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_weight="3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:weightSum="100"
+                android:layout_weight="20"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+                <Space
+                android:layout_weight="22"
+                android:layout_width="0dp"
+                android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:layout_weight="56"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:weightSum="100"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/tvCouponDesc"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:fontFamily="@font/lato_semibold"
+                        android:gravity="center"
+                        android:maxLines="3"
+                        android:textColor="@color/color_purple"
+                        android:textSize="20dp"
+                        tools:text="30% de Descuento al Pagar con Tarjeta de Crédito" />
+                    <Space
+                        android:layout_weight="5"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                    <TextView
+                        android:id="@+id/tvExchangeType"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="25"
+                        android:fontFamily="@font/lato_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/color_pure_black"
+                        android:textSize="16dp"
+                        tools:text="Búscalo en Comodines" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_weight="22"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="27" />
+
+        </LinearLayout>
+
+        <!-- Layer 4 -->
+        <LinearLayout
+            android:id="@+id/layer4"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="75" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="42" />
+
+                <!--<ImageView
+                    android:id="@+id/ivCouponDialogExchangeType"
+                    android:layout_width="0dp"
+                    android:scaleType="fitCenter"
+                    android:layout_height="match_parent"
+                    android:layout_weight="16"
+                    android:src="@drawable/ic_exchange_type_gift" />-->
+
+                <LinearLayout
+                    android:layout_weight="16"
+                    android:orientation="vertical"
+                    android:weightSum="100"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent">
+                    <Space
+                        android:layout_weight="10"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                    <ImageView
+                        android:id="@+id/ivCouponDialogExchangeType"
+                        android:layout_width="match_parent"
+                        android:scaleType="fitCenter"
+                        android:layout_height="0dp"
+                        android:layout_weight="80"
+                        android:src="@drawable/ic_exchange_type_gift" />
+
+                    <Space
+                        android:layout_weight="10"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="42" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="17" />
+
+        </LinearLayout>
+
+        <!-- Layer 5 -->
+        <LinearLayout
+            android:id="@+id/layer5"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="100">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="75" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="32.5" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:weightSum="100"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="35">
+
+                    <LinearLayout
+                        android:layout_weight="30"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:weightSum="100"
+                        android:layout_height="match_parent">
+
+                        <Space
+                            android:layout_weight="15"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp" />
+
+                        <ImageView
+                            android:id="@+id/ivCouponDialogExchangeTypeCoins"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="70"
+                            android:src="@drawable/ic_exchange_type_coins_large" />
+
+                        <Space
+                            android:layout_weight="15"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp" />
+                    </LinearLayout>
+
+                    <Space
+                        android:layout_weight="4"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/tvExchangePrice"
+                        tools:text="44,500"
+                        android:fontFamily="@font/baloo_regular"
+                        android:layout_weight="66"
+                        android:gravity="center"
+                        android:textSize="22dp"
+                        android:textColor="@color/color_white"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="32.5" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="17" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>
