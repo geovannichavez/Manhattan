@@ -44,36 +44,8 @@ public class ChestSelector
         {
             resourceMap.clear();
 
-            /*switch (eraID)
-            {
-                case 1: //Vikings
-                    drawableClosed = getDrawableId("img_gold_chest_2d_closed");
-                    drawableOpen = getDrawableId("img_gold_chest_2d_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 2: //Western
-                    drawableClosed = getDrawableId("img_02_gold_chest_closed");
-                    drawableOpen = getDrawableId("img_02_gold_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 3: //World Cup
-                    drawableClosed = getDrawableId("img_03_gold_chest_closed");
-                    drawableOpen = getDrawableId("img_03_gold_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 4: //Acuatica
-                    drawableClosed = getDrawableId("img_04_gold_chest_closed");
-                    drawableOpen = getDrawableId("img_04_gold_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-            }*/
-
-            drawableClosed = getDrawableId("img_04_gold_chest_closed");
-            drawableOpen = getDrawableId("img_04_gold_chest_open");
+            drawableClosed = getDrawableId("ic_gift");
+            drawableOpen = getDrawableId("ic_splashscreen");
             resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
             resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
         }
@@ -95,35 +67,9 @@ public class ChestSelector
         {
             resourceMap.clear();
 
-            /*switch (eraID)
-            {
-                case 1: //Vikings
-                    drawableClosed = getDrawableId("img_silver_chest_2d_closed");
-                    drawableOpen = getDrawableId("img_silver_chest_2d_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 2: //Western
-                    drawableClosed = getDrawableId("img_02_silver_chest_closed");
-                    drawableOpen = getDrawableId("img_02_silver_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 3: //World Cup
-                    drawableClosed = getDrawableId("img_03_silver_chest_closed");
-                    drawableOpen = getDrawableId("img_03_silver_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 4: //Acuatica
-                    drawableClosed = getDrawableId("img_04_silver_chest_closed");
-                    drawableOpen = getDrawableId("img_04_silver_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-            }*/
-            drawableClosed = getDrawableId("img_04_silver_chest_closed");
-            drawableOpen = getDrawableId("img_04_silver_chest_open");
+
+            drawableClosed = getDrawableId("ic_gift");
+            drawableOpen = getDrawableId("ic_splashscreen");
             resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
             resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
         }
@@ -145,35 +91,8 @@ public class ChestSelector
         {
             resourceMap.clear();
 
-            /*switch (eraID)
-            {
-                case 1: //Vikings
-                    drawableClosed = getDrawableId("img_bronze_chest_2d_closed");
-                    drawableOpen = getDrawableId("img_bronze_chest_2d_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 2: //Western
-                    drawableClosed = getDrawableId("img_02_bronze_chest_closed");
-                    drawableOpen = getDrawableId("img_02_bronze_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 3: //WorldCup
-                    drawableClosed = getDrawableId("img_03_bronze_chest_closed");
-                    drawableOpen = getDrawableId("img_03_bronze_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-                case 4: //Acuatica
-                    drawableClosed = getDrawableId("img_04_bronze_chest_closed");
-                    drawableOpen = getDrawableId("img_04_bronze_chest_open");
-                    resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
-                    resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
-                    break;
-            }*/
-            drawableClosed = getDrawableId("img_04_bronze_chest_closed");
-            drawableOpen = getDrawableId("img_04_bronze_chest_open");
+            drawableClosed = getDrawableId("ic_gift");
+            drawableOpen = getDrawableId("ic_splashscreen");
             resourceMap.put(Constants.CHEST_STATE_CLOSED, drawableClosed);
             resourceMap.put(Constants.CHEST_STATE_OPEN, drawableOpen);
         }

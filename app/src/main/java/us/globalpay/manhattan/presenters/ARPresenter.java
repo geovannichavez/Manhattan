@@ -223,7 +223,8 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     @Override
     public void redeemPrize()
     {
-        if(UserData.getInstance(mContext).getCurrentCoinsProgress() < 20)
+        //TODO Validar las 20 monedas
+       /* if(UserData.getInstance(mContext).getCurrentCoinsProgress() < 20)
         {
             mView.hideLoadingDialog();
             DialogModel dialog = new DialogModel();
@@ -240,10 +241,10 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             });
         }
         else
-        {
+        {*/
             mView.showLoadingDialog(mContext.getString(R.string.label_redeeming_prize_wait));
             mInteractor.atemptRedeemCoupon(this);
-        }
+        //}
     }
 
     @Override
@@ -279,9 +280,10 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     {
         try
         {
+            //TODO: Evaluar validacion
             //If there is no key, then is the first entered
-            if(TextUtils.equals(UserData.getInstance(mContext).getFirstKeyEntered(), ""))
-            {
+            //if(TextUtils.equals(UserData.getInstance(mContext).getFirstKeyEntered(), ""))
+            //{
                 //Saves first key entered
                 this.saveFirstKeyEntered2D(pKey);
 
@@ -304,7 +306,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
 
                 mView.switchChestVisible(true);
                 mView.makeChestBlink();
-            }
+            //}
         }
         catch (Exception ex)
         {

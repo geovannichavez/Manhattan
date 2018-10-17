@@ -82,6 +82,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
 
         mAnimation = new AlphaAnimation(1, 0);
         mFirbaseObjects = new HashMap<>();
+        mHandler = new Handler();
 
         mPresenter = new ARPresenter(this, this, this);
         mPresenter.initialize();
@@ -516,8 +517,25 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
             mFirbaseObjects.clear();
             mFirbaseObjects.put(pKey, data);
 
-            //Gets resource according to era selected
-            int resourceID = ChestSelector.getInstance(this).getGoldResource().get(Constants.CHEST_STATE_CLOSED);
+            int resourceID = 0;
+
+            switch (chestTypeValue)
+            {
+                case Constants.VALUE_CHEST_TYPE_GOLD:
+
+                    resourceID = ChestSelector.getInstance(this).getGoldResource().get(Constants.CHEST_STATE_CLOSED);
+                    Glide.with(this).load(resourceID).into(ivPrize);
+                    break;
+                case Constants.VALUE_CHEST_TYPE_SILVER:
+                    resourceID = ChestSelector.getInstance(this).getSilverResource().get(Constants.CHEST_STATE_CLOSED);
+                    Glide.with(this).load(resourceID).into(ivPrize);
+                    break;
+                case Constants.VALUE_CHEST_TYPE_BRONZE:
+                    resourceID = ChestSelector.getInstance(this).getBronzeResource().get(Constants.CHEST_STATE_CLOSED);
+                    Glide.with(this).load(resourceID).into(ivPrize);
+                    break;
+            }
+
             Glide.with(this).load(resourceID).into(ivPrize);
         }
         catch (Exception ex)
