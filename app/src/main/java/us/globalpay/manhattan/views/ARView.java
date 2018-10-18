@@ -16,7 +16,7 @@ public interface ARView
 
     void setClickListeners();
     void on2DChestClick();
-    void hideArchViewLoadingMessage();
+    void hideArchViewNoContainersMsg();
     void showGenericDialog(DialogModel messageModel, DialogInterface.OnClickListener clickListener);
     //void showImageDialog(DialogModel dialogModel, int resource, boolean closeActivity);
     void showLoadingDialog(String pLabel);
@@ -47,7 +47,7 @@ public interface ARView
     void changeToOpenChest(int pChestType);
     void navigateToWildcard();
 
-    void navigateToPrizeDetails();
+    void navigateToCouponDetails();
     void setEnabledChestImage(boolean enabled);
 
     void drawChest2D(String pKey, LatLng pLocation, int chestTypeValue);

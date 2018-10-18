@@ -9,4 +9,5 @@ public interface IBrandCouponsPresenter
     void retrieveCoupons(int brand);
     void couponActions(Cupon cupon);
     void handlePurchaseAction(Cupon coupon);
+    void selectCouponDetails(Cupon cupon);
 }

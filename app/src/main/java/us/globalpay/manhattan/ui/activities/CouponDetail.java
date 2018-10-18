@@ -67,8 +67,7 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
 
         mPresenter = new CouponDetailPresenter(this, this, this);
         mPresenter.initialize();
-        mPresenter.loadDetails(getIntent().getIntExtra(Constants.INTENT_BUNDLE_COUPON_ID, 0),
-                getIntent().getBooleanExtra(Constants.INTENT_BACKSTACK_COUPON_PURCHASED, false), mBrandCoupon);
+        mPresenter.loadDetails();
 
     }
 

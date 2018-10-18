@@ -152,11 +152,15 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
                         if(!cupon.isUnlocked())
                             mPresenter.couponActions(cupon);
                         else
-                            navigateDetails(cupon.getCuponID(), true, false);
+                        {
+                            mPresenter.selectCouponDetails(cupon);
+                            navigateDetails(cupon.getCuponID(), true);
+                        }
+
                     }
                     else
                     {
-                        navigateDetails(cupon.getCuponID(), true, false);
+                        navigateDetails(cupon.getCuponID(), true);
                     }
 
                 }
@@ -169,12 +173,15 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
     }
 
     @Override
-    public void navigateDetails(int cuponID, boolean fromBrandCoupon, boolean isPurchase)
+    public void navigateDetails(int cuponID, boolean fromBrandCoupon)
     {
+
+
+
+
         Intent details = new Intent(BrandsCoupons.this, CouponDetail.class);
         details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cuponID));
         details.putExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, fromBrandCoupon);
-        details.putExtra(Constants.INTENT_BACKSTACK_COUPON_PURCHASED, isPurchase);
         startActivity(details);
         finish();
     }

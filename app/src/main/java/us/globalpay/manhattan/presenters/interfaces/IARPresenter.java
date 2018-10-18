@@ -20,9 +20,6 @@ public interface IARPresenter
     void handle2DCoinTouch();
     void handleCoinExchangeKeyUp();
     void touchWildcard_2D(String pFirebaseID, int chestType);
-    //void showcaseARSeen();
-    //void checkForWelcomeChest();
     void deleteFirstKeySaved();
     void registerKeyEntered(String pKey, LatLng location, String chestType);
-    //void evaluateSouvsNavigation();
 }

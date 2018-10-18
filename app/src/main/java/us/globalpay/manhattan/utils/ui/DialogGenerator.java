@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,9 +31,9 @@ public class DialogGenerator
 {
     private static final String TAG = DialogGenerator.class.getSimpleName();
 
-    public static void showDialog(Context context, DialogModel content, DialogInterface.OnClickListener clickListener)
+    public static void showDialog(final Context context, final DialogModel content, final DialogInterface.OnClickListener clickListener)
     {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
         builder.setTitle(content.getTitle());
         builder.setMessage(content.getContent());
         builder.setPositiveButton(content.getAcceptButton(), clickListener);
@@ -40,9 +41,9 @@ public class DialogGenerator
         dialog.show();
     }
 
-    public static ProgressDialog showProgressDialog(Context context, String message, boolean isCancelable)
+    public static ProgressDialog showProgressDialog(Context context, final String message, final boolean isCancelable)
     {
-        ProgressDialog dialog = new ProgressDialog(context);
+        final ProgressDialog dialog = new ProgressDialog(context);
         dialog.setMessage(message);
         dialog.show();
         dialog.setCancelable(isCancelable);

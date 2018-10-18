@@ -130,6 +130,26 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
     }
 
     @Override
+    public void selectCouponDetails(Cupon cupon)
+    {
+        try
+        {
+            CouponsResponse serialized = mGson.fromJson(UserData.getInstance(mContext).getSelectedBrandCoupons(), CouponsResponse.class);
+
+            for(Cupon item : serialized.getCupons().getCupons())
+            {
+                if(item.getCuponID() == cupon.getCuponID())
+                {
+                    String selectedCoupon = mGson.toJson(item);
+                    UserData.getInstance(mContext).saveDetailedCoupon(selectedCoupon);
+                    break;
+                }
+            }
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
+    }
+
+    @Override
     public void onCoupons(JsonObject response)
     {
         try
@@ -174,10 +194,10 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
 
             //Saves serialized purchase
             String serializedCoupon = mGson.toJson(purchased);
-            UserData.getInstance(mContext).saveLastPurchasedCoupon(serializedCoupon);
+            UserData.getInstance(mContext).saveDetailedCoupon(serializedCoupon);
 
             //Navigates to details
-            mView.navigateDetails(purchased.getCuponID(), true, true);
+            mView.navigateDetails(purchased.getCuponID(), true);
 
         }
         catch (Exception ex)

@@ -13,11 +13,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DatabaseError;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
+import java.util.List;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.interactors.ARInteractor;
@@ -28,6 +28,10 @@ import us.globalpay.manhattan.location.GoogleLocationApiManager;
 import us.globalpay.manhattan.location.LocationCallback;
 import us.globalpay.manhattan.models.ArchViewGeoObject;
 import us.globalpay.manhattan.models.DialogModel;
+import us.globalpay.manhattan.models.api.Brand;
+import us.globalpay.manhattan.models.api.BrandsResponse;
+import us.globalpay.manhattan.models.api.Category;
+import us.globalpay.manhattan.models.api.GetCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.geofire.PrizePointData;
 import us.globalpay.manhattan.models.geofire.WildcardPointData;
@@ -49,6 +53,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     private ARInteractor mInteractor;
     private AppCompatActivity mActivity;
     private boolean mIsRunning;
+    private boolean mChestsEntered;
     private Location mCurrentLocation;
 
     private GoogleLocationApiManager mGoogleLocationApiManager;
@@ -67,6 +72,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
         this.mGson = new Gson();
         this.mActivity = activity;
         this.mInteractor = new ARInteractor(mContext);
+        this.mChestsEntered = false;
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(mContext);
     }
 
@@ -95,7 +101,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
         if (!UserData.getInstance(mContext).deviceFullCompatible())
         {
             mView.on2DChestClick();
-            mView.hideArchViewLoadingMessage();
+            //mView.hideArchViewNoContainersMsg(); //TODO: Para que se oculta?
         }
 
         String nickname = UserData.getInstance(mContext).getNickname();
@@ -145,59 +151,53 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     @Override
     public void openChest(JSONObject jsonObject)
     {
-        Location chestLocation = mCurrentLocation;
-
-        String latitude = "";
-        String longitude = "";
-
         try
         {
-            synchronized (this)
+            /*synchronized (this)
             {
                 if (mIsRunning)
                     return;
             }
 
-            mIsRunning = true;
+            mIsRunning = true;*/
 
 
             // Deserializes object from ArchView
             ArchViewGeoObject model = mGson.fromJson(jsonObject.toString(), ArchViewGeoObject.class);
+            Brand brand = getBrandItem( model.getBrand());
 
-            int chestValue = 0;
-
-            LatLng location = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
-
-            switch (String.valueOf(model.getType()))
+            if(model.getType() == Constants.ArActionTypes.Scanning.getType())
             {
-                case Constants.NAME_CHEST_TYPE_GOLD:
-                    chestValue = Constants.VALUE_CHEST_TYPE_GOLD;
-                    break;
-                case Constants.NAME_CHEST_TYPE_SILVER:
-                    chestValue = Constants.VALUE_CHEST_TYPE_SILVER;
-                    break;
-                case Constants.NAME_CHEST_TYPE_BRONZE:
-                    chestValue = Constants.VALUE_CHEST_TYPE_BRONZE;
-                    break;
-                case Constants.NAME_CHEST_TYPE_WILDCARD:
-                    chestValue = Constants.VALUE_CHEST_TYPE_WILDCARD;
-                    break;
-                default:
-                    Log.e(TAG, "No chest type found");
-                    break;
+                mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
+
+                if(brand != null)
+                {
+                    GetCouponReq request = new GetCouponReq();
+                    request.setBrandID(brand.getBrandID());
+                    request.setMethodID(Constants.GetRaCouponMethods.Scanning.getMethod());
+                    mInteractor.getBrandCoupon(request, this);
+                }
             }
-
-            if(chestValue == Constants.VALUE_CHEST_TYPE_WILDCARD)
+            else if(model.getType() == Constants.ArActionTypes.Wildcard.getType())
             {
-                UserData.getInstance(mContext).saveLastWildcardTouched(model.getKey(), chestValue);
+                UserData.getInstance(mContext).saveLastWildcardTouched(model.getKey(), Constants.VALUE_CHEST_TYPE_WILDCARD);
                 mView.navigateToWildcard();
             }
-            else
+            else if(model.getType() == Constants.ArActionTypes.Sponsor.getType())
             {
-                mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
-                mInteractor.openCoinsChest(location, model.getKey(), chestValue);
-            }
+                mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
 
+                GetCouponReq request = new GetCouponReq();
+                request.setBrandID(brand.getBrandID());
+                request.setMethodID(Constants.GetRaCouponMethods.TreasureHunt.getMethod());
+                mInteractor.getBrandCoupon(request, this);
+            }
+            else //Chest (1)
+            {
+                LatLng location = new LatLng(model.getLatitude(), model.getLongitude());
+                mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
+                mInteractor.openCoinsChest(location, model.getKey(), model.getChest());
+            }
         }
         catch (Exception ex)
         {
@@ -415,6 +415,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             if(!TextUtils.equals(mCurrentChestKey, key))
                 mCurrentChestKey = key;
 
+            mView.hideArchViewNoContainersMsg();
             mView.onGoldKeyEntered(key, location, "");
         }
     }
@@ -450,6 +451,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             if(!TextUtils.equals(mCurrentChestKey, key))
                 mCurrentChestKey = key;
 
+            mView.hideArchViewNoContainersMsg();
             mView.onSilverKeyEntered(key, location, "");
         }
     }
@@ -485,6 +487,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             if(!TextUtils.equals(mCurrentChestKey, key))
                 mCurrentChestKey = key;
 
+            mView.hideArchViewNoContainersMsg();
             mView.onBronzeKeyEntered(key, location, "");
         }
     }
@@ -517,10 +520,11 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     {
         if(!TextUtils.equals(UserData.getInstance(mContext).getLastExchangedChestID(), key))
         {
-            mView.hideArchViewLoadingMessage();
+            mView.hideArchViewNoContainersMsg();
             if(!TextUtils.equals(mCurrentChestKey, key))
                 mCurrentChestKey = key;
 
+            mView.hideArchViewNoContainersMsg();
             mView.onWildcardKeyEntered(key, location, "");
         }
     }
@@ -602,42 +606,6 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
         mFirebaseInteractor.detachFirebaseListeners();
     }
 
-    /*
-    *
-    *
-    *
-    *       OTHER METHODS
-    *
-    *
-    * */
-
-    private void saveFirstKeyEntered2D(String key)
-    {
-        try
-        {
-            UserData.getInstance(mContext).saveFirstKeyEntered(key);
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error saving first key entered: " + ex.getMessage());
-        }
-    }
-
-    private void deleteSpecificFirstKeyEntered2D(String key)
-    {
-        try
-        {
-            //Deletes key saved only if is the same that has left
-            if(TextUtils.equals(UserData.getInstance(mContext).getFirstKeyEntered(), key))
-            {
-                UserData.getInstance(mContext).deleteFirstKeyEntered();
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error deleting key from shared preferences: " +ex.getMessage());
-        }
-    }
 
     @Override
     public void onGetUserScoreSuccess()
@@ -673,7 +641,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
                 UserData.getInstance(mContext).saveLastCouponResponseCode(response.getCupon().getResponseCode());
                 UserData.getInstance(mContext).saveLastCouponPinLevel(response.getCupon().getLevel());
 
-                mView.navigateToPrizeDetails();
+                mView.navigateToCouponDetails();
             }
             else
             {
@@ -709,6 +677,95 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             mView.makeChestBlink();
 
         processErrorMessage(codeStatus, throwable, raw);
+    }
+
+    @Override
+    public void onBrandCoupon(JsonObject jsonResponse)
+    {
+        try
+        {
+            GetCouponResponse response = mGson.fromJson(jsonResponse, GetCouponResponse.class);
+
+            String couponEarned = mGson.toJson(response.getCupon());
+            UserData.getInstance(mContext).saveDetailedCoupon(couponEarned);
+            mView.navigateToCouponDetails();
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onBrandCouponError(int codeStatus, String raw)
+    {
+        mView.hideLoadingDialog();
+        processErrorMessage(codeStatus, null, raw);
+    }
+
+    /*
+     *
+     *
+     *
+     *       OTHER METHODS
+     *
+     *
+     * */
+
+    private void saveFirstKeyEntered2D(String key)
+    {
+        try
+        {
+            UserData.getInstance(mContext).saveFirstKeyEntered(key);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error saving first key entered: " + ex.getMessage());
+        }
+    }
+
+    private void deleteSpecificFirstKeyEntered2D(String key)
+    {
+        try
+        {
+            //Deletes key saved only if is the same that has left
+            if(TextUtils.equals(UserData.getInstance(mContext).getFirstKeyEntered(), key))
+            {
+                UserData.getInstance(mContext).deleteFirstKeyEntered();
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error deleting key from shared preferences: " +ex.getMessage());
+        }
+    }
+
+    private Brand getBrandItem(String name)
+    {
+        Brand brand = null;
+
+        try
+        {
+            BrandsResponse serialized = mGson.fromJson(UserData.getInstance(mContext).getBrandsData(), BrandsResponse.class);
+
+            for (Category category : serialized.getCategories().getCategories())
+            {
+                for (Brand brnd : category.getBrands())
+                {
+                    if(TextUtils.equals(brnd.getName(), name))
+                    {
+                        brand = brnd;
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+
+        return brand;
     }
 
     private void processErrorMessage(int pCodeStatus, Throwable pThrowable, String requiredVersion)

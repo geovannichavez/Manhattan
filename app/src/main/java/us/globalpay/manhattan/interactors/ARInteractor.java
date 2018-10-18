@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.gson.JsonObject;
 
 import java.io.IOException;
 
@@ -13,6 +14,7 @@ import retrofit2.Response;
 import us.globalpay.manhattan.api.ApiClient;
 import us.globalpay.manhattan.api.ApiInterface;
 import us.globalpay.manhattan.interactors.interfaces.IARInteractor;
+import us.globalpay.manhattan.models.api.GetCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.UserData;
@@ -44,11 +46,6 @@ public class ARInteractor implements IARInteractor
 
     }
 
-    @Override
-    public void saveUserTracking()
-    {
-
-    }
 
     @Override
     public void atemptRedeemCoupon(final ARListener listener)
@@ -83,6 +80,39 @@ public class ARInteractor implements IARInteractor
             public void onFailure(Call<GetCouponResponse> call, Throwable t)
             {
                 listener.onRedeemCouponError(0, t, "");
+            }
+        });
+    }
+
+    @Override
+    public void getBrandCoupon(GetCouponReq request, final ARListener listener)
+    {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<JsonObject> call = apiService.getBrandCoupon(request,
+                UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG),
+                Constants.PLATFORM,
+                VersionName.getPackageName(mContext, TAG));
+
+        call.enqueue(new Callback<JsonObject>()
+        {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response)
+            {
+                try
+                {
+                    if(response.isSuccessful())
+                        listener.onBrandCoupon(response.body());
+                    else
+                        listener.onBrandCouponError(response.code(), response.errorBody().string());
+                }
+                catch (IOException ex) {    Log.e(TAG, "Error: " + ex.getMessage());   }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t)
+            {
+                listener.onBrandCouponError(0, null);
             }
         });
     }

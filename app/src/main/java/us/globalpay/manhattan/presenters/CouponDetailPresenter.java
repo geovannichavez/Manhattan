@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
-import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.interfaces.ICouponDetailPresenter;
 import us.globalpay.manhattan.ui.activities.Coupons;
@@ -47,35 +46,11 @@ public class CouponDetailPresenter implements ICouponDetailPresenter
     }
 
     @Override
-    public void loadDetails(int couponID, boolean isPurchase, boolean isBrandCoupon)
+    public void loadDetails()
     {
         try
         {
-            Cupon selectedCoupon = null;
-
-            if(!isPurchase)
-            {
-                CouponsResponse serialized = null;
-
-                if(!isBrandCoupon)
-                    serialized = mGson.fromJson(UserData.getInstance(mContext).getCouponsData(), CouponsResponse.class);
-                else
-                    serialized = mGson.fromJson(UserData.getInstance(mContext).getSelectedBrandCoupons(), CouponsResponse.class);
-
-                for(Cupon item : serialized.getCupons().getCupons())
-                {
-                    if(item.getCuponID() == couponID)
-                    {
-                        selectedCoupon = item;
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                selectedCoupon = mGson.fromJson(UserData.getInstance(mContext).getLastPurchasedCoupon(), Cupon.class);
-            }
-
+            Cupon selectedCoupon = mGson.fromJson(UserData.getInstance(mContext).getDetailedCoupon(), Cupon.class);
 
             if(selectedCoupon != null)
             {

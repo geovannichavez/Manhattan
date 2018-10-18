@@ -31,4 +31,6 @@ public class StringsURL
 
     public static final String COUPON_PURCHASE = "Cupon/Purchase";
 
+    public static final String GET_COUPON = "Brand/WinCupon";
+
 }
