@@ -17,7 +17,7 @@ public interface BrandsCouponsView
     void initialize();
     void loadBrand(Brand brand, String icon);
     void renderCoupons(List<Cupon> couponsList);
-    void navigateDetails(int cuponID, boolean fromBrandCoupon, boolean isPurchase);
+    void navigateDetails(int cuponID, boolean fromBrandCoupon);
     void showLoadingDialog(String message, boolean isCancelable);
     void hideLoadingDialog();
     void showDialog(DialogModel model, DialogInterface.OnClickListener clickListener);

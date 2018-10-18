@@ -15,6 +15,7 @@ import us.globalpay.manhattan.interactors.CouponsListener;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.CouponsRequest;
 import us.globalpay.manhattan.models.api.CouponsResponse;
+import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.interfaces.ICouponsPresenter;
 import us.globalpay.manhattan.utils.NavigatePlayStore;
 import us.globalpay.manhattan.utils.UserData;
@@ -79,6 +80,26 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
         request.setStoreID(storeId);
 
         mInteractor.retrieveCoupons(request, this);
+    }
+
+    @Override
+    public void selectCouponDetails(Cupon cupon)
+    {
+        try
+        {
+            CouponsResponse serialized = mGson.fromJson(UserData.getInstance(mContext).getCouponsData(), CouponsResponse.class);
+
+            for(Cupon item : serialized.getCupons().getCupons())
+            {
+                if(item.getCuponID() == cupon.getCuponID())
+                {
+                    String selectedCoupon = mGson.toJson(item);
+                    UserData.getInstance(mContext).saveDetailedCoupon(selectedCoupon);
+                    break;
+                }
+            }
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
     }
 
     @Override

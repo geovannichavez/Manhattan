@@ -6,5 +6,5 @@ package us.globalpay.manhattan.presenters.interfaces;
 public interface ICouponDetailPresenter
 {
     void initialize();
-    void loadDetails(int couponID, boolean isPurchase, boolean isBrandCoupon);
+    void loadDetails();
 }

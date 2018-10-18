@@ -76,7 +76,7 @@ createModelBronzeAtLocation: function createModelBronzeAtLocationFn(latitude,lon
                                bronzeChestAnim.start(1);
                                setTimeout(function() {
                                           AR.platform.sendJSONObject({
-                                                                     type: 1,
+                                                                     type: 1, //Cofre normal
                                                                      chest:1,
                                                                      latitude: latitude,
                                                                      longitude: longitude,
@@ -126,7 +126,7 @@ createModelSilverAtLocation: function createModelSilverAtLocationFn(latitude,lon
                                silverChestAnim.start(1);
                                setTimeout(function() {
                                           AR.platform.sendJSONObject({
-                                                                     type: 1,
+                                                                     type: 1, //Cofre normal
                                                                      chest:2,
                                                                      latitude: latitude,
                                                                      longitude: longitude,
@@ -177,7 +177,7 @@ createModelGoldAtLocation: function createModelGoldAtLocationFn(latitude,longitu
                                goldChestAnim.start(1);
                                setTimeout(function() {
                                           AR.platform.sendJSONObject({
-                                                                     type: 1,
+                                                                     type: 1, //Cofre normal
                                                                      chest:3,
                                                                      latitude:latitude,
                                                                      longitude: longitude,
@@ -229,7 +229,7 @@ createModelWildcardAtLocation: function createModelWildcardAtLocationFn(latitude
                                WildcardChestAnim.start(1);
                                setTimeout(function() {
                                           AR.platform.sendJSONObject({
-                                                                     type: 2,
+                                                                     type: 2, // Wildcard
                                                                      latitude: latitude,
                                                                      longitude: longitude,
                                                                      key: key,
@@ -281,7 +281,7 @@ createModelSponsorAtLocation: function createModelSponsorAtLocationFn(latitude,l
                                SponsorAnim.start(1);
                                setTimeout(function() {
                                           AR.platform.sendJSONObject({
-                                                                     type:3,
+                                                                     type:3, //Sponsor
                                                                      sponsor:sponsor,
                                                                      brandid:brandid,
                                                                      visible:visible,
@@ -426,7 +426,7 @@ createOverlays: function createOverlaysFn() {
                                                                         var brand = "Metrocentro"
                                                                         setTimeout(function() {
                                                                                    AR.platform.sendJSONObject({
-                                                                                                              type:4,
+                                                                                                              type:4, // Scaneo
                                                                                                               brand:brand
                                                                                                               });
                                                                                    exchanging = false;

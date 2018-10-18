@@ -138,8 +138,8 @@ public class Coupons extends AppCompatActivity implements CouponsView
                     try
                     {
                         Cupon cupon = couponsList.get(position);
+                        mPresenter.selectCouponDetails(cupon);
                         Intent details = new Intent(Coupons.this, CouponDetail.class);
-                        details.putExtra(Constants.INTENT_BUNDLE_COUPON_ID, Integer.valueOf(cupon.getCuponID()));
                         startActivity(details);
                         finish();
                     }
@@ -180,6 +180,19 @@ public class Coupons extends AppCompatActivity implements CouponsView
             }
         }
         catch (Exception ex) {  ex.printStackTrace();   }
+    }
+
+    @Override
+    public void navigateDetails()
+    {
+        try
+        {
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package us.globalpay.manhattan.interactors;
 
+import com.google.gson.JsonObject;
+
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 
 /**
@@ -11,4 +13,6 @@ public interface ARListener
     void onGetUserScoreError(int codeStatsu, Throwable throwable, String raw);
     void onRedeemCouponSuccess(GetCouponResponse response);
     void onRedeemCouponError(int codeStatus, Throwable throwable, String raw);
+    void onBrandCoupon(JsonObject jsonResponse);
+    void onBrandCouponError(int codeStatus, String raw);
 }

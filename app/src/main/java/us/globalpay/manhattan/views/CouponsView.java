@@ -17,4 +17,5 @@ public interface CouponsView
     void showGenericDialog(DialogModel dialog, DialogInterface.OnClickListener listener);
     void showLoadingDialog(String message);
     void hideLoadingDialog();
+    void navigateDetails();
 }

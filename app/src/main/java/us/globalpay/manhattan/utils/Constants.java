@@ -74,13 +74,47 @@ public class Constants
     public static final String BUNDLE_COUPON_FAVORITE = "bundle_coupon_favorite";
     public static final String INTENT_BUNDLE_BRAND_ID = "intent_bundle_brand_id";
     public static final String INTENT_BACKSTACK_BRAND_COUPON = "intent_backstack_brand_coupon";
-    public static final String INTENT_BACKSTACK_COUPON_PURCHASED = "intent_backstack_coupon_purchased";
+    public static final String INTENT_BACKSTACK_SINGLE_COUPON = "intent_backstack_coupon_purchased";
     public static final String INTENT_BUNDLE_CATEGORY_ICON = "intent_bundle_category_icon";
+
+    // Brand Coupon obtention methods
     public static final int EXCHANGE_METHOD_1_WILDCARD = 1;
     public static final int EXCHANGE_METHOD_2_SCANNING = 2;
     public static final int EXCHANGE_METHOD_3_TREASURE_HUNT = 3;
     public static final int EXCHANGE_METHOD_4_COINS_EXCHANGE = 4;
     public static final int EXCHANGE_METHOD_5_SHOPPING = 5;
     public static final int EXCHANGE_METHOD_6_CHEST = 6;
+
+    // Get coupon with RA
+    public enum GetRaCouponMethods
+    {
+        Wildcard(1), Scanning(2), TreasureHunt(3), Chest(6);
+
+        GetRaCouponMethods(int method)
+        {
+            this.method = method;
+        }
+
+        private final int method;
+
+        public int getMethod()
+        {
+            return method;
+        }
+    }
+
+    public enum ArActionTypes
+    {
+        Chest(1), Wildcard(2), Sponsor(3), Scanning(4);
+
+        private final int type;
+
+        ArActionTypes(int type)
+        {
+            this.type = type;
+        }
+
+        public int getType() {  return type;    }
+    }
 
 }

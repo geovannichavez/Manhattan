@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -153,10 +154,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
             public void onClick(View v)
             {
                 ButtonAnimator.backButton(AR.this, v);
-                Intent map = new Intent(AR.this, Main.class);
-                NavFlagsUtil.addFlags(map);
-                startActivity(map);
-                finish();
+                navigateBack();
             }
         });
 
@@ -193,9 +191,9 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
     }
 
     @Override
-    public void hideArchViewLoadingMessage()
+    public void hideArchViewNoContainersMsg()
     {
-        this.architectView.callJavascript("World.worldLoaded()");
+        this.architectView.callJavascript("World.modelLoaded()");
     }
 
     @Override
@@ -206,24 +204,34 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
 
 
     @Override
-    public void showLoadingDialog(String content)
+    public void showLoadingDialog(final String content)
     {
-        mProgressDialog = new ProgressDialog(this);
-        mProgressDialog.setMessage(content);
-        mProgressDialog.show();
-        mProgressDialog.setCancelable(false);
-        mProgressDialog.setCanceledOnTouchOutside(false);
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                mProgressDialog = DialogGenerator.showProgressDialog(AR.this, content, true);
+            }
+        });
     }
 
     @Override
     public void hideLoadingDialog()
     {
-        try
+        runOnUiThread(new Runnable()
         {
-            if (mProgressDialog != null && mProgressDialog.isShowing())
-                mProgressDialog.dismiss();
-        }
-        catch (Exception ex) {  ex.printStackTrace();   }
+            @Override
+            public void run()
+            {
+                try
+                {
+                    if (mProgressDialog != null && mProgressDialog.isShowing())
+                        mProgressDialog.dismiss();
+                }
+                catch (Exception ex) {  ex.printStackTrace();   }
+            }
+        });
     }
 
     @Override
@@ -493,7 +501,7 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
     }
 
     @Override
-    public void navigateToPrizeDetails()
+    public void navigateToCouponDetails()
     {
         //TODO: Navigate to Details
     }
@@ -621,6 +629,37 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         architectView.onDestroy();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if(keyCode == KeyEvent.KEYCODE_BACK)
+        {
+            navigateBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    /*
+    *
+    *
+    *
+    *   OTHER METHODS
+    *
+    *
+    * */
+
+    public void navigateBack()
+    {
+        try
+        {
+            Intent map = new Intent(AR.this, Main.class);
+            NavFlagsUtil.addFlags(map);
+            startActivity(map);
+            finish();
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage()); }
+    }
 
 
 }
