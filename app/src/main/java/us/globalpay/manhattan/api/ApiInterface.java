@@ -130,7 +130,7 @@ public interface ApiInterface
                                              @Header("PackageName") String packageName);
 
     @Headers("Content-Type: application/json")
-    @POST(StringsURL.GET_COUPON)
+    @POST(StringsURL.FAVORITE_COUPON)
     Call<JsonObject> saveCoupon(@Body FavoriteCouponReq request,
                                     @Header("authenticationKey") String userAuthenticationKey,
                                     @Header("AppVersion") String versionName,

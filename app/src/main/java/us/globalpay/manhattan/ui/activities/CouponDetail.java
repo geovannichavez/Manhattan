@@ -107,7 +107,8 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
                 @Override
                 public void onClick(View v)
                 {
-                    mPresenter.markAsFavorite(details.getInt(Constants.BUNDLE_COUPON_ID), details.getBoolean(Constants.BUNDLE_COUPON_FAVORITE));
+                    ButtonAnimator.floatingButton(CouponDetail.this, v);
+                    mPresenter.markAsFavorite(details.getInt(Constants.BUNDLE_PIN_ID), details.getBoolean(Constants.BUNDLE_COUPON_FAVORITE));
                 }
             });
 

@@ -62,6 +62,7 @@ public class Constants
 
     //Coupon details
     public static final String BUNDLE_COUPON_ID = "bundle_coupon_id";
+    public static final String BUNDLE_PIN_ID = "bundle_pin_id";
     public static final String BUNDLE_COUPON_TITLE = "bundle_coupon_title";
     public static final String BUNDLE_COUPON_DESCRIPTION = "bundle_coupon_description";
     public static final String BUNDLE_COUPON_URL_BACKGROUND_BRAND = "bundle_coupon_url_background_brand";

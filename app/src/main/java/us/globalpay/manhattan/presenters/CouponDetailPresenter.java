@@ -66,6 +66,7 @@ public class CouponDetailPresenter implements ICouponDetailPresenter, CouponsLis
             {
                 Bundle details = new Bundle();
                 details.putInt(Constants.BUNDLE_COUPON_ID, selectedCoupon.getCuponID());
+                details.putInt(Constants.BUNDLE_PIN_ID, selectedCoupon.getPinID());
                 details.putString(Constants.BUNDLE_COUPON_TITLE, selectedCoupon.getTitle());
                 details.putString(Constants.BUNDLE_COUPON_DESCRIPTION, selectedCoupon.getDescription());
                 details.putString(Constants.BUNDLE_COUPON_URL_BACKGROUND_BRAND, selectedCoupon.getUrlBackgroundBrand());
@@ -102,7 +103,7 @@ public class CouponDetailPresenter implements ICouponDetailPresenter, CouponsLis
     }
 
     @Override
-    public void markAsFavorite(int CouponID, boolean isFavorite)
+    public void markAsFavorite(int pinID, boolean isFavorite)
     {
         try
         {
@@ -111,7 +112,7 @@ public class CouponDetailPresenter implements ICouponDetailPresenter, CouponsLis
             mFavorite = isFavorite;
 
             FavoriteCouponReq request = new FavoriteCouponReq();
-            request.setPinID(CouponID);
+            request.setPinID(pinID);
 
             if(isFavorite)
                 favoriteValue = 0; // 0 No Favorite
@@ -169,14 +170,7 @@ public class CouponDetailPresenter implements ICouponDetailPresenter, CouponsLis
     @Override
     public void onFavorite(JsonObject response)
     {
-
-        FavoriteCouponResponse favorite = mGson.fromJson(response, FavoriteCouponResponse.class);
-
-        boolean isFavorite = false;
-
-        isFavorite = favorite.getFavorite() == 1;
-
-        mView.toggleFavorite(isFavorite);
+        Log.i(TAG, "Favorite saved: " + response.toString());
     }
 
     @Override

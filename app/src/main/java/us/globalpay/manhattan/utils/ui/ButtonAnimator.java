@@ -48,15 +48,15 @@ public class ButtonAnimator
 
     public static void floatingButton(Context context, View view)
     {
-        final ImageView imageButton = (ImageView) view;
+        //final ImageView imageButton = (ImageView) view;
         final Animation anim = AnimationUtils.loadAnimation(context, R.anim.bounce);
-        imageButton.startAnimation(anim);
+        view.startAnimation(anim);
 
         // Use bounce interpolator with amplitude 0.2 and frequency 20
         BounceInterpolator interpolator = new BounceInterpolator(0.05, 5);
         anim.setInterpolator(interpolator);
 
-        imageButton.startAnimation(anim);
+        view.startAnimation(anim);
     }
 
     public static void backButton(Context context, View view)
