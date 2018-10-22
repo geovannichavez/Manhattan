@@ -41,7 +41,7 @@ public class CouponsInteractor implements ICouponsInteractors
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<JsonObject> call = apiService.getCoupons(request,
-                Constants.RG_AUTH_KEY, //TODO: Cambiar por el mio
+                UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
                 VersionName.getPackageName(mContext, TAG));

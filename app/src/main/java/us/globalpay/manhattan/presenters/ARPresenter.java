@@ -632,16 +632,7 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             if(!TextUtils.equals(response.getCupon().getCode(), "00"))
             {
                 //Saves last Coupom
-
-                UserData.getInstance(mContext).saveLastCouponTitle(response.getCupon().getTitle());
-                UserData.getInstance(mContext).saveLastCouponDescription(response.getCupon().getDescription());
-                UserData.getInstance(mContext).saveLastCouponUrlBackground(response.getCupon().getUrlBackground());
-                UserData.getInstance(mContext).saveLastCouponUrlBackgroundHistory(response.getCupon().getUrlBackgroundHistory());
-                UserData.getInstance(mContext).saveLastCouponPurchasable(response.getCupon().isPurchasable());
-                UserData.getInstance(mContext).saveLastCouponCode(response.getCupon().getCode());
-                UserData.getInstance(mContext).saveLastCouponResponseCode(response.getCupon().getResponseCode());
-                UserData.getInstance(mContext).saveLastCouponPinLevel(response.getCupon().getLevel());
-
+                UserData.getInstance(mContext).saveDetailedCoupon(mGson.toJson(response.getCupon()));
                 mView.navigateToCouponDetails();
             }
             else
