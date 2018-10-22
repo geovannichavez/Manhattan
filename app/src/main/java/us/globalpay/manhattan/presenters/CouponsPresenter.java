@@ -149,6 +149,18 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
 
     }
 
+    @Override
+    public void onFavorite(JsonObject response)
+    {
+
+    }
+
+    @Override
+    public void onFavoriteError(int codeStatus, String raw)
+    {
+
+    }
+
 
 
 

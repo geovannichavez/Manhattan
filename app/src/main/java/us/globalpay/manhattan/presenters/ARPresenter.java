@@ -31,6 +31,7 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Category;
+import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.models.api.GetCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.geofire.PrizePointData;

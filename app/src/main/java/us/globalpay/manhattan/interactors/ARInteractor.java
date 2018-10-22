@@ -52,7 +52,7 @@ public class ARInteractor implements IARInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<GetCouponResponse> call = apiService.getCouponByCoins(
-                UserData.getInstance(mContext).getUserAuthenticationKey(),
+                Constants.RG_AUTH_KEY, //TODO: Cambiar por el almacenado
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
                 VersionName.getPackageName(mContext, TAG));
@@ -89,7 +89,7 @@ public class ARInteractor implements IARInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<JsonObject> call = apiService.getBrandCoupon(request,
-                UserData.getInstance(mContext).getUserAuthenticationKey(),
+                Constants.RG_AUTH_KEY, //TODO: Cambiar por el alamcenado
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
                 VersionName.getPackageName(mContext, TAG));

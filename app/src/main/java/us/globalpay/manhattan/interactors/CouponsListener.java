@@ -11,4 +11,6 @@ public interface CouponsListener
     void onCouponsError(int codeStatus, Throwable throwable, String raw);
     void onPurchase(JsonObject result);
     void onPurchaseError(int codeStatus, Throwable throwable, String raw);
+    void onFavorite(JsonObject response);
+    void onFavoriteError(int codeStatus, String raw);
 }

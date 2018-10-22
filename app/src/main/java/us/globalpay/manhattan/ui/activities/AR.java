@@ -503,7 +503,10 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
     @Override
     public void navigateToCouponDetails()
     {
-        //TODO: Navigate to Details
+        Intent couponDetails = new Intent(this, CouponDetail.class);
+        NavFlagsUtil.addFlags(couponDetails);
+        startActivity(couponDetails);
+        finish();
     }
 
     @Override

@@ -16,6 +16,7 @@ import us.globalpay.manhattan.interactors.interfaces.ICouponsInteractors;
 import us.globalpay.manhattan.models.api.BrandCouponsReq;
 import us.globalpay.manhattan.models.api.CouponPurchaseReq;
 import us.globalpay.manhattan.models.api.CouponsRequest;
+import us.globalpay.manhattan.models.api.FavoriteCouponReq;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.utils.VersionName;
@@ -40,7 +41,7 @@ public class CouponsInteractor implements ICouponsInteractors
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<JsonObject> call = apiService.getCoupons(request,
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MjMyMjcxODczNDQxMTQxMg.OTHEyQiIiX3iijPIgHKiQLncRQqtDLX0MUmlgBBz7eE", //TODO: Cmbiar por el mio
+                Constants.RG_AUTH_KEY, //TODO: Cambiar por el mio
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
                 VersionName.getPackageName(mContext, TAG));
@@ -131,6 +132,39 @@ public class CouponsInteractor implements ICouponsInteractors
             public void onFailure(Call<JsonObject> call, Throwable t)
             {
                 listener.onPurchaseError(0, t, null);
+            }
+        });
+    }
+
+    @Override
+    public void saveCoupon(final FavoriteCouponReq request, final CouponsListener listener)
+    {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<JsonObject> call = apiService.saveCoupon(request,
+                UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG),
+                Constants.PLATFORM,
+                VersionName.getPackageName(mContext, TAG));
+
+        call.enqueue(new Callback<JsonObject>()
+        {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response)
+            {
+                try
+                {
+                    if(response.isSuccessful())
+                        listener.onFavorite(response.body());
+                    else
+                        listener.onFavoriteError(response.code(), response.errorBody().string());
+                }
+                catch (IOException ex) {   Log.e(TAG, "Error: " + ex.getMessage());     }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t)
+            {
+                listener.onFavoriteError(0, null);
             }
         });
     }

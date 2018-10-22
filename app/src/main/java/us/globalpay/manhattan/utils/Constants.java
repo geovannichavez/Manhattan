@@ -117,4 +117,6 @@ public class Constants
         public int getType() {  return type;    }
     }
 
+    public static final String RG_AUTH_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.MjMyMjcxODczNDQxMTQxMg.OTHEyQiIiX3iijPIgHKiQLncRQqtDLX0MUmlgBBz7eE";
+
 }

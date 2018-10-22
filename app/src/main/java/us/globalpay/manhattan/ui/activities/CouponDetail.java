@@ -8,8 +8,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -32,7 +34,7 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
     private ImageView ivBrandPhoto;
     private ImageView ivBackground;
     private ImageView ivBrandLogo;
-    private ImageView ivFavorite;
+    private CheckBox swFavorite;
     private TextView tvTitle;
     //private TextView tvSub;
     private TextView tvDescription;
@@ -55,9 +57,8 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
         ivBrandPhoto = (ImageView) findViewById(R.id.ivBrandPhoto);
         ivBackground = (ImageView) findViewById(R.id.ivBackground);
         ivBrandLogo = (ImageView) findViewById(R.id.ivBrandLogo);
-        ivFavorite = (ImageView) findViewById(R.id.ivFavorite);
+        swFavorite = (CheckBox) findViewById(R.id.swFavorite);
         tvTitle = (TextView) findViewById(R.id.tvTitle);
-        //tvSub = (TextView) findViewById(R.id.tvSub);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvExchangeMethod = (TextView) findViewById(R.id.tvExchangeMethod);
         tvAvailability = (TextView) findViewById(R.id.tvAvailability);
@@ -84,10 +85,11 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
 
         btnBack = toolbar.findViewById(R.id.btnBack);
         btnBack.setOnClickListener(backListener);
+
     }
 
     @Override
-    public void loadDetails(Bundle details)
+    public void loadDetails(final Bundle details)
     {
         try
         {
@@ -98,10 +100,16 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
             tvTitle.setText(details.getString(Constants.BUNDLE_COUPON_TITLE));
             tvDescription.setText(details.getString(Constants.BUNDLE_COUPON_DESCRIPTION));
 
-            if(details.getBoolean(Constants.BUNDLE_COUPON_FAVORITE))
-                ivFavorite.setImageResource(R.drawable.ic_fav_on);
-            else
-                ivFavorite.setImageResource(R.drawable.ic_fav_off);
+            swFavorite.setChecked(details.getBoolean(Constants.BUNDLE_COUPON_FAVORITE));
+
+            swFavorite.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    mPresenter.markAsFavorite(details.getInt(Constants.BUNDLE_COUPON_ID), details.getBoolean(Constants.BUNDLE_COUPON_FAVORITE));
+                }
+            });
 
         }
         catch (Exception ex)
@@ -126,6 +134,18 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
     public void showDialog(DialogModel dialog, DialogInterface.OnClickListener clickListener)
     {
         DialogGenerator.showDialog(CouponDetail.this, dialog, clickListener);
+    }
+
+    @Override
+    public void toggleFavorite(boolean isFavorite)
+    {
+        swFavorite.setChecked(isFavorite);
+    }
+
+    @Override
+    public void showToast(String text)
+    {
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
     @Override

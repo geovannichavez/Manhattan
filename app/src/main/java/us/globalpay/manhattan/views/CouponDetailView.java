@@ -15,4 +15,6 @@ public interface CouponDetailView
     void showLoadingDialog(String message, boolean isCancelable);
     void hideLoadingDialog();
     void showDialog(DialogModel dialog, DialogInterface.OnClickListener clickListener);
+    void toggleFavorite(boolean isFavorite);
+    void showToast(String text);
 }

@@ -213,6 +213,18 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
         handleError(codeStatus, throwable, raw);
     }
 
+    @Override
+    public void onFavorite(JsonObject response)
+    {
+
+    }
+
+    @Override
+    public void onFavoriteError(int codeStatus, String raw)
+    {
+
+    }
+
     /*
      *
      *

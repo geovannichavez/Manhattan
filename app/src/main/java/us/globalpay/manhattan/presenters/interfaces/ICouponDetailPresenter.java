@@ -7,4 +7,5 @@ public interface ICouponDetailPresenter
 {
     void initialize();
     void loadDetails();
+    void markAsFavorite(int CouponID, boolean isFavorite);
 }
