@@ -16,19 +16,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.Challenge;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.CouponsPresenter;
 import us.globalpay.manhattan.ui.adapters.CouponsAdapter;
-import us.globalpay.manhattan.utils.Constants;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
-import us.globalpay.manhattan.utils.ui.RecyclerClickListener;
+import us.globalpay.manhattan.utils.interfaces.RecyclerClickListener;
 import us.globalpay.manhattan.utils.ui.RecyclerTouchListener;
 import us.globalpay.manhattan.views.CouponsView;
 
@@ -79,7 +79,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
     }
 
     @Override
-    public void initialize()
+    public void initialize(String storeName)
     {
         Glide.with(this).load(R.drawable.bg_blue_purple).into(ivBackground);
 
@@ -105,6 +105,8 @@ public class Coupons extends AppCompatActivity implements CouponsView
         btnCoupons.setOnClickListener(couponsListener);
         btnRedeemed.setOnClickListener(redeemedListener);
         spLocation.setOnClickListener(spinnerListener);
+
+        tvSpinnerLocation.setText(storeName);
 
         // Set initial button set
         btnFavorites.setImageResource(R.drawable.btn_coupon_bar_left_off);
@@ -196,6 +198,12 @@ public class Coupons extends AppCompatActivity implements CouponsView
     }
 
     @Override
+    public void showSelectableDialog(HashMap<String, ?> arrayMap, IActionResult actionResult)
+    {
+        DialogGenerator.showArrayDialog(this, arrayMap, actionResult);
+    }
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)
     {
         if (keyCode == KeyEvent.KEYCODE_BACK)
@@ -281,6 +289,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
         public void onClick(View v)
         {
             ButtonAnimator.floatingButton(Coupons.this, v);
+            mPresenter.presentStores();
         }
     };
 

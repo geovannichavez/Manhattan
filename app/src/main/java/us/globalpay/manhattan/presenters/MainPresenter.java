@@ -30,6 +30,7 @@ import us.globalpay.manhattan.interactors.MainInteractor;
 import us.globalpay.manhattan.interactors.MainListener;
 import us.globalpay.manhattan.location.GoogleLocationApiManager;
 import us.globalpay.manhattan.location.LocationCallback;
+import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.models.api.MainDataResponse;
 import us.globalpay.manhattan.models.geofire.PrizePointData;
 import us.globalpay.manhattan.models.geofire.WildcardPointData;
@@ -68,6 +69,7 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
         this.mContext = context;
         this.mView = view;
         this.mActivity = activity;
+        this.mGson = new Gson();
         this.mInteractor = new MainInteractor(mContext);
         this.mFirebaseInteractor = new FirebasePointInteractor(mContext, this);
 
@@ -80,19 +82,20 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     @Override
     public void initialize()
     {
-        mGson = new Gson();
         mView.renderMap();
         mView.initialize();
-
-        mView.renderCoupons();//TODO: Quitar
 
         MainDataResponse mainDataResponse = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
 
         if(mainDataResponse != null)
         {
+            mView.renderCoupons(mainDataResponse.getData().getCupon());
+
             //Score
             String coins = String.valueOf(mainDataResponse.getData().getTotalCoins());
             String promos = String.valueOf(mainDataResponse.getData().getTotalNewPromo());
+            String store = (!TextUtils.isEmpty(mainDataResponse.getData().getStore().get(0).getName()))
+                    ? mainDataResponse.getData().getStore().get(0).getName() : "";
             mView.loadInitialValues(coins, promos);
         }
     }
@@ -227,6 +230,17 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     }
 
     @Override
+    public void saveSelectedCoupon(Cupon selected)
+    {
+        try
+        {
+            String serialized = mGson.toJson(selected);
+            UserData.getInstance(mContext).saveDetailedCoupon(serialized);
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
+    }
+
+    @Override
     public void onSuccess(JsonObject rawResponse)
     {
         try
@@ -242,7 +256,11 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
                 //Display new data
                 String coins = String.valueOf(mainDataResponse.getData().getTotalCoins());
                 String promos = String.valueOf(mainDataResponse.getData().getTotalNewPromo());
+                String store = (!TextUtils.isEmpty(mainDataResponse.getData().getStore().get(0).getName()))
+                        ? mainDataResponse.getData().getStore().get(0).getName() : "";
+
                 mView.loadInitialValues(coins, promos);
+                mView.renderCoupons(mainDataResponse.getData().getCupon());
             }
         }
         catch (Exception ex)

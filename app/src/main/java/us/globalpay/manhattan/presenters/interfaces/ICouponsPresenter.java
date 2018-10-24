@@ -8,4 +8,5 @@ public interface ICouponsPresenter
     void initialize();
     void retrieveCoupons(int option, int storeId);
     void selectCouponDetails(Cupon cupon);
+    void presentStores();
 }

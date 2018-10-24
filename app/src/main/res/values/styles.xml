@@ -29,6 +29,8 @@
 
         <!-- Used for the background -->
         <item name="android:windowBackground">@drawable/custom_rounded_gradient_rectangle</item>
+        <item name="android:windowNoTitle">true</item>
+
     </style>
 
 </resources>

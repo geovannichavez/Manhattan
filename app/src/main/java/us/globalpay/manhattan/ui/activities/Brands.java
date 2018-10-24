@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -65,7 +64,7 @@ public class Brands extends AppCompatActivity implements BrandsView
     }
 
     @Override
-    public void initialize()
+    public void initialize(String storeName)
     {
         View toolbar = findViewById(R.id.toolbarBrand);
         ImageView ivTitleIcon = toolbar.findViewById(R.id.ivTitleIcon);
@@ -86,6 +85,8 @@ public class Brands extends AppCompatActivity implements BrandsView
                 ButtonAnimator.floatingButton(Brands.this, v);
             }
         });
+
+        tvLocation.setText(storeName);
 
     }
 

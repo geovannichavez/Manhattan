@@ -7,22 +7,28 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.utils.Constants;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 
 /**
  * Created by Josué Chávez on 28/09/2018.
@@ -150,11 +156,6 @@ public class DialogGenerator
                 dialog.dismiss();
             }
         });
-
-
-
-
-
     }
 
     public static void showImageDialog(final Context context, @Nullable String imgUrl, int imgResource, DialogModel content, View.OnClickListener clickListener)
@@ -201,5 +202,25 @@ public class DialogGenerator
         });
 
 
+    }
+
+    public static void showArrayDialog(Context context, final HashMap<String, ?> arrayMap, final IActionResult actionResult)
+    {
+        final List<String> itemsText = new ArrayList<>(arrayMap.keySet());
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.CustomAlertDialog);
+        ArrayAdapter arrayAdapter = new ArrayAdapter<>(context, R.layout.custom_list_item_single_choice, itemsText);
+        builder.setSingleChoiceItems(arrayAdapter, -1, new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                Object selected = arrayMap.get(itemsText.get(i));
+                dialogInterface.dismiss();
+                actionResult.onSelectedItem(selected);
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

@@ -1,4 +1,4 @@
-package us.globalpay.manhattan.utils;
+package us.globalpay.manhattan.utils.interfaces;
 
 import android.view.View;
 

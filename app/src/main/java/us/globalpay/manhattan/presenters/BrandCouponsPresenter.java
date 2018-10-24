@@ -3,6 +3,7 @@ package us.globalpay.manhattan.presenters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -19,6 +20,7 @@ import us.globalpay.manhattan.models.api.CouponPurchaseReq;
 import us.globalpay.manhattan.models.api.CouponPurchaseResponse;
 import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.models.api.Cupon;
+import us.globalpay.manhattan.models.api.MainDataResponse;
 import us.globalpay.manhattan.presenters.interfaces.IBrandCouponsPresenter;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavigatePlayStore;
@@ -52,7 +54,12 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
     {
        try
        {
-           mView.initialize();
+           //Store handling
+           MainDataResponse mainData = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+           String store = (!TextUtils.isEmpty(mainData.getData().getStore().get(0).getName()))
+                   ? mainData.getData().getStore().get(0).getName() : "";
+
+           mView.initialize(store);
 
            String serialized = UserData.getInstance(mContext).getSelectedBrand();
            Brand brand = mGson.fromJson(serialized, Brand.class);

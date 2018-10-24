@@ -1,13 +1,15 @@
 package us.globalpay.manhattan.views;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.List;
+
 import us.globalpay.manhattan.models.DialogModel;
+import us.globalpay.manhattan.models.api.Cupon;
 
 /**
  * Created by Josué Chávez on 18/09/2018.
@@ -16,7 +18,7 @@ public interface MainView
 {
     void initialize();
     void renderMap();
-    void renderCoupons();
+    void renderCoupons(List<Cupon> coupons);
 
     void loadInitialValues(String coins, String promos);
     void displayActivateLocationDialog();

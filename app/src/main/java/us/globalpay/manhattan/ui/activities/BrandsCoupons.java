@@ -29,7 +29,7 @@ import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
-import us.globalpay.manhattan.utils.ui.RecyclerClickListener;
+import us.globalpay.manhattan.utils.interfaces.RecyclerClickListener;
 import us.globalpay.manhattan.utils.ui.RecyclerTouchListener;
 import us.globalpay.manhattan.views.BrandsCouponsView;
 
@@ -82,7 +82,7 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
     }
 
     @Override
-    public void initialize()
+    public void initialize(String storeName)
     {
         View toolbar = findViewById(R.id.toolbarBrandCoupons);
         ImageView ivTitleIcon = toolbar.findViewById(R.id.ivTitleIcon);
@@ -103,6 +103,8 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
                 ButtonAnimator.floatingButton(BrandsCoupons.this, v);
             }
         });
+
+        tvSpinnerText.setText(storeName);
     }
 
     @Override

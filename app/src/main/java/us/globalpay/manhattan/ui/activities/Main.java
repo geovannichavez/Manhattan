@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,14 +32,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
-import us.globalpay.manhattan.models.FavoriteCuppon;
+import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.MainPresenter;
 import us.globalpay.manhattan.ui.adapters.FavoriteCupponAdapter;
 import us.globalpay.manhattan.utils.Constants;
@@ -273,36 +273,32 @@ public class Main extends AppCompatActivity implements OnMapReadyCallback, MainV
     }
 
     @Override
-    public void renderCoupons()
+    public void renderCoupons(List<Cupon> coupons)
     {
-        mCupponsAdapter = new FavoriteCupponAdapter(this, R.layout.custom_promo_main_item);
-        gvCuppons.setAdapter(mCupponsAdapter);
-
-        List<FavoriteCuppon> list = new ArrayList<>();
-
         try
         {
-            FavoriteCuppon cup1 = new FavoriteCuppon();
-            cup1.setImgUrl("http://1.bp.blogspot.com/-_GSaDuoriIc/UaOzeBlLVkI/AAAAAAAABFY/W9MhFhIqB5M/s1600/almacenes-siman-logo-250x250.png");
-            cup1.setDescription("15% de descuento en todas las sucursales");
-            list.add(cup1);
+            mCupponsAdapter = new FavoriteCupponAdapter(this, R.layout.custom_promo_main_item);
+            gvCuppons.setAdapter(mCupponsAdapter);
+            gvCuppons.setOnItemClickListener(new AdapterView.OnItemClickListener()
+            {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Cupon selected = (Cupon) parent.getItemAtPosition(position);
+                    mPresenter.saveSelectedCoupon(selected);
+                    Intent details = new Intent(Main.this, CouponDetail.class);
+                    NavFlagsUtil.addFlags(details);
+                    startActivity(details);
+                    finish();
+                }
+            });
 
-            FavoriteCuppon cup2 = new FavoriteCuppon();
-            cup2.setImgUrl("https://d3j72de684fey1.cloudfront.net/resized/d4097060ee1efd57273bd6c782402d448b688253.PjI1NngyNTY.png");
-            cup2.setDescription("2x1 por compras de $50 o más");
-            list.add(cup2);
+            mCupponsAdapter.notifyDataSetChanged();
 
-            FavoriteCuppon cup3 = new FavoriteCuppon();
-            cup3.setImgUrl("http://www.stickpng.com/assets/images/58429d58a6515b1e0ad75ae8.png");
-            cup3.setDescription("Refill gratis al agrandar combo");
-            list.add(cup3);
-
-            for (FavoriteCuppon item : list)
+            for(Cupon item : coupons)
             {
                 mCupponsAdapter.add(item);
             }
-
-
         }
         catch (Exception ex)
         {

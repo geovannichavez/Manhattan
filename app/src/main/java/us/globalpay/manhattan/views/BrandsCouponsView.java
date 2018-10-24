@@ -14,7 +14,7 @@ import us.globalpay.manhattan.models.api.Cupon;
  */
 public interface BrandsCouponsView
 {
-    void initialize();
+    void initialize(String storeName);
     void loadBrand(Brand brand, String icon);
     void renderCoupons(List<Cupon> couponsList);
     void navigateDetails(int cuponID, boolean fromBrandCoupon);

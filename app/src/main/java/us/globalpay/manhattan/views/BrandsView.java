@@ -12,7 +12,7 @@ import us.globalpay.manhattan.models.api.Category;
  */
 public interface BrandsView
 {
-    void initialize();
+    void initialize(String storeName);
     void renderBrands(List<Category> categories, Map<String, List<Brand>> filledCategories);
     void showLoadingDialog(String string, boolean isCancelable);
     void hideLoadingDialog();

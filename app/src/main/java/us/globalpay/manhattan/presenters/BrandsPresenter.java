@@ -20,6 +20,7 @@ import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.BrandsReqBody;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Category;
+import us.globalpay.manhattan.models.api.MainDataResponse;
 import us.globalpay.manhattan.presenters.interfaces.IBrandsPresenter;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.views.BrandsView;
@@ -50,7 +51,12 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
     {
         try
         {
-            mView.initialize();
+            //Store handling
+            MainDataResponse mainData = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+            String store = (!TextUtils.isEmpty(mainData.getData().getStore().get(0).getName()))
+                    ? mainData.getData().getStore().get(0).getName() : "";
+
+            mView.initialize(store);
 
             //Load saved brands data
             String savedBrands = UserData.getInstance(mContext).getBrandsData();
