@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<CheckedTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:text="El Salvador"
+    android:textAlignment="gravity"
+    android:textSize="18sp"
+    android:fontFamily="@font/lato_semibold"
+    android:textColor="@color/color_blue_light"
     android:layout_width="match_parent"
     android:layout_height="?android:attr/listPreferredItemHeightSmall"
-    android:checkMark="@null"
-    android:fontFamily="@font/lato_semibold"
     android:gravity="center"
-    android:textAlignment="gravity"
-    android:textColor="@color/color_blue_light"
-    android:textIsSelectable="true"
-    android:textSize="18sp"
-    tools:text="El Salvador" />
+    android:checkMark="@null" />

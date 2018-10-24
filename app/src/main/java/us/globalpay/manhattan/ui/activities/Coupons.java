@@ -74,12 +74,12 @@ public class Coupons extends AppCompatActivity implements CouponsView
 
         mPresenter = new CouponsPresenter(this, this, this);
         mPresenter.initialize();
-        mPresenter.retrieveCoupons(1, 1); //TODO: Cambiar tienda default
+        mPresenter.retrieveCoupons(1);
 
     }
 
     @Override
-    public void initialize(String storeName)
+    public void initialize()
     {
         Glide.with(this).load(R.drawable.bg_blue_purple).into(ivBackground);
 
@@ -105,8 +105,6 @@ public class Coupons extends AppCompatActivity implements CouponsView
         btnCoupons.setOnClickListener(couponsListener);
         btnRedeemed.setOnClickListener(redeemedListener);
         spLocation.setOnClickListener(spinnerListener);
-
-        tvSpinnerLocation.setText(storeName);
 
         // Set initial button set
         btnFavorites.setImageResource(R.drawable.btn_coupon_bar_left_off);
@@ -185,22 +183,18 @@ public class Coupons extends AppCompatActivity implements CouponsView
     }
 
     @Override
-    public void navigateDetails()
-    {
-        try
-        {
-
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
-    }
-
-    @Override
     public void showSelectableDialog(HashMap<String, ?> arrayMap, IActionResult actionResult)
     {
         DialogGenerator.showArrayDialog(this, arrayMap, actionResult);
+    }
+
+    @Override
+    public void setStoreName(String name)
+    {
+        try
+        {
+            tvSpinnerLocation.setText(name);
+        } catch (Exception ex)  {   Log.e(TAG, "Error: " + ex.getMessage());    }
     }
 
     @Override
@@ -232,7 +226,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             lblRedeemed.setTextColor(getResources().getColor(R.color.color_blue_dark));
 
             //Request
-            mPresenter.retrieveCoupons(0, 1); //TODO: Poner tienda
+            mPresenter.retrieveCoupons(0); //TODO: Poner tienda
 
         }
     };
@@ -256,7 +250,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             lblRedeemed.setTextColor(getResources().getColor(R.color.color_blue_dark));
 
             //Request
-            mPresenter.retrieveCoupons(1, 1); //TODO: Poner tienda
+            mPresenter.retrieveCoupons(1); //TODO: Poner tienda
         }
     };
 
@@ -279,7 +273,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             lblRedeemed.setTextColor(getResources().getColor(R.color.color_white));
 
             //Request
-            mPresenter.retrieveCoupons(2, 1); //TODO: Poner tienda
+            mPresenter.retrieveCoupons(2); //TODO: Poner tienda
         }
     };
 

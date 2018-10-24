@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,10 @@ import us.globalpay.manhattan.models.api.BrandsReqBody;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Category;
 import us.globalpay.manhattan.models.api.MainDataResponse;
+import us.globalpay.manhattan.models.api.Store;
 import us.globalpay.manhattan.presenters.interfaces.IBrandsPresenter;
 import us.globalpay.manhattan.utils.UserData;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.views.BrandsView;
 
 /**
@@ -35,8 +38,8 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
     private Context mContext;
     private BrandsView mView;
     private BrandsInteractor mInteractor;
-
     private Gson mGson;
+    private int mSelectedStoreID;
 
     public BrandsPresenter(Context context, AppCompatActivity activity, BrandsView view)
     {
@@ -53,10 +56,17 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
         {
             //Store handling
             MainDataResponse mainData = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
-            String store = (!TextUtils.isEmpty(mainData.getData().getStore().get(0).getName()))
-                    ? mainData.getData().getStore().get(0).getName() : "";
 
-            mView.initialize(store);
+            if(mainData.getData().getStore().size() > 0)
+            {
+                Store store = mainData.getData().getStore().get(0);
+
+                mView.setStoreName(store.getName());
+                mSelectedStoreID = store.getStoreID();
+            }
+
+
+            mView.initialize();
 
             //Load saved brands data
             String savedBrands = UserData.getInstance(mContext).getBrandsData();
@@ -84,8 +94,9 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
     @Override
     public void retrieveBrands()
     {
+
         BrandsReqBody request = new BrandsReqBody();
-        request.setStoreID(1); //TODO: Cambiar ID quemado
+        request.setStoreID(mSelectedStoreID);
         mInteractor.retrieveBrands(request, this);
     }
 
@@ -98,6 +109,40 @@ public class BrandsPresenter implements IBrandsPresenter, BrandsListener
             UserData.getInstance(mContext).saveSelectedBrand(serialized);
         }
         catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage()); }
+    }
+
+    @Override
+    public void openStoresList()
+    {
+        try
+        {
+            MainDataResponse data = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+            HashMap<String, Store> storesMap = new HashMap<>();
+
+            for(Store item: data.getData().getStore())
+            {
+                storesMap.put(item.getName(), item);
+            }
+
+            mView.showListDialog(storesMap, new IActionResult()
+            {
+                @Override
+                public void onSelectedItem(Object selected)
+                {
+                    Store selectedStore = (Store) selected;
+
+                    BrandsReqBody brandsReq = new BrandsReqBody();
+                    brandsReq.setStoreID(selectedStore.getStoreID());
+                    mInteractor.retrieveBrands(brandsReq, BrandsPresenter.this);
+                    mView.setStoreName(selectedStore.getName());
+                }
+            });
+
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     @Override

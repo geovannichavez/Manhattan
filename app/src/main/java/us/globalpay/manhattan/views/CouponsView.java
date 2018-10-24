@@ -14,11 +14,11 @@ import us.globalpay.manhattan.utils.interfaces.IActionResult;
  */
 public interface CouponsView
 {
-    void initialize(String storeName);
+    void initialize();
     void renderCoupons(List<Cupon> couponsList);
     void showGenericDialog(DialogModel dialog, DialogInterface.OnClickListener listener);
     void showLoadingDialog(String message);
     void hideLoadingDialog();
-    void navigateDetails();
     void showSelectableDialog(HashMap<String, ?> arrayMap, IActionResult actionResult);
+    void setStoreName(String name);
 }

@@ -37,6 +37,8 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     private CouponsView mView;
     private CouponsInteractor mInteractor;
     private Gson mGson;
+    private int mCurrentOption;
+    private int mStoreID;
 
     public CouponsPresenter(Context context, AppCompatActivity activity, CouponsView couponsView)
     {
@@ -55,8 +57,14 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
             MainDataResponse mainData = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
             String store = (!TextUtils.isEmpty(mainData.getData().getStore().get(0).getName()))
                     ? mainData.getData().getStore().get(0).getName() : "";
+            mView.setStoreName(store);
 
-            mView.initialize(store);
+            //Initial request data
+            mCurrentOption = 1; //Middle tab value. Default value
+            if(mainData.getData().getStore().size() > 0)
+                mStoreID = mainData.getData().getStore().get(0).getStoreID();
+
+            mView.initialize();
             String rawResponse = UserData.getInstance(mContext).getCouponsData();
 
             if(!TextUtils.isEmpty(rawResponse))
@@ -83,11 +91,12 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     }
 
     @Override
-    public void retrieveCoupons(int option, int storeId)
+    public void retrieveCoupons(int option)
     {
+        mCurrentOption = option;
         CouponsRequest request = new CouponsRequest();
         request.setOption(option);
-        request.setStoreID(storeId);
+        request.setStoreID(mStoreID);
 
         mInteractor.retrieveCoupons(request, this);
     }
@@ -130,7 +139,15 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
                 @Override
                 public void onSelectedItem(Object selected)
                 {
-                    changeStore((Store)selected);
+                    mStoreID = ((Store) selected).getStoreID();
+
+                    CouponsRequest request = new CouponsRequest();
+                    request.setStoreID(mStoreID);
+                    request.setOption(mCurrentOption);
+
+                    mView.setStoreName(((Store) selected).getName());
+
+                    mInteractor.retrieveCoupons(request, CouponsPresenter.this);
                 }
             });
         }
@@ -195,12 +212,6 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     {
 
     }
-
-    private void changeStore(Store store)
-    {
-
-    }
-
 
 
     /*

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,7 @@ import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.Category;
 import us.globalpay.manhattan.presenters.BrandsPresenter;
 import us.globalpay.manhattan.utils.Constants;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
@@ -64,7 +66,7 @@ public class Brands extends AppCompatActivity implements BrandsView
     }
 
     @Override
-    public void initialize(String storeName)
+    public void initialize()
     {
         View toolbar = findViewById(R.id.toolbarBrand);
         ImageView ivTitleIcon = toolbar.findViewById(R.id.ivTitleIcon);
@@ -83,10 +85,9 @@ public class Brands extends AppCompatActivity implements BrandsView
             public void onClick(View v)
             {
                 ButtonAnimator.floatingButton(Brands.this, v);
+                mPresenter.openStoresList();
             }
         });
-
-        tvLocation.setText(storeName);
 
     }
 
@@ -144,6 +145,22 @@ public class Brands extends AppCompatActivity implements BrandsView
     public void showGenericDialog(DialogModel dialog)
     {
 
+    }
+
+    @Override
+    public void showListDialog(HashMap<String, ?> arrayMap, IActionResult actionResult)
+    {
+        DialogGenerator.showArrayDialog(this, arrayMap, actionResult);
+    }
+
+    @Override
+    public void setStoreName(String name)
+    {
+        try
+        {
+            tvLocation.setText(name);
+        }
+        catch (Exception ex) {    Log.e(TAG, "Error: " + ex.getMessage());    }
     }
 
     @Override

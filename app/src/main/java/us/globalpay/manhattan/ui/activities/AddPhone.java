@@ -257,6 +257,7 @@ public class AddPhone extends AppCompatActivity implements AddPhoneView
         });
     }
 
+    //TODO: Consumir metodo de DialogGenerator
     private void displayCountries()
     {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.CustomAlertDialog);

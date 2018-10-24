@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 
 import us.globalpay.manhattan.R;
@@ -27,6 +28,7 @@ import us.globalpay.manhattan.presenters.BrandCouponsPresenter;
 import us.globalpay.manhattan.ui.adapters.CouponsAdapter;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.utils.interfaces.RecyclerClickListener;
@@ -82,7 +84,7 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
     }
 
     @Override
-    public void initialize(String storeName)
+    public void initialize()
     {
         View toolbar = findViewById(R.id.toolbarBrandCoupons);
         ImageView ivTitleIcon = toolbar.findViewById(R.id.ivTitleIcon);
@@ -101,10 +103,10 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
             public void onClick(View v)
             {
                 ButtonAnimator.floatingButton(BrandsCoupons.this, v);
+                mPresenter.openStoresList();
             }
         });
 
-        tvSpinnerText.setText(storeName);
     }
 
     @Override
@@ -210,6 +212,18 @@ public class BrandsCoupons extends AppCompatActivity implements BrandsCouponsVie
     public void showCouponDialog(Cupon coupon, View.OnClickListener clickListener)
     {
         DialogGenerator.showCouponDialog(this, coupon, clickListener);
+    }
+
+    @Override
+    public void setStoreName(String storeName)
+    {
+        tvSpinnerText.setText(storeName);
+    }
+
+    @Override
+    public void showListDialog(HashMap<String, ?> arrayMap, IActionResult actionResult)
+    {
+        DialogGenerator.showArrayDialog(this, arrayMap, actionResult);
     }
 
     @Override
