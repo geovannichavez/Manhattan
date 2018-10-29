@@ -6,6 +6,7 @@ import us.globalpay.manhattan.models.api.Cupon; /**
 public interface ICouponsPresenter
 {
     void initialize();
-    void retrieveCoupons(int option, int storeId);
+    void retrieveCoupons(int option);
     void selectCouponDetails(Cupon cupon);
+    void presentStores();
 }

@@ -70,10 +70,10 @@
                     <ImageView
                         android:id="@+id/spLocation"
                         android:layout_width="0dp"
-
+                        android:scaleType="fitXY"
                         android:layout_height="match_parent"
                         android:layout_weight="84"
-                        android:background="@drawable/custom_spinner_coupons" />
+                        android:src="@drawable/custom_spinner_coupons" />
 
                     <Space
                         android:layout_width="0dp"
@@ -183,22 +183,22 @@
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="10" />
+                        android:layout_weight="12.5" />
 
                     <TextView
                         android:id="@+id/tvSpinnerLocation"
                         android:layout_width="0dp"
-                        android:fontFamily="@font/lato_semibold"
-                        android:textColor="@color/colorPrimary"
                         android:layout_height="match_parent"
-                        android:layout_weight="70"
+                        android:layout_weight="65"
+                        android:fontFamily="@font/lato_semibold"
                         android:gravity="center_vertical"
+                        android:textColor="@color/colorPrimary"
                         tools:text="San Salvador, El Salvador" />
 
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="20" />
+                        android:layout_weight="22.5" />
 
                 </LinearLayout>
 

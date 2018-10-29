@@ -10,4 +10,5 @@ public interface IBrandCouponsPresenter
     void couponActions(Cupon cupon);
     void handlePurchaseAction(Cupon coupon);
     void selectCouponDetails(Cupon cupon);
+    void openStoresList();
 }

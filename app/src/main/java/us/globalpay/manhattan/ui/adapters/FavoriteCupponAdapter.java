@@ -14,11 +14,12 @@ import com.bumptech.glide.Glide;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.FavoriteCuppon;
+import us.globalpay.manhattan.models.api.Cupon;
 
 /**
  * Created by Josué Chávez on 11/09/2018.
  */
-public class FavoriteCupponAdapter extends ArrayAdapter<FavoriteCuppon>
+public class FavoriteCupponAdapter extends ArrayAdapter<Cupon>
 {
     private static final String TAG = FavoriteCupponAdapter.class.getSimpleName();
 
@@ -38,7 +39,7 @@ public class FavoriteCupponAdapter extends ArrayAdapter<FavoriteCuppon>
     {
         View row = convertView;
 
-        final FavoriteCuppon currentItem = getItem(position);
+        final Cupon currentItem = getItem(position);
 
         if (row == null)
         {
@@ -51,8 +52,8 @@ public class FavoriteCupponAdapter extends ArrayAdapter<FavoriteCuppon>
         ImageView ivCupponImage = (ImageView) row.findViewById(R.id.ivCupponImage);
         TextView tvCupponDescription = (TextView) row.findViewById(R.id.tvCupponDescription);
 
-        Glide.with(mContext).load(currentItem.getImgUrl()).into(ivCupponImage);
-        tvCupponDescription.setText(currentItem.getDescription());
+        Glide.with(mContext).load(currentItem.getUrlLogo()).into(ivCupponImage);
+        tvCupponDescription.setText(currentItem.getTitle());
 
 
         return row;

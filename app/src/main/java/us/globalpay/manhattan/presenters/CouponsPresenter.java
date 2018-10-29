@@ -9,6 +9,8 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
+
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.interactors.CouponsInteractor;
 import us.globalpay.manhattan.interactors.CouponsListener;
@@ -16,7 +18,10 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.CouponsRequest;
 import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.models.api.Cupon;
+import us.globalpay.manhattan.models.api.MainDataResponse;
+import us.globalpay.manhattan.models.api.Store;
 import us.globalpay.manhattan.presenters.interfaces.ICouponsPresenter;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.utils.NavigatePlayStore;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.views.CouponsView;
@@ -32,6 +37,8 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     private CouponsView mView;
     private CouponsInteractor mInteractor;
     private Gson mGson;
+    private int mCurrentOption;
+    private int mStoreID;
 
     public CouponsPresenter(Context context, AppCompatActivity activity, CouponsView couponsView)
     {
@@ -46,6 +53,17 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     {
         try
         {
+            //Store handling
+            MainDataResponse mainData = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+            String store = (!TextUtils.isEmpty(mainData.getData().getStore().get(0).getName()))
+                    ? mainData.getData().getStore().get(0).getName() : "";
+            mView.setStoreName(store);
+
+            //Initial request data
+            mCurrentOption = 1; //Middle tab value. Default value
+            if(mainData.getData().getStore().size() > 0)
+                mStoreID = mainData.getData().getStore().get(0).getStoreID();
+
             mView.initialize();
             String rawResponse = UserData.getInstance(mContext).getCouponsData();
 
@@ -73,11 +91,12 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     }
 
     @Override
-    public void retrieveCoupons(int option, int storeId)
+    public void retrieveCoupons(int option)
     {
+        mCurrentOption = option;
         CouponsRequest request = new CouponsRequest();
         request.setOption(option);
-        request.setStoreID(storeId);
+        request.setStoreID(mStoreID);
 
         mInteractor.retrieveCoupons(request, this);
     }
@@ -98,6 +117,39 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
                     break;
                 }
             }
+        }
+        catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
+    }
+
+    @Override
+    public void presentStores()
+    {
+        try
+        {
+            MainDataResponse data = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+            HashMap<String, Store> storesMap = new HashMap<>();
+
+            for(Store item: data.getData().getStore())
+            {
+                storesMap.put(item.getName(), item);
+            }
+
+            mView.showSelectableDialog(storesMap, new IActionResult()
+            {
+                @Override
+                public void onSelectedItem(Object selected)
+                {
+                    mStoreID = ((Store) selected).getStoreID();
+
+                    CouponsRequest request = new CouponsRequest();
+                    request.setStoreID(mStoreID);
+                    request.setOption(mCurrentOption);
+
+                    mView.setStoreName(((Store) selected).getName());
+
+                    mInteractor.retrieveCoupons(request, CouponsPresenter.this);
+                }
+            });
         }
         catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
     }
@@ -160,8 +212,6 @@ public class CouponsPresenter implements ICouponsPresenter, CouponsListener
     {
 
     }
-
-
 
 
     /*

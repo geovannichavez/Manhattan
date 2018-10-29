@@ -175,10 +175,11 @@
 
                             <ImageView
                                 android:id="@+id/spLocation"
+                                android:scaleType="fitXY"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="94"
-                                android:background="@drawable/custom_spinner_coupons" />
+                                android:src="@drawable/custom_spinner_coupons" />
 
                             <Space
                                 android:layout_width="0dp"

@@ -27,7 +27,7 @@ public class Data
     private List<Brand> brand = null;
     @SerializedName("cupon")
     @Expose
-    private List<Object> cupon = null;
+    private List<Cupon> cupon = null;
     @SerializedName("responseCode")
     @Expose
     private int responseCode;
@@ -82,12 +82,12 @@ public class Data
         this.brand = brand;
     }
 
-    public List<Object> getCupon()
+    public List<Cupon> getCupon()
     {
         return cupon;
     }
 
-    public void setCupon(List<Object> cupon)
+    public void setCupon(List<Cupon> cupon)
     {
         this.cupon = cupon;
     }

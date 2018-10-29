@@ -8,4 +8,5 @@ public interface IBrandsPresenter
     void init();
     void retrieveBrands();
     void saveSelectedBrand(Brand selected);
+    void openStoresList();
 }

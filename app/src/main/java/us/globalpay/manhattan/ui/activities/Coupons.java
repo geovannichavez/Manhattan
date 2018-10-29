@@ -16,19 +16,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
 
-import okhttp3.Challenge;
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.presenters.CouponsPresenter;
 import us.globalpay.manhattan.ui.adapters.CouponsAdapter;
-import us.globalpay.manhattan.utils.Constants;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
-import us.globalpay.manhattan.utils.ui.RecyclerClickListener;
+import us.globalpay.manhattan.utils.interfaces.RecyclerClickListener;
 import us.globalpay.manhattan.utils.ui.RecyclerTouchListener;
 import us.globalpay.manhattan.views.CouponsView;
 
@@ -74,7 +74,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
 
         mPresenter = new CouponsPresenter(this, this, this);
         mPresenter.initialize();
-        mPresenter.retrieveCoupons(1, 1); //TODO: Cambiar tienda default
+        mPresenter.retrieveCoupons(1);
 
     }
 
@@ -183,16 +183,18 @@ public class Coupons extends AppCompatActivity implements CouponsView
     }
 
     @Override
-    public void navigateDetails()
+    public void showSelectableDialog(HashMap<String, ?> arrayMap, IActionResult actionResult)
+    {
+        DialogGenerator.showArrayDialog(this, arrayMap, actionResult);
+    }
+
+    @Override
+    public void setStoreName(String name)
     {
         try
         {
-
-        }
-        catch (Exception ex)
-        {
-            Log.e(TAG, "Error: " + ex.getMessage());
-        }
+            tvSpinnerLocation.setText(name);
+        } catch (Exception ex)  {   Log.e(TAG, "Error: " + ex.getMessage());    }
     }
 
     @Override
@@ -224,7 +226,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             lblRedeemed.setTextColor(getResources().getColor(R.color.color_blue_dark));
 
             //Request
-            mPresenter.retrieveCoupons(0, 1); //TODO: Poner tienda
+            mPresenter.retrieveCoupons(0); //TODO: Poner tienda
 
         }
     };
@@ -248,7 +250,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             lblRedeemed.setTextColor(getResources().getColor(R.color.color_blue_dark));
 
             //Request
-            mPresenter.retrieveCoupons(1, 1); //TODO: Poner tienda
+            mPresenter.retrieveCoupons(1); //TODO: Poner tienda
         }
     };
 
@@ -271,7 +273,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
             lblRedeemed.setTextColor(getResources().getColor(R.color.color_white));
 
             //Request
-            mPresenter.retrieveCoupons(2, 1); //TODO: Poner tienda
+            mPresenter.retrieveCoupons(2); //TODO: Poner tienda
         }
     };
 
@@ -281,6 +283,7 @@ public class Coupons extends AppCompatActivity implements CouponsView
         public void onClick(View v)
         {
             ButtonAnimator.floatingButton(Coupons.this, v);
+            mPresenter.presentStores();
         }
     };
 

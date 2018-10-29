@@ -3,11 +3,14 @@ package us.globalpay.manhattan.presenters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+
+import java.util.HashMap;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.interactors.CouponsInteractor;
@@ -19,10 +22,13 @@ import us.globalpay.manhattan.models.api.CouponPurchaseReq;
 import us.globalpay.manhattan.models.api.CouponPurchaseResponse;
 import us.globalpay.manhattan.models.api.CouponsResponse;
 import us.globalpay.manhattan.models.api.Cupon;
+import us.globalpay.manhattan.models.api.MainDataResponse;
+import us.globalpay.manhattan.models.api.Store;
 import us.globalpay.manhattan.presenters.interfaces.IBrandCouponsPresenter;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.NavigatePlayStore;
 import us.globalpay.manhattan.utils.UserData;
+import us.globalpay.manhattan.utils.interfaces.IActionResult;
 import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.utils.ui.DialogGenerator;
 import us.globalpay.manhattan.views.BrandsCouponsView;
@@ -39,6 +45,8 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
     private BrandsCouponsView mView;
     private CouponsInteractor mInteractor;
 
+    private int mSelectedStoreID;
+
     public BrandCouponsPresenter(Context context, AppCompatActivity activity, BrandsCouponsView view)
     {
         this.mGson = new Gson();
@@ -52,6 +60,16 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
     {
        try
        {
+           //Store handling
+           MainDataResponse mainData = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+
+           if(mainData.getData().getStore().size() > 0)
+           {
+               Store store = mainData.getData().getStore().get(0);
+               mView.setStoreName(store.getName());
+               mSelectedStoreID = store.getStoreID();
+           }
+
            mView.initialize();
 
            String serialized = UserData.getInstance(mContext).getSelectedBrand();
@@ -147,6 +165,42 @@ public class BrandCouponsPresenter implements IBrandCouponsPresenter, CouponsLis
             }
         }
         catch (Exception ex) {  Log.e(TAG, "Error: " + ex.getMessage());    }
+    }
+
+    @Override
+    public void openStoresList()
+    {
+        try
+        {
+            MainDataResponse data = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
+            HashMap<String, Store> storesMap = new HashMap<>();
+
+            for(Store item: data.getData().getStore())
+            {
+                storesMap.put(item.getName(), item);
+            }
+
+            mView.showListDialog(storesMap, new IActionResult()
+            {
+                @Override
+                public void onSelectedItem(Object selected)
+                {
+                    Store selectedStore = (Store)selected;
+
+                    mView.setStoreName(selectedStore.getName());
+                    mSelectedStoreID = selectedStore.getStoreID();
+
+                    //TODO: Preguntar qué se hace aqui
+                    /*BrandCouponsReq request = new BrandCouponsReq();
+                    request.setBrandID();
+                    mInteractor.retrieveBrandsCoupons();*/
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     @Override
