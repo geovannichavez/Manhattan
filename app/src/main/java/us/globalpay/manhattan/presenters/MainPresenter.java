@@ -4,13 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Environment;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.Request;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.firebase.geofire.GeoLocation;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +38,7 @@ import us.globalpay.manhattan.interactors.MainInteractor;
 import us.globalpay.manhattan.interactors.MainListener;
 import us.globalpay.manhattan.location.GoogleLocationApiManager;
 import us.globalpay.manhattan.location.LocationCallback;
+import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.models.api.MainDataResponse;
 import us.globalpay.manhattan.models.geofire.PrizePointData;
@@ -41,7 +50,10 @@ import us.globalpay.manhattan.ui.activities.Nickname;
 import us.globalpay.manhattan.ui.activities.Permissions;
 import us.globalpay.manhattan.ui.activities.SmsCodeInput;
 import us.globalpay.manhattan.ui.activities.Terms;
+import us.globalpay.manhattan.utils.BitmapUtils;
+import us.globalpay.manhattan.utils.BrandedChest;
 import us.globalpay.manhattan.utils.Constants;
+import us.globalpay.manhattan.utils.MetricsUtils;
 import us.globalpay.manhattan.utils.MockLocationUtility;
 import us.globalpay.manhattan.utils.NavFlagsUtil;
 import us.globalpay.manhattan.utils.UserData;
@@ -62,7 +74,11 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
 
     private Gson mGson;
     private Map<String, Bitmap> mMarkerMap;
+    private BrandedChest mBrandedChest;
     private GoogleLocationApiManager mGoogleLocationApiManager;
+
+    private int mBrandMaxWidthPx;
+    private int mBrandMaxHeightPx;
 
     public MainPresenter(Context context, AppCompatActivity activity, MainView view)
     {
@@ -76,6 +92,9 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
         this.mGoogleLocationApiManager = new GoogleLocationApiManager(activity, mContext, Constants.FOUR_METTERS_DISPLACEMENT);
         this.mGoogleLocationApiManager.setLocationCallback(this);
 
+        mBrandMaxWidthPx = MetricsUtils.pixelsFromDp(mContext, Constants.BRAND_ICMARKER_DP_WIDTH_SIZE);
+        mBrandMaxHeightPx = MetricsUtils.pixelsFromDp(mContext, Constants.BRAND_ICMARKER_DP_HEIGHT_SIZE);
+
         this.mMarkerMap = new HashMap<>();
     }
 
@@ -84,6 +103,7 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     {
         mView.renderMap();
         mView.initialize();
+        mBrandedChest = new BrandedChest(mContext);
 
         MainDataResponse mainDataResponse = mGson.fromJson(UserData.getInstance(mContext).getHomeData(), MainDataResponse.class);
 
@@ -253,11 +273,90 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
 
                 MainDataResponse mainDataResponse = mGson.fromJson(rawData, MainDataResponse.class);
 
+                //Save sponsored marker icon
+                for(final Brand item : mainDataResponse.getData().getBrand())
+                {
+                    Glide.with(mContext).load(item.getUrlLogo()).into(new Target<Drawable>()
+                    {
+                        @Override
+                        public void onLoadStarted(@Nullable Drawable placeholder)
+                        {
+
+                        }
+
+                        @Override
+                        public void onLoadFailed(@Nullable Drawable errorDrawable)
+                        {
+
+                        }
+
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition)
+                        {
+                            Bitmap bitmap = BitmapUtils.drawableToBitmap(resource);
+                            String iconName = Constants.PREFIX_BRAND_ICON_MARKER + item.getName()
+                                    .replaceAll(" ", "_")
+                                    .replaceAll("%20", "_");
+
+                            Bitmap resizedBrandIcon =  BitmapUtils.scaleBrandIcon(bitmap, mBrandMaxWidthPx, mBrandMaxHeightPx);
+                            BitmapUtils.save(mContext, resizedBrandIcon, iconName);
+                        }
+
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder)
+                        {
+
+                        }
+
+                        @Override
+                        public void getSize(@NonNull SizeReadyCallback cb)
+                        {
+
+                        }
+
+                        @Override
+                        public void removeCallback(@NonNull SizeReadyCallback cb)
+                        {
+
+                        }
+
+                        @Override
+                        public void setRequest(@Nullable Request request)
+                        {
+
+                        }
+
+                        @Nullable
+                        @Override
+                        public Request getRequest()
+                        {
+                            return null;
+                        }
+
+                        @Override
+                        public void onStart()
+                        {
+
+                        }
+
+                        @Override
+                        public void onStop()
+                        {
+
+                        }
+
+                        @Override
+                        public void onDestroy()
+                        {
+
+                        }
+                    });
+                }
+
                 //Display new data
                 String coins = String.valueOf(mainDataResponse.getData().getTotalCoins());
                 String promos = String.valueOf(mainDataResponse.getData().getTotalNewPromo());
-                String store = (!TextUtils.isEmpty(mainDataResponse.getData().getStore().get(0).getName()))
-                        ? mainDataResponse.getData().getStore().get(0).getName() : "";
+
 
                 mView.loadInitialValues(coins, promos);
                 mView.renderCoupons(mainDataResponse.getData().getCupon());
@@ -279,8 +378,19 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     @Override
     public void query_goldPoint_onKeyEntered(String key, LatLng location)
     {
-        Bitmap goldMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_GOLD);
-        mView.addGoldPoint(key, location, goldMarker);
+        try
+        {
+            Bitmap goldMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_GOLD);
+            Bitmap brand = mBrandedChest.getRandomBrandBitmap();
+
+            Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, goldMarker, brand);
+
+            mView.addGoldPoint(key, location, marker);
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
     }
 
     @Override
@@ -298,8 +408,11 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     @Override
     public void query_silverPoint_onKeyEntered(String key, LatLng location)
     {
-        Bitmap silverMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_SILVER);
-        mView.addSilverPoint(key, location, silverMarker);
+         Bitmap silverMarker = retrieveBitmap(Constants.NAME_CHEST_TYPE_SILVER);
+        Bitmap brand = mBrandedChest.getRandomBrandBitmap();
+
+        Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, silverMarker, brand);
+        mView.addSilverPoint(key, location, marker);
     }
 
     @Override
@@ -318,7 +431,10 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     public void query_bronzePoint_onKeyEntered(String key, LatLng location)
     {
         Bitmap bronzeBitmap = retrieveBitmap(Constants.NAME_CHEST_TYPE_BRONZE);
-        mView.addBronzePoint(key, location, bronzeBitmap);
+        Bitmap brand = mBrandedChest.getRandomBrandBitmap();
+
+        Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, bronzeBitmap, brand);
+        mView.addBronzePoint(key, location, marker);
     }
 
     @Override
@@ -337,7 +453,10 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     public void query_wildcardPoint_onKeyEntered(String key, LatLng location)
     {
         Bitmap wildcardBitmap = retrieveBitmap(Constants.NAME_CHEST_TYPE_WILDCARD);
-        mView.addWildcardPoint(key, location, wildcardBitmap);
+        Bitmap brand = mBrandedChest.getRandomBrandBitmap();
+
+        Bitmap marker = BitmapUtils.getSponsoredMarker(mContext, wildcardBitmap, brand);
+        mView.addWildcardPoint(key, location, marker);
     }
 
     @Override
@@ -472,6 +591,7 @@ public class MainPresenter implements IMainPresenter, MainListener, FirebasePoin
     {
 
     }
+
 
     private Bitmap retrieveBitmap(String chestName)
     {

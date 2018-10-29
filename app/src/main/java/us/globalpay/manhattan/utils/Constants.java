@@ -85,6 +85,12 @@ public class Constants
     public static final int EXCHANGE_METHOD_4_COINS_EXCHANGE = 4;
     public static final int EXCHANGE_METHOD_5_SHOPPING = 5;
     public static final int EXCHANGE_METHOD_6_CHEST = 6;
+    public static final String PREFIX_BRAND_ICON_MARKER = "brandmarker_";
+    public static final float BRAND_ICMARKER_DP_WIDTH_SIZE = 25;
+    public static final float BRAND_ICMARKER_DP_HEIGHT_SIZE = 22;
+
+    public static final int MARKER_MAX_WIDTH_DP_SIZE = 50;
+    public static final int MARKER_MAX_HEIGHT_DP_SIZE = 44;
 
     // Get coupon with RA
     public enum GetRaCouponMethods
