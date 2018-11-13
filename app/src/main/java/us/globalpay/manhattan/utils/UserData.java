@@ -77,6 +77,7 @@ public class UserData
     private static final String KEY_LAST_CHEST_LOCATION_TIME = "key_last_chest_location_time";
     private static final String KEY_LAST_WILDCARD_TOUCHED_FIREBASE_ID = "usr_last_wildcard_touched_firebase_id";
     private static final String KEY_LAST_WILDCARD_TOUCHED_CHEST_TYPE = "usr_last_wildcard_touched_chest_type";
+    private static final String KEY_LAST_GIFT_FIREBASE_ID = "key_last_gift_firebase_id";
 
     //Coupon
     private static final String KEY_LAST_COUPON_TITLE = "key_last_coupon_type";
@@ -98,6 +99,7 @@ public class UserData
     private static final String KEY_PROMOS_RAW_DATA = "rshm-rw-dta0910018706-ser-manh";
     private static final String KEY_COUPONS_RAW_DATA = "rscp-rw-dta06100181737-ser-manh";
     private static final String KEY_BRAND_COUPONS_RAW_DATA = "rsbcp-rw-dta161018252-ser-manh";
+    private static final String KEY_LAST_OPENED_GIFT_DATA = "rsgft-rw-dta2910018826-ser-manh";
 
     private UserData(Context context)
     {
@@ -577,5 +579,27 @@ public class UserData
     public String getSelectedBrandCoupons()
     {
         return mPreferences.getString(KEY_BRAND_COUPONS_RAW_DATA, "");
+    }
+
+    public void saveLastGiftFirebaseID(String firebaseID)
+    {
+        mEditor.putString(KEY_LAST_GIFT_FIREBASE_ID, firebaseID);
+        mEditor.commit();
+    }
+
+    public String getLastGiftFirebaseID()
+    {
+        return mPreferences.getString(KEY_LAST_GIFT_FIREBASE_ID, "");
+    }
+
+    public void saveLastGiftOpened(String jsonData)
+    {
+        mEditor.putString(KEY_LAST_OPENED_GIFT_DATA, jsonData);
+        mEditor.commit();
+    }
+
+    public String getLastGiftOpened()
+    {
+        return mPreferences.getString(KEY_LAST_OPENED_GIFT_DATA, "");
     }
 }

@@ -20,6 +20,7 @@ import us.globalpay.manhattan.models.api.FavoriteCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
 import us.globalpay.manhattan.models.api.NicknameReqBody;
+import us.globalpay.manhattan.models.api.OpenGiftReq;
 import us.globalpay.manhattan.models.api.PromosRequest;
 import us.globalpay.manhattan.models.api.RegisterClientResponse;
 import us.globalpay.manhattan.models.api.RegisterPhoneConsumerReqBody;
@@ -136,5 +137,14 @@ public interface ApiInterface
                                     @Header("AppVersion") String versionName,
                                     @Header("Platform") String platform,
                                     @Header("PackageName") String packageName);
+
+
+    @Headers("Content-Type: application/json")
+    @POST(StringsURL.OPEN_GIFT_OBJECT)
+    Call<JsonObject> openGift(@Body OpenGiftReq request,
+                              @Header("authenticationKey") String userAuthenticationKey,
+                              @Header("AppVersion") String versionName,
+                              @Header("Platform") String platform,
+                              @Header("PackageName") String packageName);
 
     }

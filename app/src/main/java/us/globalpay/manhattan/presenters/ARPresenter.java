@@ -6,6 +6,7 @@ import android.location.Location;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.crashlytics.android.Crashlytics;
 import com.firebase.geofire.GeoLocation;
@@ -16,8 +17,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
-
-import java.util.List;
 
 import us.globalpay.manhattan.R;
 import us.globalpay.manhattan.interactors.ARInteractor;
@@ -31,15 +30,17 @@ import us.globalpay.manhattan.models.DialogModel;
 import us.globalpay.manhattan.models.api.Brand;
 import us.globalpay.manhattan.models.api.BrandsResponse;
 import us.globalpay.manhattan.models.api.Category;
-import us.globalpay.manhattan.models.api.Cupon;
 import us.globalpay.manhattan.models.api.GetCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
+import us.globalpay.manhattan.models.api.OpenGiftReq;
+import us.globalpay.manhattan.models.api.OpenGiftResponse;
 import us.globalpay.manhattan.models.geofire.PrizePointData;
 import us.globalpay.manhattan.models.geofire.WildcardPointData;
 import us.globalpay.manhattan.presenters.interfaces.IARPresenter;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.MockLocationUtility;
 import us.globalpay.manhattan.utils.UserData;
+import us.globalpay.manhattan.utils.ui.ButtonAnimator;
 import us.globalpay.manhattan.views.ARView;
 
 /**
@@ -83,7 +84,10 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
         mView.setClickListeners();
 
         //Udpate indicators
-        mView.updatePrizeButton(UserData.getInstance(mContext).getCurrentCoinsProgress());
+
+        OpenGiftResponse deserialized = mGson.fromJson(UserData.getInstance(mContext).getLastGiftOpened(),OpenGiftResponse.class);
+        if(deserialized != null)
+            mView.updatePrizeButton(deserialized.getCurrentCoins(), deserialized.getTotalWinCoins());
 
 
         mGoogleLocationApiManager = new GoogleLocationApiManager(mActivity, mContext, Constants.ONE_METTER_DISPLACEMENT);
@@ -197,7 +201,13 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
             {
                 LatLng location = new LatLng(model.getLatitude(), model.getLongitude());
                 mView.showLoadingDialog(mContext.getString(R.string.label_loading_exchanging_chest));
-                mInteractor.openCoinsChest(location, model.getKey(), model.getChest());
+
+                OpenGiftReq req = new OpenGiftReq();
+                req.setChestType(model.getType());
+                req.setLocationID(model.getKey());
+                req.setLatitude(model.getLatitude());
+                req.setLongitude(model.getLongitude());
+                mInteractor.openCoinsChest(req, this);
             }
         }
         catch (Exception ex)
@@ -211,7 +221,13 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     public void open2DChest(LatLng pLocation, String pFirebaseID, int pChestType)
     {
         mView.showLoadingDialog(mContext.getString(R.string.label_please_wait));
-        mInteractor.openCoinsChest(pLocation, pFirebaseID, pChestType);
+
+        OpenGiftReq req = new OpenGiftReq();
+        req.setChestType(pChestType);
+        req.setLocationID(pFirebaseID);
+        req.setLatitude((float)pLocation.latitude);
+        req.setLongitude((float)pLocation.longitude);
+        mInteractor.openCoinsChest(req, this);
     }
 
     @Override
@@ -693,6 +709,54 @@ public class ARPresenter implements IARPresenter, LocationCallback, FirebasePoin
     {
         mView.hideLoadingDialog();
         processErrorMessage(codeStatus, null, raw);
+    }
+
+    @Override
+    public void onOpenGiftSuccess(JsonObject jsonResponse, String firebaseID)
+    {
+        mView.hideLoadingDialog();
+        mView.setEnabledChestImage(true);
+        mIsRunning = false;
+
+        UserData.getInstance(mContext).saveLastGiftFirebaseID(firebaseID);
+
+        try
+        {
+            //Saves data
+            UserData.getInstance(mContext).saveLastGiftOpened(mGson.toJson(jsonResponse));
+
+            //Deserializes to pass to view
+            OpenGiftResponse deserialized = mGson.fromJson(jsonResponse, OpenGiftResponse.class);
+
+            // CurrentCoins: 20 coins progress
+            // ExchangeCoins: Earned coins from current gift open
+            // TotalWinCoins: Total earned coins
+            mView.updatePrizeButton(deserialized.getCurrentCoins(), deserialized.getTotalWinCoins());
+
+            DialogModel model = new DialogModel();
+            model.setTitle(mContext.getString(R.string.title_congratulations));
+            model.setContent(String.format(mContext.getString(R.string.label_gift_open_result), String.valueOf(deserialized.getCurrentCoins())));
+            model.setAcceptButton(mContext.getString(R.string.button_accept));
+
+            mView.showImageDialog(null, R.drawable.ic_coins_stacked_medium, model, new View.OnClickListener(){
+                @Override
+                public void onClick(View v)
+                {
+                    ButtonAnimator.floatingButton(mContext, v);
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            Log.e(TAG, "Error: " + ex.getMessage());
+        }
+    }
+
+    @Override
+    public void onOpenGiftError(int codeStatus, Throwable throwable, String raw)
+    {
+        mView.hideLoadingDialog();
+        processErrorMessage(codeStatus, throwable, raw);
     }
 
     /*

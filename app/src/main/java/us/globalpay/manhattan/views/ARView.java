@@ -1,6 +1,7 @@
 package us.globalpay.manhattan.views;
 
 import android.content.DialogInterface;
+import android.view.View;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -28,9 +29,10 @@ public interface ARView
     void on2DChestTouch(int await);
     void removeRunnableCallback();
     void deleteModelAR();
+    void showImageDialog(String imgUrl, int imgResource, DialogModel content, View.OnClickListener clickListener);
 
     //void updateIndicators(String pPrizes, int pCoins, String pSouvenirs);
-    void updatePrizeButton(int pCoins);
+    void updatePrizeButton(int pCoins, int totalEarnedCoins);
 
     void onGoldKeyEntered(String key, LatLng location, String folderName);
     void onGoldKeyExited(String pKey);

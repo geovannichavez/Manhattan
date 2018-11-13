@@ -35,4 +35,6 @@ public class StringsURL
 
     public static final String FAVORITE_COUPON = "Cupon/Favorite";
 
+    public static final String OPEN_GIFT_OBJECT = "WinCoins";
+
 }

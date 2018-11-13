@@ -118,6 +118,8 @@
     <string name="title_warning">¡Advertencia!</string>
     <string name="label_purchase_coupon_confirmation">¿Deseas comprar un Cupón por 500 monedas?</string>
     <string name="toast_favorite_failed">No se guardó el cambio, inténtalo de nuevo.</string>
+    <string name="title_congratulations">¡Felicidades!</string>
+    <string name="label_gift_open_result">Al abrir el regalo obtuviste %1$d monedas</string>
 
 
 </resources>

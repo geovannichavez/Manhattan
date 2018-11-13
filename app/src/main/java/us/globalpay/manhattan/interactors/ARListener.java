@@ -15,4 +15,6 @@ public interface ARListener
     void onRedeemCouponError(int codeStatus, Throwable throwable, String raw);
     void onBrandCoupon(JsonObject jsonResponse);
     void onBrandCouponError(int codeStatus, String raw);
+    void onOpenGiftSuccess(JsonObject jsonResponse, String firebaseID);
+    void onOpenGiftError(int codeStatus, Throwable throwable, String raw);
 }

@@ -307,7 +307,20 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
     }
 
     @Override
-    public void updatePrizeButton(int coins)
+    public void showImageDialog(final String imgUrl, final int imgResource, final DialogModel content, final View.OnClickListener clickListener)
+    {
+        runOnUiThread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                DialogGenerator.showImageDialog(AR.this, imgUrl, imgResource, content, clickListener);
+            }
+        });
+    }
+
+    @Override
+    public void updatePrizeButton(int coins, int totalEarnedCoins)
     {
         int coinsButton;
         coinsButton = R.drawable.btn_coins_metter_0;
@@ -383,11 +396,12 @@ public class AR extends AppCompatActivity implements ARView, ArchitectJavaScript
         }
 
         ivCoinsMetter.setImageResource(coinsButton);
+        tvCoinsCounter.setText(String.valueOf(totalEarnedCoins));
 
-        if(coins != 20)
+        /*if(coins != 20)
             tvCoinsCounter.setText(String.valueOf(coins));
         else
-            tvCoinsCounter.setText("");
+            tvCoinsCounter.setText("");*/
     }
 
     @Override

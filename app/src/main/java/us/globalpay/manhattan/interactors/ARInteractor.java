@@ -3,7 +3,6 @@ package us.globalpay.manhattan.interactors;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
@@ -16,6 +15,7 @@ import us.globalpay.manhattan.api.ApiInterface;
 import us.globalpay.manhattan.interactors.interfaces.IARInteractor;
 import us.globalpay.manhattan.models.api.GetCouponReq;
 import us.globalpay.manhattan.models.api.GetCouponResponse;
+import us.globalpay.manhattan.models.api.OpenGiftReq;
 import us.globalpay.manhattan.utils.Constants;
 import us.globalpay.manhattan.utils.UserData;
 import us.globalpay.manhattan.utils.VersionName;
@@ -41,9 +41,36 @@ public class ARInteractor implements IARInteractor
     }
 
     @Override
-    public void openCoinsChest(LatLng location, String firebaseId, int chestType)
+    public void openCoinsChest(final OpenGiftReq request, final ARListener listener)
     {
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        final Call<JsonObject> call = apiService.openGift(request,
+                UserData.getInstance(mContext).getUserAuthenticationKey(),
+                VersionName.getVersionName(mContext, TAG),
+                Constants.PLATFORM,
+                VersionName.getPackageName(mContext, TAG));
 
+        call.enqueue(new Callback<JsonObject>()
+        {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response)
+            {
+                try
+                {
+                    if(response.isSuccessful())
+                        listener.onOpenGiftSuccess(response.body(), request.getLocationID());
+                    else
+                        listener.onOpenGiftError(response.code(), null, response.errorBody().string());
+                }
+                catch (IOException ex) {  Log.e(TAG, "Error: " + ex.getMessage());  }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t)
+            {
+                listener.onOpenGiftError(0, t, null);
+            }
+        });
     }
 
 
