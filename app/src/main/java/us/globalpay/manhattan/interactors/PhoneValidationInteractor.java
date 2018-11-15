@@ -86,6 +86,7 @@ public class PhoneValidationInteractor implements IPhoneValidationInteractor
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
                 VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName(),
                 registerConsumerBody);
 
         call.enqueue(new Callback<RegisterClientResponse>()
@@ -127,7 +128,8 @@ public class PhoneValidationInteractor implements IPhoneValidationInteractor
                 UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
-                VersionName.getPackageName(mContext, TAG));
+                VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName());
 
         call.enqueue(new Callback<JsonObject>()
         {
