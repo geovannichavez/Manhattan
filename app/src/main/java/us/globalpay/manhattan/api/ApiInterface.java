@@ -41,8 +41,7 @@ public interface ApiInterface
     Call<AuthenticateResponse> authenticateConsumer(@Body AuthenticateReqBody pAuthenticateBody,
                                                     @Header("AppVersion") String pAppVersion,
                                                     @Header("Platform") String pPlatform,
-                                                    @Header("PackageName") String packageName,
-                                                    @Header("deviceType") String deviceInfo);
+                                                    @Header("PackageName") String packageName );
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_NICKNAME)
