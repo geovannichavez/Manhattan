@@ -56,7 +56,7 @@ public class AuthenticationInteractor implements IAuthenticationInteractor
     {
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
         final Call<AuthenticateResponse> call = apiService.authenticateConsumer(requestBody,
-                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, VersionName.getPackageName(mContext, TAG));
+                VersionName.getVersionName(mContext, TAG), Constants.PLATFORM, VersionName.getPackageName(mContext, TAG) );
 
         call.enqueue(new Callback<AuthenticateResponse>()
         {

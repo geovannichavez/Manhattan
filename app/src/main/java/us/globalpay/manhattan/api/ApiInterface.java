@@ -41,7 +41,7 @@ public interface ApiInterface
     Call<AuthenticateResponse> authenticateConsumer(@Body AuthenticateReqBody pAuthenticateBody,
                                                     @Header("AppVersion") String pAppVersion,
                                                     @Header("Platform") String pPlatform,
-                                                    @Header("PackageName") String packageName);
+                                                    @Header("PackageName") String packageName );
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.VALIDATE_NICKNAME)
@@ -49,7 +49,8 @@ public interface ApiInterface
                                                 @Body NicknameReqBody pNicknameRequest,
                                                 @Header("AppVersion") String pAppVersion,
                                                 @Header("Platform") String pPlatform,
-                                                @Header("PackageName") String packageName);
+                                                @Header("PackageName") String packageName,
+                                                @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
 
@@ -58,13 +59,15 @@ public interface ApiInterface
                                @Header("authenticationKey") String userAuthenticationKey,
                                @Header("AppVersion") String versionName,
                                @Header("Platform") String platform,
-                               @Header("PackageName") String packageName);
+                               @Header("PackageName") String packageName,
+                               @Header("deviceType") String deviceInfo);
 
     @POST(StringsURL.REGISTER_PHONE_CONSUMER)
     Call<RegisterClientResponse> registerConsumer(@Header("authenticationKey") String pAuthKey,
                                                   @Header("AppVersion") String pAppVersion,
                                                   @Header("Platform") String pPlatform,
                                                   @Header("PackageName") String packageName,
+                                                  @Header("deviceType") String deviceInfo,
                                                   @Body RegisterPhoneConsumerReqBody registerConsumerBody);
 
     @Headers("Content-Type: application/json")
@@ -73,21 +76,24 @@ public interface ApiInterface
                                           @Header("authenticationKey") String pAuthKey,
                                           @Header("AppVersion") String pAppVersion,
                                           @Header("Platform") String pPlatform,
-                                          @Header("PackageName") String packageName);
+                                          @Header("PackageName") String packageName,
+                                          @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_INITIAL_DATA)
     Call<JsonObject> getInitialData(@Header("authenticationKey") String userAuthenticationKey,
                                    @Header("AppVersion") String versionName,
                                    @Header("Platform") String platform,
-                                   @Header("PackageName") String packageName);
+                                   @Header("PackageName") String packageName,
+                                    @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.RECLAIM_COUPON)
     Call<GetCouponResponse> getCouponByCoins(@Header("authenticationKey") String userAuthenticationKey,
                                              @Header("AppVersion") String versionName,
                                              @Header("Platform") String platform,
-                                             @Header("PackageName") String packageName);
+                                             @Header("PackageName") String packageName,
+                                             @Header("deviceType") String deviceInfo);
 
                                              
     @Headers("Content-Type: application/json")
@@ -96,7 +102,8 @@ public interface ApiInterface
                                             @Header("authenticationKey") String userAuthenticationKey,
                                              @Header("AppVersion") String versionName,
                                              @Header("Platform") String platform,
-                                             @Header("PackageName") String packageName);
+                                             @Header("PackageName") String packageName,
+                                             @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_COUPONS)
@@ -104,7 +111,8 @@ public interface ApiInterface
                                      @Header("authenticationKey") String userAuthenticationKey,
                                      @Header("AppVersion") String versionName,
                                      @Header("Platform") String platform,
-                                     @Header("PackageName") String packageName);
+                                     @Header("PackageName") String packageName,
+                                     @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_COUPONS_BY_BRAND)
@@ -112,7 +120,8 @@ public interface ApiInterface
                                 @Header("authenticationKey") String userAuthenticationKey,
                                 @Header("AppVersion") String versionName,
                                 @Header("Platform") String platform,
-                                @Header("PackageName") String packageName);
+                                @Header("PackageName") String packageName,
+                                 @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.COUPON_PURCHASE)
@@ -120,7 +129,8 @@ public interface ApiInterface
                                     @Header("authenticationKey") String userAuthenticationKey,
                                     @Header("AppVersion") String versionName,
                                     @Header("Platform") String platform,
-                                    @Header("PackageName") String packageName);
+                                    @Header("PackageName") String packageName,
+                                    @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.GET_COUPON)
@@ -128,7 +138,8 @@ public interface ApiInterface
                                              @Header("authenticationKey") String userAuthenticationKey,
                                              @Header("AppVersion") String versionName,
                                              @Header("Platform") String platform,
-                                             @Header("PackageName") String packageName);
+                                             @Header("PackageName") String packageName,
+                                             @Header("deviceType") String deviceInfo);
 
     @Headers("Content-Type: application/json")
     @POST(StringsURL.FAVORITE_COUPON)
@@ -136,7 +147,8 @@ public interface ApiInterface
                                     @Header("authenticationKey") String userAuthenticationKey,
                                     @Header("AppVersion") String versionName,
                                     @Header("Platform") String platform,
-                                    @Header("PackageName") String packageName);
+                                    @Header("PackageName") String packageName,
+                                    @Header("deviceType") String deviceInfo);
 
 
     @Headers("Content-Type: application/json")
@@ -145,6 +157,7 @@ public interface ApiInterface
                               @Header("authenticationKey") String userAuthenticationKey,
                               @Header("AppVersion") String versionName,
                               @Header("Platform") String platform,
-                              @Header("PackageName") String packageName);
+                              @Header("PackageName") String packageName,
+                              @Header("deviceType") String deviceInfo);
 
     }

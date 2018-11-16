@@ -39,7 +39,8 @@ public class NicknameInteractor implements INicknameInteractor
         final Call<SimpleResultResponse> call = apiService.registerNickname(UserData.getInstance(mContext).getUserAuthenticationKey(),
                 requestBody,
                 VersionName.getVersionName(mContext, TAG),
-                Constants.PLATFORM, VersionName.getPackageName(mContext, TAG));
+                Constants.PLATFORM, VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName());
 
         call.enqueue(new Callback<SimpleResultResponse>()
         {

@@ -44,7 +44,8 @@ public class CouponsInteractor implements ICouponsInteractors
                 UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
-                VersionName.getPackageName(mContext, TAG));
+                VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName());
 
         call.enqueue(new Callback<JsonObject>()
         {
@@ -77,7 +78,8 @@ public class CouponsInteractor implements ICouponsInteractors
                 UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
-                VersionName.getPackageName(mContext, TAG));
+                VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName());
 
         call.enqueue(new Callback<JsonObject>()
         {
@@ -111,7 +113,8 @@ public class CouponsInteractor implements ICouponsInteractors
                 UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
-                VersionName.getPackageName(mContext, TAG));
+                VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName());
 
         call.enqueue(new Callback<JsonObject>()
         {
@@ -144,7 +147,8 @@ public class CouponsInteractor implements ICouponsInteractors
                 UserData.getInstance(mContext).getUserAuthenticationKey(),
                 VersionName.getVersionName(mContext, TAG),
                 Constants.PLATFORM,
-                VersionName.getPackageName(mContext, TAG));
+                VersionName.getPackageName(mContext, TAG),
+                VersionName.getDeviceName());
 
         call.enqueue(new Callback<JsonObject>()
         {
