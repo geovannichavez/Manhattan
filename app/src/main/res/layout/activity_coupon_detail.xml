@@ -193,7 +193,7 @@
                         android:maxLines="2"
                         tools:text="30% de Descuento en Juguetes" />
 
-                    <!--<TextView
+                    <TextView
                         android:id="@+id/tvSub"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -203,7 +203,7 @@
                         android:lineSpacingExtra="-3sp"
                         android:textColor="@color/color_purple"
                         android:textSize="18sp"
-                        tools:text="En combos" />-->
+                        tools:text="En combos" />
 
                     <Space
                         android:layout_width="match_parent"
@@ -237,7 +237,7 @@
                     <Space
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="18" />
+                        android:layout_weight="12" />
 
                     <TextView
                         android:id="@+id/tvAvailability"
@@ -308,6 +308,7 @@
                             android:layout_height="match_parent"
                             android:layout_weight="80"
                             android:scaleType="fitCenter"
+                            android:visibility="gone"
                             android:src="@drawable/ic_barcode" />
 
                         <Space

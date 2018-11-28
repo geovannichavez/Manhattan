@@ -17,6 +17,9 @@ public class Brand
     @SerializedName("Name")
     @Expose
     private String name;
+    @SerializedName("Description")
+    @Expose
+    private String description;
     @SerializedName("Status")
     @Expose
     private int status;
@@ -73,6 +76,16 @@ public class Brand
     public void setName(String name)
     {
         this.name = name;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
     }
 
     public int getStatus()

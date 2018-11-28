@@ -115,7 +115,7 @@ public class BrandsAdapter extends BaseExpandableListAdapter
 
         Glide.with(mContext).load(brand.getUrlLogo()).into(logo);
         name.setText(brand.getName());
-        //description.setText(brand.get);
+        description.setText(brand.getDescription());
 
         return convertView;
     }

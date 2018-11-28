@@ -74,6 +74,8 @@ public class CouponDetailPresenter implements ICouponDetailPresenter, CouponsLis
                 details.putString(Constants.BUNDLE_COUPON_URL_CATEGORY_ICON, selectedCoupon.getUrlImageCategory());
                 details.putString(Constants.BUNDLE_COUPON_BRAND_NAME, selectedCoupon.getBrandName());
                 details.putString(Constants.BUNDLE_COUPON_CODE, selectedCoupon.getCode());
+                details.putString(Constants.BUNDLE_COUPON_EXCHANGE_METHOD, selectedCoupon.getExchangeAction());
+                details.putString(Constants.BUNDLE_COUPON_EXCHANGE_PLACE, selectedCoupon.getExchangePlace());
                 details.putInt(Constants.BUNDLE_COUPON_PIN_LEVEL, selectedCoupon.getLevel());
                 details.putBoolean(Constants.BUNDLE_COUPON_PURCHASABLE, selectedCoupon.isPurchasable());
                 details.putBoolean(Constants.BUNDLE_COUPON_FAVORITE, selectedCoupon.isFavorite());

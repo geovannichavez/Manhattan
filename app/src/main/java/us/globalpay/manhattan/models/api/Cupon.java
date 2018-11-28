@@ -75,6 +75,12 @@ public class Cupon
     @SerializedName("Unlocked")
     @Expose
     private boolean unlocked;
+    @SerializedName("ExchangePlace")
+    @Expose
+    private String exchangePlace;
+    @SerializedName("ExchangeAction")
+    @Expose
+    private String exchangeAction;
 
     public String get$id()
     {
@@ -294,6 +300,26 @@ public class Cupon
     public void setUnlocked(boolean unlocked)
     {
         this.unlocked = unlocked;
+    }
+
+    public String getExchangePlace()
+    {
+        return exchangePlace;
+    }
+
+    public void setExchangePlace(String exchangePlace)
+    {
+        this.exchangePlace = exchangePlace;
+    }
+
+    public String getExchangeAction()
+    {
+        return exchangeAction;
+    }
+
+    public void setExchangeAction(String exchangeAction)
+    {
+        this.exchangeAction = exchangeAction;
     }
 
 

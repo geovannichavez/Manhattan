@@ -36,7 +36,7 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
     private ImageView ivBrandLogo;
     private CheckBox swFavorite;
     private TextView tvTitle;
-    //private TextView tvSub;
+    private TextView tvSub;
     private TextView tvDescription;
     private TextView tvExchangeMethod;
     private TextView tvAvailability;
@@ -62,6 +62,7 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvExchangeMethod = (TextView) findViewById(R.id.tvExchangeMethod);
         tvAvailability = (TextView) findViewById(R.id.tvAvailability);
+        tvSub = (TextView) findViewById(R.id.tvSub);
 
         mBrandCoupon = false;
         mBrandCoupon = getIntent().getBooleanExtra(Constants.INTENT_BACKSTACK_BRAND_COUPON, false);
@@ -98,7 +99,9 @@ public class CouponDetail extends AppCompatActivity implements CouponDetailView
             Glide.with(this).load(details.getString(Constants.BUNDLE_COUPON_URL_LOGO_DESC)).into(ivBrandLogo);
 
             tvTitle.setText(details.getString(Constants.BUNDLE_COUPON_TITLE));
+            tvSub.setText(details.getString(Constants.BUNDLE_COUPON_EXCHANGE_PLACE));
             tvDescription.setText(details.getString(Constants.BUNDLE_COUPON_DESCRIPTION));
+            tvExchangeMethod.setText(details.getString(Constants.BUNDLE_COUPON_EXCHANGE_METHOD));
 
             swFavorite.setChecked(details.getBoolean(Constants.BUNDLE_COUPON_FAVORITE));
 
